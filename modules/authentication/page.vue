@@ -1,5 +1,11 @@
 <script setup>
 
+const router = useRouter();
+const route = useRoute();
+
+
+/* template */
+
 </script>
 
 
@@ -7,17 +13,11 @@
   <v-container fluid class="fill-height d-flex flex-column align-center justify-center bg-grey-lighten-4">
 
     <div class="text-h5">
-      Hello From Home
+      Hello to authentication
     </div>
 
-    <v-btn
-      variant="outlined"
-      color="primary"
-      prepend-icon="mdi-link"
-      class="mt-4 text-none"
-      href="https://github.com/yooneskh"
-      target="_blank">
-      Made By YoonesKh
+    <v-btn variant="outlined" class="mt-4 text-none" @click="router.back()">
+      Go Back
     </v-btn>
 
   </v-container>
