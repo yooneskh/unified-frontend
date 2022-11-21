@@ -1,4 +1,5 @@
 import vuetify from 'vite-plugin-vuetify'
+import { routes } from './routes';
 
 
 export default defineNuxtConfig({
@@ -23,4 +24,10 @@ export default defineNuxtConfig({
       ));
     },
   ],
+  pages: true,
+  hooks: {
+    'pages:extend'(pages) {
+      pages.push(...routes);
+    }
+  }
 });
