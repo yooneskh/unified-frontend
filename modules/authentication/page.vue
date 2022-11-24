@@ -1,24 +1,88 @@
 <script setup>
 
+import { inject, onMounted, ref } from 'vue';
 const router = useRouter();
 const route = useRoute();
 
 
-/* template */
+/* authentication */
+
+const mode = ref('login');
+const loading = ref(false);
+
+
+onMounted(() => {
+  if (route.query['mode'] === 'register') {
+    mode.value = 'register';
+  }
+});
+
+
+function handleAuthentication() {
+  router.push(route.query['next'] || '/');
+}
+
+
+/* template specific */
+
+// import GradientText from '../../components/gradient-text.vue';
+import CoverImage from './images/cover.webp';
+import AuthenticationHandler from './components/authentication-handler.vue';
+
+const $mobile = inject('$mobile');
 
 </script>
 
 
 <template>
-  <v-container fluid class="fill-height d-flex flex-column align-center justify-center bg-grey-lighten-4">
+  <v-container fluid class="pa-0">
 
-    <div class="text-h5">
-      Hello to authentication
-    </div>
+    <v-row no-gutters style="min-height: 100vh;">
+      <v-col v-if="!$mobile" cols="5" class="pa-3 d-flex flex-column" style="height: 100vh;">
+        <v-card
+          :image="CoverImage"
+          class="flex-grow-1 cover"
+          style="height: 0; width: 100%;"
+        />
+      </v-col>
+      <v-col class="d-flex flex-column align-center justify-center">
 
-    <v-btn variant="outlined" class="mt-4 text-none" @click="router.back()">
-      Go Back
-    </v-btn>
+        <v-card flat width="420" max-width="90%" color="transparent">
+
+          <div class="d-flex align-center justify-center mb-8">
+
+            <v-img
+              src="/logo.png"
+              width="64"
+              class="flex-grow-0"
+            />
+
+            <div class="text-h4 ms-3 font-weight-bold">
+              Login
+            </div>
+
+          </div>
+
+          <authentication-handler
+            v-model:mode="mode"
+            @authenticated="handleAuthentication()"
+          />
+
+        </v-card>
+
+      </v-col>
+    </v-row>
 
   </v-container>
 </template>
+
+
+<style lang="scss" scoped>
+  .v-card.cover {
+    box-shadow: 0 1px 1px rgba(0,0,0,0.12),
+            0 2px 2px rgba(0,0,0,0.12),
+            0 4px 4px rgba(0,0,0,0.12),
+            0 8px 8px rgba(0,0,0,0.12),
+            0 16px 16px rgba(0,0,0,0.12);
+  }
+</style>

@@ -1,5 +1,8 @@
 <script setup>
 
+const token = inject('token');
+const user = inject('user');
+
 </script>
 
 
@@ -19,6 +22,8 @@
       target="_blank">
       Made By YoonesKh
     </v-btn>
+
+    <pre style="width: 512px;">{{ { token, user } }}</pre>
 
   </v-container>
 </template>

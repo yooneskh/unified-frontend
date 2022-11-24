@@ -3,8 +3,13 @@ import { resolve } from 'path';
 
 export const routes = [
   {
+    name: 'authentication.page',
+    path: '/authentication',
+    file: resolve('/modules/authentication/page.vue')
+  },
+  {
     path: '/',
-    file: resolve('/modules/base/wrapper.vue'),
+    file: resolve('/modules/general/wrapper.vue'),
     children: [
       {
         name: 'home.page',
@@ -14,8 +19,10 @@ export const routes = [
     ]
   },
   {
-    name: 'authentication.page',
-    path: '/authentication',
-    file: resolve('/modules/authentication/page.vue')
+    path: '/admin',
+    file: resolve('/modules/admin/wrapper.vue'),
+    children: [
+
+    ],
   },
 ];

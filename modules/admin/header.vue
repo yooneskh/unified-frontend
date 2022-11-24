@@ -7,19 +7,15 @@ const route = useRoute();
 
 /* template */
 
-import BaseHeader from './header.vue';
-
 </script>
 
 
 <template>
-  <v-layout>
+  <v-app-bar>
 
-    <base-header />
+    <v-app-bar-title>
+      Hello Felan
+    </v-app-bar-title>
 
-    <v-main>
-      <NuxtPage />
-    </v-main>
-
-  </v-layout>
+  </v-app-bar>
 </template>
