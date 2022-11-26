@@ -1,9 +1,10 @@
-import { $http, generalHttpHandle } from '../../services/http/mod';
+import { http, generalHttpHandle, syncedRequest } from '../../services/http/mod';
 
 
-export async function loadUserWithToken(loginToken, token, user) {
+export async function loadUserWithToken(loginToken, tokenRef, userRef) {
 
-  const { status, data } = await $http.get({
+  const { status, data } = await syncedRequest('--auth-profile--', {
+    method: 'get',
     url: `/authentication/identity`,
     headers: {
       Authorization: loginToken
@@ -15,15 +16,16 @@ export async function loadUserWithToken(loginToken, token, user) {
   }
 
 
-  token.value = loginToken;
-  user.value = data;
-  $http.applyHeader('Authorization', loginToken);
+  tokenRef.value = loginToken;
+  userRef.value = data;
+  http.applyHeader('Authorization', loginToken);
 
 }
 
-export async function logoutUser(token, user) {
+export async function logoutUser(tokenRef, userRef) {
 
-  const { status, data } = await $http.post({
+  const { status, data } = await http.request({
+    method: 'post',
     url: `/authentication/logout`
   });
 
@@ -33,8 +35,8 @@ export async function logoutUser(token, user) {
   }
 
 
-  token.value = '';
-  user.value = undefined;
-  $http.removeHeader('Authorization');
+  tokenRef.value = '';
+  userRef.value = undefined;
+  http.removeHeader('Authorization');
 
 }

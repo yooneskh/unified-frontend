@@ -1,8 +1,11 @@
 <script setup>
 
-/* auth */
+/* authentication */
 
 import { useToken, useUser } from './modules/authentication/state';
+import { http } from './services/http/mod';
+import { loadUserWithToken } from './modules/authentication/controller';
+
 
 const token = useToken();
 const user = useUser();
@@ -11,17 +14,16 @@ provide('token', token);
 provide('user', user);
 
 
-/* http authentication */
+if (token.value) {
+  try {
+    await loadUserWithToken(token.value, token, user);
+  }
+  catch {}
+}
 
-import { $http } from './services/http/mod';
 
 watch(token, () => {
-  if (token.value) {
-    $http.base.headers['Authorization'] = token.value;
-  }
-  else {
-    delete $http.base.headers['Authorization'];
-  }
+  http.applyHeader('Authorization', token.value);
 }, { immediate: true })
 
 
@@ -39,21 +41,15 @@ provide('$desktop', computed(() => display.lgAndUp.value));
 
 <template>
   <v-app>
-
-    <template v-if="false">
-      <div class="fill-height d-flex flex-column align-center justify-center">
-        <v-progress-circular
-          indeterminate
-          size="24"
-        />
-      </div>
-    </template>
-
-    <template v-else>
-      <NuxtLayout>
-        <NuxtPage />
-      </NuxtLayout>
-    </template>
-
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
   </v-app>
 </template>
+
+
+<style lang="scss">
+  .v-btn {
+    text-transform: none !important;
+  }
+</style>

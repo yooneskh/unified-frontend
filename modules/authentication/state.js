@@ -16,4 +16,6 @@ export const useToken = () => {
 
 };
 
-export const useUser = () => useState('--auth-user--', () => undefined);
+export const useUser = () => (
+  useState('--auth-user--', () => undefined)
+);

@@ -1,7 +1,7 @@
 <script setup>
 
 import { onMounted, ref } from 'vue';
-import { $http, generalHttpHandle } from '../../../services/http/mod';
+import { http, generalHttpHandle } from '../../../services/http/mod';
 
 
 /* interface */
@@ -28,7 +28,7 @@ async function refreshCaptcha() {
   emit('update:modelValue', '');
 
 
-  const { status, data } = await $http.get({
+  const { status, data } = await http.get({
     url: '/captcha-tokens/generate/new'
   }); if (generalHttpHandle(status, data)) return;
 

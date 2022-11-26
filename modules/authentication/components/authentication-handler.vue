@@ -1,7 +1,7 @@
 <script setup>
 
 import { ref } from 'vue';
-import { $http, generalHttpHandle } from '../../../services/http/mod';
+import { http, generalHttpHandle } from '../../../services/http/mod';
 
 
 /* interface */
@@ -54,7 +54,7 @@ import { loadUserWithToken } from '../controller';
 async function submitLogin() {
 
   loading.value = true;
-  const { status, data } = await $http.post({
+  const { status, data } = await http.post({
     url: `/authentication/login`,
     body: {
       provider: 'phoneNumber',
@@ -91,7 +91,7 @@ async function submitLogin() {
 async function submitRegister() {
 
   loading.value = true;
-  const { status, data } = await $http.post({
+  const { status, data } = await http.post({
     url: `/authentication/register`,
     body: {
       provider: 'phoneNumber',
@@ -120,7 +120,7 @@ async function submitRegister() {
 async function submitVerification() {
 
   loading.value = true;
-  const { status, data } = await $http.post({
+  const { status, data } = await http.post({
     url: `/authentication/verify`,
     body: {
       provider: 'phoneNumber',

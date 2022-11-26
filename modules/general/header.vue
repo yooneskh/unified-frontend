@@ -5,6 +5,11 @@ const router = useRouter();
 const route = useRoute();
 
 
+/* user */
+
+const user = inject('user');
+
+
 /* template */
 
 </script>
@@ -23,13 +28,23 @@ const route = useRoute();
 
     <v-toolbar-items>
 
-      <v-btn to="/authentication">
-        Login
-      </v-btn>
+      <template v-if="user">
+        <v-btn to="/profile" prepend-icon="mdi-account">
+          Your Profile
+        </v-btn>
+      </template>
 
-      <v-btn to="/authentication">
-        Register
-      </v-btn>
+      <template v-else>
+
+        <v-btn to="/authentication">
+          Login
+        </v-btn>
+
+        <v-btn to="/authentication?mode=register">
+          Register
+        </v-btn>
+
+      </template>
 
     </v-toolbar-items>
 
