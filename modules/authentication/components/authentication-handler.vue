@@ -190,10 +190,12 @@ import CaptchaField from './captcha-field.vue';
         v-model="phoneNumber"
       />
 
-      <captcha-field
-        v-model="captchaText"
-        v-model:id="captchaId"
-      />
+      <client-only>
+        <captcha-field
+          v-model="captchaText"
+          v-model:id="captchaId"
+        />
+      </client-only>
 
       <v-btn color="primary" class="mt-8" block size="large" @click="submitLogin()">
 
@@ -241,10 +243,12 @@ import CaptchaField from './captcha-field.vue';
         v-model="name"
       />
 
-      <captcha-field
-        v-model="captchaText"
-        v-model:id="captchaId"
-      />
+      <client-only>
+        <captcha-field
+          v-model="captchaText"
+          v-model:id="captchaId"
+        />
+      </client-only>
 
       <v-btn color="primary" class="mt-8" block size="large" @click="submitRegister()">
 

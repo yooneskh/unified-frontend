@@ -4045,10 +4045,10 @@ unhead@^1.0.0:
     "@unhead/schema" "1.0.2"
     hookable "^5.4.1"
 
-unified-network@0.5.0:
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/unified-network/-/unified-network-0.5.0.tgz#d17c4aa1519a08771dd2ef33e004cd908c7a6ed7"
-  integrity sha512-OL1X6ZEcK0m2JuB1iWBvtt7bwEBptHgNTnG2O1M7UqMSnuKNCS6F2HJagjYvVJxoTMBNDSQo+Fy2VGHsgEM80Q==
+unified-network@0.6.1:
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/unified-network/-/unified-network-0.6.1.tgz#0759cd74a065b177bfce62ec52e0db5eeebb6ec0"
+  integrity sha512-jg03C1YghA0jJbCbCVAUQRVaqs477VMbsTwI0bb58YfjUmIIDadzvGyP7HG+wWMMSX/bq8zZx8EUIVzZDoC+Ng==
 
 unimport@^1.0.0, unimport@^1.0.1:
   version "1.0.1"
