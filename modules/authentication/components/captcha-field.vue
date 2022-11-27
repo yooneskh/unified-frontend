@@ -28,7 +28,8 @@ async function refreshCaptcha() {
   emit('update:modelValue', '');
 
 
-  const { status, data } = await http.get({
+  const { status, data } = await http.request({
+    method: 'get',
     url: '/captcha-tokens/generate/new'
   }); if (generalHttpHandle(status, data)) return;
 

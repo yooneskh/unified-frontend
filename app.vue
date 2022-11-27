@@ -3,7 +3,6 @@
 /* authentication */
 
 import { useToken, useUser } from './modules/authentication/state';
-import { http } from './services/http/mod';
 import { loadUserWithToken } from './modules/authentication/controller';
 
 
@@ -21,6 +20,8 @@ if (token.value) {
   catch {}
 }
 
+
+import { http } from './services/http/mod';
 
 watch(token, () => {
   http.applyHeader('Authorization', token.value);

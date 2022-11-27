@@ -54,7 +54,8 @@ import { loadUserWithToken } from '../controller';
 async function submitLogin() {
 
   loading.value = true;
-  const { status, data } = await http.post({
+  const { status, data } = await http.request({
+    method: 'post',
     url: `/authentication/login`,
     body: {
       provider: 'phoneNumber',
@@ -62,7 +63,7 @@ async function submitLogin() {
     },
     headers: {
       'captcha-id': captchaId.value,
-      'captcha-text': captchaText.value
+      'captcha-text': captchaText.value,
     }
   });
   loading.value = false;
@@ -91,7 +92,8 @@ async function submitLogin() {
 async function submitRegister() {
 
   loading.value = true;
-  const { status, data } = await http.post({
+  const { status, data } = await http.request({
+    method: 'post',
     url: `/authentication/register`,
     body: {
       provider: 'phoneNumber',
@@ -120,7 +122,8 @@ async function submitRegister() {
 async function submitVerification() {
 
   loading.value = true;
-  const { status, data } = await http.post({
+  const { status, data } = await http.request({
+    method: 'post',
     url: `/authentication/verify`,
     body: {
       provider: 'phoneNumber',
