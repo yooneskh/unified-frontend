@@ -12,7 +12,7 @@ export const routes = [
     file: resolve('/modules/general/wrapper.vue'),
     children: [
       {
-        name: 'home.page',
+        name: 'general.home',
         path: '/',
         file: resolve('/modules/home/page.vue'),
       }
