@@ -4,9 +4,9 @@ const router = useRouter();
 const route = useRoute();
 
 
-/* items */
+/* groups */
 
-const items = [
+const groups = [
   {
     icon: 'mdi-home',
     name: 'General',
@@ -32,11 +32,6 @@ const items = [
         name: 'Accounts',
         pathName: 'admin.accounts.list',
       },
-      {
-        icon: 'mdi-cash-register',
-        name: 'Transfers',
-        pathName: 'admin.transfers.list',
-      },
     ],
   },
 ];
@@ -45,8 +40,43 @@ const items = [
 const selectedGroupName = ref('General');
 
 const selectedGroup = computed(() =>
-  items.find(it => it.name === selectedGroupName.value)
+  groups.find(it => it.name === selectedGroupName.value)
 );
+
+
+const previewingGroupName = ref('');
+
+const previewingGroup = computed(() =>
+  (!previewingGroupName.value) ? [] : groups.find(it => it.name === previewingGroupName.value)
+);
+
+
+const visibleGroupName = computed(() =>
+  previewingGroupName.value || selectedGroupName.value
+);
+
+const visibleGroup = computed(() =>
+  groups.find(it => it.name === visibleGroupName.value)
+);
+
+
+(function identifyStartingGroup() {
+
+  if (route.name === 'admin.dashboard') {
+    return;
+  }
+
+
+  const initialGroup = groups.find(it => it.children.some(i => i.pathName === route.name));
+
+  if (!initialGroup) {
+    return;
+  }
+
+
+  selectedGroupName.value = initialGroup.name;
+
+})();
 
 
 /* template */
@@ -55,7 +85,7 @@ const selectedGroup = computed(() =>
 
 
 <template>
-  <v-navigation-drawer permanent elevation="2">
+  <v-navigation-drawer :model-value="true" permanent elevation="2">
     <div class="fill-height d-flex flex-column">
 
       <v-card color="blue-lighten-1" class="ma-2 flex-grow-0 d-flex align-center py-3 px-4" flat>
@@ -79,16 +109,17 @@ const selectedGroup = computed(() =>
 
       <div class="flex-grow-1 d-flex flex-row" style="height: 0; border-top: 1px solid rgba(0, 0, 0, 0.175);">
 
-        <div class="flex-grow-0 fill-height d-flex flex-column" style="padding: 6px; gap: 6px; overflow-y: auto; border-right: 1px solid rgba(0, 0, 0, 0.175);">
+        <div class="flex-grow-0 fill-height d-flex flex-column" style="padding: 6px; gap: 4px; overflow-y: auto; border-right: 1px solid rgba(0, 0, 0, 0.175);">
 
           <v-btn
-            v-for="group of items" :key="group.name"
-            variant="text"
+            v-for="group of groups" :key="group.name"
+            :variant="(group.name === previewingGroupName) ? ('outlined') : ('text')"
             min-width="0"
-            width="36"
-            height="36"
+            width="40"
+            height="40"
             :title="group.name"
-            @click="selectedGroupName = group.name">
+            :active="group.name === selectedGroupName"
+            @click="previewingGroupName = group.name">
             <v-icon
               :icon="group.icon"
               color="grey-darken-1"
@@ -99,11 +130,13 @@ const selectedGroup = computed(() =>
 
         <v-list nav density="compact" class="flex-grow-1" style="padding: 6px;">
           <v-list-item
-            v-for="child of selectedGroup.children" :key="child.name"
+            v-for="child of visibleGroup.children" :key="child.name"
             :prepend-icon="child.icon"
             :title="child.name"
             class="sidebar-nav-child"
-            :to="{ name: 'general.home' /* child.pathName */ }"
+            :to="{ name: child.pathName }"
+            exact
+            @click="selectedGroupName = group.name; previewingGroupName = '';"
           />
         </v-list>
 

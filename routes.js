@@ -13,16 +13,30 @@ export const routes = [
     children: [
       {
         name: 'general.home',
-        path: '/',
+        path: '',
         file: resolve('/modules/home/page.vue'),
-      }
-    ]
+      },
+    ],
   },
   {
     path: '/admin',
     file: resolve('/modules/admin/wrapper.vue'),
     children: [
-
+      {
+        name: 'admin.dashboard',
+        path: '',
+        file: resolve('/modules/admin/dashboard.vue'),
+      },
+      {
+        name: 'admin.users.list',
+        path: 'users',
+        file: resolve('/modules/users/page.vue'),
+      },
+      {
+        name: 'admin.accounts.list',
+        path: 'accounts',
+        file: resolve('/modules/accounts/page.vue'),
+      },
     ],
   },
 ];
