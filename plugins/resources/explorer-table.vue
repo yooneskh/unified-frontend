@@ -33,10 +33,7 @@ const { meta } = useMeta({
 /* headers */
 
 const headers = computed(() =>
-  meta.value.map(it => ({
-    value: it.key,
-    title: it.title,
-  }))
+  meta.value
 );
 
 
@@ -60,6 +57,7 @@ watch(loading, () =>
 /* template */
 
 import SimpleTable from './components/simple-table.vue';
+import ExplorerTableCell from './explorer-table-cell.vue';
 
 </script>
 
@@ -67,6 +65,14 @@ import SimpleTable from './components/simple-table.vue';
 <template>
   <simple-table
     :headers="headers"
-    :items="items"
-  />
+    :items="items">
+
+    <template #item="{ header, data }">
+      <explorer-table-cell
+        :header="header"
+        :data="data"
+      />
+    </template>
+
+  </simple-table>
 </template>

@@ -24,7 +24,7 @@ const emit = defineEmits([]);
 
     <thead>
       <tr>
-        <th v-for="header of headers" :key="header.value">
+        <th v-for="header of headers" :key="header.key">
           {{ header.title }}
         </th>
       </tr>
@@ -32,8 +32,10 @@ const emit = defineEmits([]);
 
     <tbody>
       <tr v-for="item of items" :key="item[props.itemKey]">
-        <td v-for="header of headers" :key="header.value">
-          {{ item[header.value] }}
+        <td v-for="header of headers" :key="header.key">
+          <slot name="item" :header="header" :item="item" :data="item[header.key]">
+            {{ item[header.key] }}
+          </slot>
         </td>
       </tr>
     </tbody>
