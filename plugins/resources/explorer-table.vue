@@ -12,12 +12,21 @@ const emit = defineEmits([
 ]);
 
 
+/* shared */
+
+import { useResourceUrl } from './composeables/use-resource-url';
+
+const { resourceUrlPart } = useResourceUrl({
+  resource: computed(() => props.resource),
+});
+
+
 /* meta */
 
 import { useMeta } from './composeables/use-meta';
 
-const meta = useMeta({
-  resource: props.resource,
+const { meta } = useMeta({
+  resource: computed(() => props.resource),
 });
 
 
@@ -37,7 +46,9 @@ import { useNetwork } from './composeables/use-network';
 
 const { loading, data: items } = useNetwork({
   method: 'get',
-  url: `${props.resource.toLowerCase()}s/`,
+  url: computed(() =>
+    `${resourceUrlPart.value}/`
+  ),
 });
 
 
