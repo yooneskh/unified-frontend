@@ -24,13 +24,15 @@ import AdminSidebar from './sidebar.vue';
 
 
 <template>
-  <v-layout>
+  <client-only>
+    <v-layout>
 
-    <admin-sidebar />
+      <admin-sidebar />
 
-    <v-main class="bg-grey-lighten-4" style="max-height: 100vh; overflow-y: auto;">
-      <NuxtPage />
-    </v-main>
+      <v-main class="bg-grey-lighten-4" style="max-height: 100vh; overflow-y: auto;">
+        <NuxtPage />
+      </v-main>
 
-  </v-layout>
+    </v-layout>
+  </client-only>
 </template>
