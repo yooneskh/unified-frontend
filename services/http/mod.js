@@ -2,7 +2,7 @@ import { makeUnifiedNetwork } from 'unified-network';
 
 
 export const http = makeUnifiedNetwork({
-  baseUrl: 'https://api.zeimaran.com/api',
+  baseUrl: 'https://api.aboutshiraz.com/api',
   processor: async ({ url, method, body, headers }) => {
 
     const response = await $fetch.raw(url, {
