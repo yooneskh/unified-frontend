@@ -1,18 +1,38 @@
+import { AppConfig } from '~~/app-config';
+import { cache } from '~~/services/cache/mod';
 import { retrieveMeta } from './use-meta';
+import { retrieveResourceObject } from './use-resource-object';
 
 
 export async function retrieveResourceTitle({ resource, resourceObject }) {
 
   const meta = await retrieveMeta({ resource });
 
-  console.log(meta);
-
   const titleableMetas = meta.filter(it => it.titleable);
 
 
   return (await Promise.all(
     titleableMetas.map(async property => {
-      return resourceObject[property.key];
+
+      if (!property.ref) {
+
+        if (property.variants) {
+          return resourceObject[property.key][AppConfig.locale.default];
+        }
+
+        return resourceObject[property.key];
+
+      }
+
+
+      return retrieveResourceTitle({
+        resource: property.ref,
+        resourceObject: await retrieveResourceObject({
+          resource: property.ref,
+          resourceId: resourceObject[property.key],
+        }),
+      });
+
     })
   )).join(' ');
 

@@ -24,7 +24,7 @@ export async function retrieveMeta({ resource }) {
       url: `${resourceUrlPart}/meta`,
     });
 
-    if (generalHttpHandle(status, data)) {
+    if (generalHttpHandle(status, data, true)) {
       return [];
     }
 

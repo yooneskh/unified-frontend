@@ -19,11 +19,11 @@ const { resourceUrlPart } = useResourceUrl({
 });
 
 
-import { useNetwork } from './composeables/use-network';
+import { useResourceObject } from './composeables/use-resource-object';
 
-const { loading, data: item, error } = useNetwork({
-  method: 'get',
-  url: computed(() => `/${resourceUrlPart.value}/${props.resourceId}`),
+const { resource: item } = useResourceObject({
+  resource: computed(() => props.resource),
+  resourceId: computed(() => props.resourceId),
 });
 
 
@@ -43,7 +43,7 @@ const { title } = useResourceTitle({
 
 
 <template>
-  <template v-if="props.resource !== 'Media'">
+  <template v-if="props.resource === 'Media'">
     <a target="_blank" :href="item?.path">
       Media
       <v-menu v-if="item?.type.startsWith('image')" open-on-hover activator="parent">
@@ -54,6 +54,8 @@ const { title } = useResourceTitle({
     </a>
   </template>
   <template v-else>
-    {{ title }}
+    <span class="text-primary me-2 text-decoration-underline" style="cursor: pointer;">
+      {{ title }}
+    </span>
   </template>
 </template>

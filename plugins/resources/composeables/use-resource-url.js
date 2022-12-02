@@ -1,9 +1,9 @@
 import pluralize from 'pluralize';
-import snakeCase from 'lodash/snakeCase';
+import kebabCase from 'lodash/kebabCase';
 
 
 export function retrieveResourceUrl({ resource }) {
-  return snakeCase( pluralize(unref(resource)) );
+  return kebabCase( pluralize(unref(resource)) );
 }
 
 

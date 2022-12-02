@@ -47,6 +47,9 @@ const { loading, data: items } = useNetwork({
   url: computed(() =>
     `${resourceUrlPart.value}/`
   ),
+  queries: {
+    limit: 10,
+  },
 });
 
 

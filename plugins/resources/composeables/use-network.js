@@ -1,7 +1,7 @@
 import { http, generalHttpHandle } from '../../../services/http/mod';
 
 
-export function useNetwork({ method, url }) {
+export function useNetwork({ method, url, queries }) {
 
   const loading = ref(false);
 
@@ -23,10 +23,11 @@ export function useNetwork({ method, url }) {
     const response = await http.request({
       method: unref(method),
       url: unref(url),
+      queries: unref(queries),
     });
     loading.value = false;
 
-    if (generalHttpHandle(response.status, response.data)) {
+    if (generalHttpHandle(response.status, response.data, true)) {
       error.value = true;
       return;
     }

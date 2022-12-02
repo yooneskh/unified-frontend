@@ -32,7 +32,7 @@ export const routes = [
         path: 'users',
         file: resolve('/plugins/resources/manager-page.vue'),
         meta: {
-          resource: 'User',
+          resource: 'USer',
         },
       },
       {
