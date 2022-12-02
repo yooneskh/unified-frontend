@@ -1,7 +1,21 @@
+import { retrieveMeta } from './use-meta';
 
 
 export async function retrieveResourceTitle({ resource, resourceObject }) {
-  return '---';
+
+  const meta = await retrieveMeta({ resource });
+
+  console.log(meta);
+
+  const titleableMetas = meta.filter(it => it.titleable);
+
+
+  return (await Promise.all(
+    titleableMetas.map(async property => {
+      return resourceObject[property.key];
+    })
+  )).join(' ');
+
 }
 
 
