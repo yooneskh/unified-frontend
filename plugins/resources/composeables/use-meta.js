@@ -2,7 +2,7 @@ import { useNetwork } from './use-network';
 import { useResourceUrl } from './use-resource-url';
 
 
-export function useMeta({ resource }) {
+export function useMeta({ resource, filter }) {
 
   const { resourceUrlPart } = useResourceUrl({
     resource,
@@ -18,7 +18,7 @@ export function useMeta({ resource }) {
 
   return {
     meta: computed(() =>
-      (loading.value || error.value) ? ([]) : (data.value)
+      (loading.value || error.value) ? ([]) : (data.value.filter(filter || Boolean))
     ),
   };
 

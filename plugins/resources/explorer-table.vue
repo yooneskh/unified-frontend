@@ -27,6 +27,7 @@ import { useMeta } from './composeables/use-meta';
 
 const { meta } = useMeta({
   resource: computed(() => props.resource),
+  filter: it => !it.hideInTable,
 });
 
 
