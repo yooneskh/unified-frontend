@@ -33,9 +33,9 @@ watch(token, () => {
 import { useDisplay } from 'vuetify/lib/framework.mjs';
 const display = useDisplay();
 
-provide('$mobile', computed(() => display.smAndDown.value));
-provide('$tablet', computed(() => display.mdAndDown.value && !display.smAndDown.value));
-provide('$desktop', computed(() => display.lgAndUp.value));
+provide('isMobile', computed(() => display.smAndDown.value));
+provide('isTablet', computed(() => display.mdAndDown.value && !display.smAndDown.value));
+provide('isDesktop', computed(() => display.lgAndUp.value));
 
 </script>
 

@@ -58,6 +58,29 @@ watch(loading, () =>
 );
 
 
+/* actions */
+
+const actions = [
+  {
+    key: 'update',
+    icon: 'mdi-pen',
+    title: 'Update',
+    handler(item, index) {
+      console.log({ item, index });
+    },
+  },
+  {
+    key: 'delete',
+    color: 'error',
+    icon: 'mdi-delete',
+    title: 'Delete',
+    handler(item, index) {
+      console.log({ item, index });
+    },
+  },
+];
+
+
 /* template */
 
 import SimpleTable from './components/simple-table.vue';
@@ -69,7 +92,8 @@ import ExplorerTableCell from './explorer-table-cell.vue';
 <template>
   <simple-table
     :headers="headers"
-    :items="items">
+    :items="items"
+    :actions="actions">
 
     <template #item="{ header, data }">
       <explorer-table-cell
