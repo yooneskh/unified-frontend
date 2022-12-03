@@ -16,6 +16,8 @@ const emit = defineEmits([]);
 
 /* template */
 
+import felan from 'lodash/startCase';
+
 </script>
 
 
@@ -25,7 +27,7 @@ const emit = defineEmits([]);
     <thead>
       <tr>
         <th v-for="header of headers" :key="header.key">
-          {{ header.title }}
+          {{ header.title || felan(header.key) }}
         </th>
       </tr>
     </thead>

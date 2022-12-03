@@ -23,9 +23,9 @@ const { resourceUrlPart } = useResourceUrl({
 
 /* meta */
 
-import { useMeta } from './composeables/use-meta';
+import { useEnrichedMeta } from './composeables/use-meta';
 
-const { meta } = useMeta({
+const { meta } = useEnrichedMeta({
   resource: computed(() => props.resource),
   filter: it => !it.hideInTable,
 });

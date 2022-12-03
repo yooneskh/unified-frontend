@@ -62,3 +62,34 @@ export function useMeta({ resource, filter }) {
   };
 
 }
+
+
+export function useEnrichedMeta({ resource, filter }) {
+
+  const { meta } = useMeta({
+    resource,
+    filter,
+  });
+
+
+  return {
+    meta: computed(() =>
+      [
+        ...meta.value,
+        {
+          key: 'createdAt',
+          type: 'number',
+          labelFormat: 'YYYY/MM/DD HH:mm:ss',
+          dir: 'ltr'
+        },
+        {
+          key: 'updatedAt',
+          type: 'number',
+          labelFormat: 'YYYY/MM/DD HH:mm:ss',
+          dir: 'ltr'
+        },
+      ]
+    ),
+  };
+
+}

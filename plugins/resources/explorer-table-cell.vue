@@ -12,6 +12,8 @@ const emit = defineEmits([]);
 
 /* template */
 
+import dayjs from 'dayjs';
+
 import ExplorerTableCellResource from './explorer-table-cell-resource.vue';
 
 </script>
@@ -48,6 +50,10 @@ import ExplorerTableCellResource from './explorer-table-cell-resource.vue';
       :resource="props.header.ref"
       :resource-id="data"
     />
+  </template>
+
+  <template v-else-if="props.header.labelFormat">
+    {{ dayjs(data).format(props.header.labelFormat) }}
   </template>
 
   <template v-else-if="props.header.type === 'number'">
