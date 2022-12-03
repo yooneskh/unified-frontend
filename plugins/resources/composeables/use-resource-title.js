@@ -1,5 +1,4 @@
 import { AppConfig } from '~~/app-config';
-import { cache } from '~~/services/cache/mod';
 import { retrieveMeta } from './use-meta';
 import { retrieveResourceObject } from './use-resource-object';
 
