@@ -4055,6 +4055,23 @@ unhead@^1.0.0:
     "@unhead/schema" "1.0.2"
     hookable "^5.4.1"
 
+unified-form-vuetify@0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/unified-form-vuetify/-/unified-form-vuetify-0.2.1.tgz#4b9c3ff194319fdd7f8179210483f1926dda52ac"
+  integrity sha512-U5I4S/xYT5G+g7YrWvEtNp8+yfwgXL5scIfKGUkaJgSom34o8rW2dgHLGgUd8pfr3/W6kSkEEw2WJcPLpadLzg==
+
+unified-form@0.2.3:
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/unified-form/-/unified-form-0.2.3.tgz#6fe528fcb8ace60a251dc135a56a31c68bbe7a33"
+  integrity sha512-dTZioEz49KIxtwEYOKMdQlgL3FkMaczdxN1rVcT2y5uUp7PDaAmrqebZNwskH6RB/Z3d+Xw3+y6+fkqiFnUs9g==
+  dependencies:
+    unified-mongo-filter "0.3.1"
+
+unified-mongo-filter@0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/unified-mongo-filter/-/unified-mongo-filter-0.3.1.tgz#4e8056b9477f550da1aef5af616d373928aad40b"
+  integrity sha512-4eiGtgGAfqU/EyJaEQkn3zYMPGlXwPfJm69Btwd5lKZzOrf/xG3qv8n33fmu1Z8OuFxDQYHh4hovPLBpFBGUgw==
+
 unified-network@0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/unified-network/-/unified-network-0.6.1.tgz#0759cd74a065b177bfce62ec52e0db5eeebb6ec0"

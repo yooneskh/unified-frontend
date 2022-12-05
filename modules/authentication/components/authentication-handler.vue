@@ -39,13 +39,16 @@ const user = useUser();
 
 /* actions */
 
-const phoneNumber = ref('');
-const name = ref('');
+const authStates = reactive({
+  phoneNumber: '',
+  name: '',
+  verificationCode: '',
+});
+
 const captchaId = ref('');
 const captchaText = ref('');
 
 const verificationToken = ref('');
-const verificationCode = ref('');
 
 
 import { loadUserWithToken } from '../controller';
@@ -59,7 +62,7 @@ async function submitLogin() {
     url: `/authentication/login`,
     body: {
       provider: 'phoneNumber',
-      phoneNumber: '+98' + phoneNumber.value.slice(1),
+      phoneNumber: '+98' + authStates.phoneNumber.slice(1),
     },
     headers: {
       'captcha-id': captchaId.value,
@@ -97,8 +100,8 @@ async function submitRegister() {
     url: `/authentication/register`,
     body: {
       provider: 'phoneNumber',
-      phoneNumber: '+98' + phoneNumber.value.slice(1),
-      name: name.value,
+      phoneNumber: '+98' + authStates.phoneNumber.slice(1),
+      name: authStates.name,
     },
     headers: {
       'captcha-id': captchaId.value,
@@ -128,7 +131,7 @@ async function submitVerification() {
     body: {
       provider: 'phoneNumber',
       verificationToken: verificationToken.value,
-      verificationCode: verificationCode.value
+      verificationCode: authStates.verificationCode,
     }
   });
   loading.value = false;
@@ -183,14 +186,15 @@ import CaptchaField from './captcha-field.vue';
         Please enter your phone number.
       </div>
 
-      <v-text-field
-        label="Phone number"
-        inputmode="numeric"
-        class="mt-4"
-        dir="ltr"
-        placeholder="09---------"
-        hide-details
-        v-model="phoneNumber"
+      <u-form
+        class="mx-n3 mb-n3"
+        :target="authStates"
+        :fields="[
+          {
+            key: 'phoneNumber', identifier: 'text', label: 'Phone Number',
+            placeholder: '09---------',
+          }
+        ]"
       />
 
       <client-only>
@@ -200,20 +204,11 @@ import CaptchaField from './captcha-field.vue';
         />
       </client-only>
 
-      <v-btn color="primary" class="mt-8" block size="large" @click="submitLogin()">
-
+      <v-btn color="primary" class="mt-8" block size="large" :loading="loading" @click="submitLogin()">
         Login
-
-        <v-progress-circular
-          v-if="loading"
-          indeterminate
-          size="16"
-          class="ms-3"
-        />
-
       </v-btn>
 
-      <v-btn variant="tonal" class="mt-1" block @click="mode = 'register'">
+      <v-btn variant="tonal" class="mt-2" block @click="mode = 'register'">
         Register new account
       </v-btn>
 
@@ -229,21 +224,18 @@ import CaptchaField from './captcha-field.vue';
         Please fill these information to create your account.
       </div>
 
-      <v-text-field
-        label="Phone number"
-        inputmode="numeric"
-        class="mt-4"
-        dir="ltr"
-        placeholder="09---------"
-        hide-details
-        v-model="phoneNumber"
-      />
-
-      <v-text-field
-        label="Name"
-        class="mt-2"
-        hide-details
-        v-model="name"
+      <u-form
+        class="mx-n3 mb-n3"
+        :target="authStates"
+        :fields="[
+          {
+            key: 'phoneNumber', identifier: 'text', label: 'Phone Number',
+            placeholder: '09---------',
+          },
+          {
+            key: 'name', identifier: 'text', label: 'Your Name',
+          },
+        ]"
       />
 
       <client-only>
@@ -253,17 +245,8 @@ import CaptchaField from './captcha-field.vue';
         />
       </client-only>
 
-      <v-btn color="primary" class="mt-8" block size="large" @click="submitRegister()">
-
+      <v-btn color="primary" class="mt-8" block size="large" :loading="loading" @click="submitRegister()">
         Register
-
-        <v-progress-circular
-          v-if="loading"
-          indeterminate
-          size="16"
-          class="ms-3"
-        />
-
       </v-btn>
 
       <v-btn variant="tonal" class="mt-1" block @click="mode = 'login'">
@@ -282,26 +265,18 @@ import CaptchaField from './captcha-field.vue';
         Enter the code below
       </div>
 
-      <v-text-field
-        label="Verification Code"
-        inputmode="numeric"
-        class="mt-4"
-        dir="ltr"
-        hide-details
-        v-model="verificationCode"
+      <u-form
+        class="mx-n3 mb-n3"
+        :target="authStates"
+        :fields="[
+          {
+            key: 'verificationCode', identifier: 'text', label: 'Verification Code',
+          }
+        ]"
       />
 
-      <v-btn color="primary" class="mt-8" block size="large" @click="submitVerification()">
-
+      <v-btn color="primary" class="mt-8" block size="large" :loading="loading" @click="submitVerification()">
         Check Code
-
-        <v-progress-circular
-          v-if="loading"
-          indeterminate
-          size="16"
-          class="ms-3"
-        />
-
       </v-btn>
 
       <v-btn variant="text" class="mt-2" block to="/">

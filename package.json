@@ -18,6 +18,8 @@
     "dayjs": "1.11.6",
     "lodash": "4.17.21",
     "pluralize": "8.0.0",
+    "unified-form": "0.2.3",
+    "unified-form-vuetify": "0.2.1",
     "unified-network": "0.6.1",
     "vuetify": "3.0.3"
   }
