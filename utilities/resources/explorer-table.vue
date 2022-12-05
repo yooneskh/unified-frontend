@@ -42,19 +42,39 @@ const headers = computed(() =>
 
 import { useNetwork } from './composeables/use-network';
 
-const { loading, data: items, refresh: refreshItems } = useNetwork({
+const itemsInPage = ref(10);
+const currentPage = ref(1);
+
+
+const { loading, data: items, refresh: refreshItemsData } = useNetwork({
   method: 'get',
   url: computed(() =>
     `${resourceUrlPart.value}/`
   ),
-  queries: {
-    limit: 100,
-  },
+  queries: computed(() => ({
+    skip: (currentPage.value - 1) * itemsInPage.value,
+    limit: itemsInPage.value,
+  })),
+});
+
+const { loading: countLoading, data: itemsCount, refresh: refreshItemsCount } = useNetwork({
+  method: 'get',
+  url: computed(() =>
+    `${resourceUrlPart.value}/count`
+  ),
+  // queries: computed(() => ({
+  // })),
 });
 
 
-watch(loading, () =>
-  emit('update:loading', loading.value)
+function refreshItems() {
+  refreshItemsData();
+  refreshItemsCount();
+}
+
+
+watch([loading, countLoading], () =>
+  emit('update:loading', loading.value || countLoading.value)
 );
 
 
@@ -132,17 +152,50 @@ import ExplorerTableCell from './explorer-table-cell.vue';
 
 
 <template>
-  <simple-table
-    :headers="headers"
-    :items="items"
-    :actions="actions">
+  <div class="explorer-table">
 
-    <template #item="{ header, data }">
-      <explorer-table-cell
-        :header="header"
-        :data="data"
+    <simple-table
+      :headers="headers"
+      :items="items"
+      :actions="actions">
+
+      <template #item="{ header, data }">
+        <explorer-table-cell
+          :header="header"
+          :data="data"
+        />
+      </template>
+
+    </simple-table>
+
+    <div class="pa-3 d-flex align-start">
+
+      <v-pagination
+        size="small"
+        density="comfortable"
+        :length="Math.ceil(itemsCount / itemsInPage) || 1"
+        total-visible="9"
+        v-model="currentPage"
       />
-    </template>
 
-  </simple-table>
+      <v-spacer />
+
+      <v-select
+        variant="outlined"
+        density="compact"
+        class="flex-grow-0"
+        :items="[5, 10, 15, 30]"
+        v-model="itemsInPage"
+        @update:model-value="currentPage = 1"
+        hide-details>
+        <template #prepend>
+          <div class="text-caption">
+            Items to show
+          </div>
+        </template>
+      </v-select>
+
+    </div>
+
+  </div>
 </template>
