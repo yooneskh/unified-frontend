@@ -31,10 +31,10 @@ const isMobile = inject('isMobile');
 <template>
   <v-table hover style="border-radius: 0;">
 
-    <thead class="bg-grey-lighten-3">
+    <thead>
       <tr>
 
-        <th v-for="header of headers" :key="header.key">
+        <th v-for="header of headers" :key="header.key" style="white-space: nowrap;">
           {{ header.title || startCase(header.key) }}
         </th>
 
@@ -54,7 +54,7 @@ const isMobile = inject('isMobile');
           </slot>
         </td>
 
-        <td v-if="props.actions">
+        <td v-if="props.actions" style="white-space: nowrap;">
 
           <template v-if="isMobile">
             <v-btn
