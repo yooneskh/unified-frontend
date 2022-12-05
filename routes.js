@@ -30,7 +30,7 @@ export const routes = [
       {
         name: 'admin.users.list',
         path: 'users',
-        file: resolve('/plugins/resources/manager-page.vue'),
+        file: resolve('/utilities/resources/manager-page.vue'),
         meta: {
           resource: 'User',
         },
