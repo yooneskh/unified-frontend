@@ -42,13 +42,13 @@ const headers = computed(() =>
 
 import { useNetwork } from './composeables/use-network';
 
-const { loading, data: items } = useNetwork({
+const { loading, data: items, refresh: refreshItems } = useNetwork({
   method: 'get',
   url: computed(() =>
     `${resourceUrlPart.value}/`
   ),
   queries: {
-    limit: 10,
+    limit: 100,
   },
 });
 
@@ -59,6 +59,10 @@ watch(loading, () =>
 
 
 /* actions */
+
+import { generalHttpHandle, http } from '~~/services/http/mod';
+
+import { launchButtonPickerDialog } from '../unified-dialogs-vuetify/button-picker/mod';
 
 const actions = [
   {
@@ -74,11 +78,49 @@ const actions = [
     color: 'error',
     icon: 'mdi-delete',
     title: 'Delete',
-    handler(item, index) {
-      console.log({ item, index });
-    },
+    handler: handleItemDelete,
   },
 ];
+
+
+async function handleItemDelete(item, index) {
+
+  const choice = await launchButtonPickerDialog({
+    icon: 'mdi-delete',
+    title: `Delete ${props.resource}`,
+    text: 'Are you sure you want to delete this?',
+    startButtons: [
+      {
+        value: false,
+        title: 'No, Cancel',
+      },
+    ],
+    endButtons: [
+      {
+        value: true,
+        title: 'Yes, Delete this',
+        color: 'error',
+      },
+    ],
+  });
+
+  if (!choice) {
+    return;
+  }
+
+  const { status, data } = await http.request({
+    method: 'delete',
+    url: `/${resourceUrlPart.value}/${item._id}`,
+  });
+
+  if (generalHttpHandle(status, data)) {
+    return;
+  }
+
+  alert(`${props.resource} deleted successfully.`);
+  refreshItems();
+
+}
 
 
 /* template */

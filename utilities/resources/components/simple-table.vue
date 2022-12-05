@@ -29,9 +29,9 @@ const isMobile = inject('isMobile');
 
 
 <template>
-  <v-table>
+  <v-table hover style="border-radius: 0;">
 
-    <thead>
+    <thead class="bg-grey-lighten-3">
       <tr>
 
         <th v-for="header of headers" :key="header.key">

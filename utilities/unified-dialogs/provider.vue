@@ -13,8 +13,8 @@ function removeDialog(dialog) {
   dialog.modelValue = false;
 
   setTimeout(() => {
-    dialogs.splice(
-      dialogs.findIndex(it => it.id === dialog.id),
+    dialogs.value.splice(
+      dialogs.value.findIndex(it => it.id === dialog.id),
       1
     );
   }, 1000);

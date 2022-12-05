@@ -11,6 +11,8 @@ export function useNetwork({ method, url, queries }) {
 
   const error = ref(false);
 
+  const refreshHandle = ref(0);
+
 
   watchEffect(async () => {
 
@@ -19,7 +21,7 @@ export function useNetwork({ method, url, queries }) {
     }
 
 
-    loading.value = true;
+    loading.value = refreshHandle.value > -1; // to make it refresh
     const response = await http.request({
       method: unref(method),
       url: unref(url),
@@ -46,6 +48,7 @@ export function useNetwork({ method, url, queries }) {
     data,
     headers,
     error,
+    refresh: () => refreshHandle.value++,
   };
 
 }
