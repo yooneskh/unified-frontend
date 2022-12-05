@@ -3,6 +3,38 @@
 const token = inject('token');
 const user = inject('user');
 
+import { launchListPickerDialog } from '../../utilities/unified-dialogs-vuetify/list-picker/mod';
+
+async function testDialogs() {
+
+  const choice = await launchListPickerDialog({
+    icon: 'mdi-home',
+    title: 'Unified Dialogs',
+    subtitle: 'Streamlines your applications dialogs',
+    text: 'Save time and headache by using Unified Dialogs to show dialog in your application.',
+    items: [
+      {
+        value: 'wanted',
+        icon: 'mdi-star',
+        title: 'I want it!',
+        subtitle: 'This is wonderful!',
+      },
+      {
+        value: 'didn\'t want',
+        icon: 'mdi-archive',
+        title: 'Not now',
+      },
+    ]
+  });
+
+  if (!choice) {
+    return;
+  }
+
+  alert(`You ${choice} it!`);
+
+}
+
 </script>
 
 
@@ -10,7 +42,7 @@ const user = inject('user');
   <v-container fluid class="fill-height d-flex flex-column align-center justify-center bg-grey-lighten-4">
 
     <div class="text-h5">
-      Hello From Home
+      Hello From Unified Frontend
     </div>
 
     <v-btn
@@ -23,7 +55,14 @@ const user = inject('user');
       Made By YoonesKh
     </v-btn>
 
-    <pre style="width: 512px;">{{ { token, user } }}</pre>
+    <v-btn
+      variant="text"
+      color="primary"
+      prepend-icon="mdi-star"
+      class="mt-2 text-none"
+      @click="testDialogs()">
+      Test Dialogs
+    </v-btn>
 
   </v-container>
 </template>

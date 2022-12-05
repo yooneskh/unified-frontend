@@ -37,14 +37,26 @@ provide('isMobile', computed(() => display.smAndDown.value));
 provide('isTablet', computed(() => display.mdAndDown.value && !display.smAndDown.value));
 provide('isDesktop', computed(() => display.lgAndUp.value));
 
+
+/* unified dialogs */
+
+import { UnifiedDialogProvider } from './utilities/unified-dialogs/mod';
+import { launchDialog } from './services/dialogs/mod';
+
+provide('launchDialog', launchDialog);
+
 </script>
 
 
 <template>
   <v-app>
+
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
+
+    <unified-dialog-provider />
+
   </v-app>
 </template>
 
