@@ -89,9 +89,7 @@ const actions = [
     key: 'update',
     icon: 'mdi-pen',
     title: 'Update',
-    handler(item, index) {
-      console.log({ item, index });
-    },
+    handler: handleItemUpdate,
   },
   {
     key: 'delete',
@@ -103,7 +101,7 @@ const actions = [
 ];
 
 
-async function handleItemDelete(item, index) {
+async function handleItemDelete(item) {
 
   const choice = await launchButtonPickerDialog({
     icon: 'mdi-delete',
@@ -140,6 +138,21 @@ async function handleItemDelete(item, index) {
   alert(`${props.resource} deleted successfully.`);
   refreshItems();
 
+}
+
+
+import { launchDialog } from '~~/services/dialogs/mod';
+import ResourceObjectDialog from './object-dialog.vue';
+
+async function handleItemUpdate(item) {
+  launchDialog({
+    component: ResourceObjectDialog,
+    props: {
+      resource: props.resource,
+      resourceId: item._id,
+      resourceObject: item,
+    },
+  });
 }
 
 
