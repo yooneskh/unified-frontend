@@ -4072,10 +4072,10 @@ unified-mongo-filter@0.3.1:
   resolved "https://registry.yarnpkg.com/unified-mongo-filter/-/unified-mongo-filter-0.3.1.tgz#4e8056b9477f550da1aef5af616d373928aad40b"
   integrity sha512-4eiGtgGAfqU/EyJaEQkn3zYMPGlXwPfJm69Btwd5lKZzOrf/xG3qv8n33fmu1Z8OuFxDQYHh4hovPLBpFBGUgw==
 
-unified-network@0.6.1:
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/unified-network/-/unified-network-0.6.1.tgz#0759cd74a065b177bfce62ec52e0db5eeebb6ec0"
-  integrity sha512-jg03C1YghA0jJbCbCVAUQRVaqs477VMbsTwI0bb58YfjUmIIDadzvGyP7HG+wWMMSX/bq8zZx8EUIVzZDoC+Ng==
+unified-network@0.6.2:
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/unified-network/-/unified-network-0.6.2.tgz#15ffd04a6be34f424768f37ddcf6299867299667"
+  integrity sha512-cy7yqZl9Mwh/JR0oxbg+ykh949dlh+He3+L5jOS1hqvzDe47sBugjJxm1Z4VPVs2aEhRSGgMETzKu3WlO+ePGw==
 
 unimport@^1.0.0, unimport@^1.0.1:
   version "1.0.1"

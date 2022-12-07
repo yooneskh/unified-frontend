@@ -70,9 +70,9 @@ onMounted(async () => {
     width="768">
 
     <v-card-text class="pb-0">
-      Please fill the form below.
+      Please fill the form.
     </v-card-text>
-    {{ object }}
+
     <v-card-text class="pt-0">
       <u-form
         class="px-0 pt-0"

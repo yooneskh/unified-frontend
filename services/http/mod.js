@@ -5,18 +5,31 @@ export const http = makeUnifiedNetwork({
   baseUrl: 'https://api.aboutshiraz.com/api',
   processor: async ({ url, method, body, headers }) => {
 
-    const response = await $fetch.raw(url, {
-      method: method.toUpperCase(),
-      body,
-      headers,
-    });
+    try {
+
+      const response = await $fetch.raw(url, {
+        method: method.toUpperCase(),
+        body,
+        headers,
+      });
 
 
-    return {
-      status: response.status,
-      headers: Object.fromEntries( response.headers.entries() ),
-      data: response._data,
-    };
+      return {
+        status: response.status,
+        headers: Object.fromEntries( response.headers.entries() ),
+        data: response._data,
+      };
+
+    }
+    catch (error) {
+
+      return {
+        status: error.statusCode,
+        headers: Object.fromEntries( error.response.headers.entries() ),
+        data: error.data,
+      };
+
+    }
 
   }
 });

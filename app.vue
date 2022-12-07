@@ -21,7 +21,11 @@ if (token.value) {
 }
 
 
-import { http } from './services/http/mod';
+import { http, generalHttpHandle } from './services/http/mod';
+
+provide('http', http);
+provide('generalHttpHandle', generalHttpHandle);
+
 
 watch(token, () => {
   http.applyHeader('Authorization', token.value);
