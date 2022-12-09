@@ -63,6 +63,7 @@ const { loading: countLoading, data: itemsCount, refresh: refreshItemsCount } = 
     `${resourceUrlPart.value}/count`
   ),
   // queries: computed(() => ({
+  //   filters: ...
   // })),
 });
 
@@ -145,7 +146,8 @@ import { launchDialog } from '~~/services/dialogs/mod';
 import ResourceObjectDialog from './object-dialog.vue';
 
 async function handleItemUpdate(item) {
-  launchDialog({
+
+  const result = await launchDialog({
     component: ResourceObjectDialog,
     props: {
       resource: props.resource,
@@ -153,6 +155,14 @@ async function handleItemUpdate(item) {
       resourceObject: item,
     },
   });
+
+  if (!result) {
+    return;
+  }
+
+
+  refreshItemsData();
+
 }
 
 
@@ -160,6 +170,15 @@ async function handleItemUpdate(item) {
 
 import SimpleTable from './components/simple-table.vue';
 import ExplorerTableCell from './explorer-table-cell.vue';
+
+
+/* expose */
+
+defineExpose({
+  refreshItems,
+  refreshItemsData,
+  refreshItemsCount,
+});
 
 </script>
 

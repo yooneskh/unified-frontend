@@ -61,7 +61,7 @@ function convertMetaPropertyToField(property) {
 export function useResourceMetaFields({ resource }) {
 
   const { meta } = useMeta({
-    resource: computed(() => resource),
+    resource,
     filter: it => !it.hidden,
   });
 

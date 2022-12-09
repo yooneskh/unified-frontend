@@ -14,6 +14,7 @@ const emit = defineEmits([]);
 /* general */
 
 const loading = ref(false);
+const elExplorer = ref();
 
 
 /* create new */
@@ -29,6 +30,13 @@ async function handleCreateNew() {
       resource: props.resource
     },
   });
+
+  if (!result) {
+    return;
+  }
+
+
+  elExplorer.value?.refreshItems();
 
 }
 
@@ -50,6 +58,7 @@ import ExplorerTable from './explorer-table.vue';
     </template>
 
     <explorer-table
+      ref="elExplorer"
       :resource="props.resource"
       @update:loading="loading = $event"
     />

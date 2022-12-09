@@ -73,12 +73,11 @@ const isMobile = inject('isMobile');
           <template v-else>
             <v-btn
               v-for="action of props.actions" :key="action.key"
-              variant="outlined"
+              variant="tonal"
               size="small"
               density="comfortable"
               :color="action.color"
               :icon="action.icon"
-              flat
               class="me-2 my-1"
               @click="action.handler?.(item, index)">
 
