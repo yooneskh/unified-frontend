@@ -1,4 +1,5 @@
 import vuetify from 'vite-plugin-vuetify'
+import vue from '@vitejs/plugin-vue';
 import { routes } from './routes';
 
 
@@ -7,6 +8,12 @@ export default defineNuxtConfig({
     'vuetify/dist/vuetify.min.css',
     '@mdi/font/css/materialdesignicons.min.css',
   ],
+  build: {
+    transpile: [
+      'unified-form',
+      'unified-form-vuetify'
+    ]
+  },
   vite: {
     ssr: {
       noExternal: [
