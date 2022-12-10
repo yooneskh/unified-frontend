@@ -21,6 +21,11 @@ const groups = [
         name: 'Users',
         pathName: 'admin.users.list',
       },
+      {
+        icon: 'mdi-file-sign',
+        name: 'Posts',
+        pathName: 'admin.posts.list',
+      },
     ],
   },
   {

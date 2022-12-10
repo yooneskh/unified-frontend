@@ -31,10 +31,36 @@ const { resource: item } = useResourceObject({
 
 import { useResourceTitle } from './composeables/use-resource-title';
 
-const { title } = useResourceTitle({
+const { title, refresh: refreshitemTitle } = useResourceTitle({
   resource: computed(() => props.resource),
-  resourceObject: item,
+  resourceId: computed(() => props.resourceId),
 });
+
+
+/* view */
+
+import { launchDialog } from '~~/services/dialogs/mod';
+
+async function showResource() {
+
+  const result = await launchDialog({
+    component: defineAsyncComponent(() =>
+      import('./object-dialog.vue')
+    ),
+    props: {
+      resource: props.resource,
+      resourceId: props.resourceId,
+    },
+  });
+
+  if (!result) {
+    return;
+  }
+
+
+  refreshitemTitle();
+
+}
 
 
 /* template */
@@ -54,7 +80,10 @@ const { title } = useResourceTitle({
     </a>
   </template>
   <template v-else>
-    <span class="text-primary me-2 text-decoration-underline" style="cursor: pointer;">
+    <span
+      class="text-primary me-2 text-decoration-underline"
+      style="cursor: pointer;"
+      @click="showResource()">
       {{ title }}
     </span>
   </template>

@@ -36,6 +36,14 @@ export const routes = [
         },
       },
       {
+        name: 'admin.posts.list',
+        path: 'posts',
+        file: resolve('/utilities/resources/manager-page.vue'),
+        meta: {
+          resource: 'Post',
+        },
+      },
+      {
         name: 'admin.accounts.list',
         path: 'accounts',
         file: resolve('/modules/accounts/page.vue'),

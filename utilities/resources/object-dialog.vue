@@ -11,7 +11,6 @@ const route = useRoute()
 const props = defineProps({
   resource: String,
   resourceId: String,
-  resourceObject: Object,
 });
 
 const emit = defineEmits([
@@ -43,25 +42,19 @@ const loading = ref(false);
 
 
 const isCreating = computed(() =>
-  !props.resourceId && !props.resourceObject
+  !props.resourceId
 );
 
 
 onMounted(async () => {
 
-  if (props.resourceObject) {
-    object.value      = JSON.parse(JSON.stringify(props.resourceObject));
-    objectClone.value = JSON.parse(JSON.stringify(props.resourceObject));
-  }
-  else if (props.resourceId) {
+  if (props.resourceId) {
 
     loading.value = true;
-
     object.value = await retrieveResourceObject({
       resource: props.resource,
       resourceId: props.resourceId,
     });
-
     loading.value = false;
 
     objectClone.value = JSON.parse(JSON.stringify(object.value));
@@ -107,6 +100,8 @@ const validationMessages = computed(() =>
 
 /* submission */
 
+import { cache } from "~~/services/cache/mod";
+
 const submitting = ref(false);
 
 async function submitObject() {
@@ -138,6 +133,14 @@ async function submitObject() {
 
   if (generalHttpHandle(status, data)) {
     return;
+  }
+
+
+  if (isCreating.value) {
+    cache.set(`resource.${props.resource}.${object.value._id}.object`, data);
+  }
+  else {
+    cache.delete(`resource.${props.resource}.${object.value._id}.object`);
   }
 
 

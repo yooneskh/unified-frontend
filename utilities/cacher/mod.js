@@ -18,7 +18,7 @@ export class YCacher {
 
   async get(key) {
     if (this.cache.has(key)) {
-      return this.cache.get(key);
+      return clone(this.cache.get(key));
     }
     else if (this.preempts.has(key)) {
       return await this.preempts.get(key);

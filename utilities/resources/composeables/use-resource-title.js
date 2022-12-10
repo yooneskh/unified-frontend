@@ -3,9 +3,16 @@ import { retrieveMeta } from './use-meta';
 import { retrieveResourceObject } from './use-resource-object';
 
 
-export async function retrieveResourceTitle({ resource, resourceObject }) {
+export async function retrieveResourceTitle({ resource, resourceId }) {
 
-  const meta = await retrieveMeta({ resource });
+  const meta = await retrieveMeta({
+    resource,
+  });
+
+  const resourceObject = await retrieveResourceObject({
+    resource,
+    resourceId,
+  });
 
   const titleableMetas = meta.filter(it => it.titleable);
 
@@ -16,7 +23,7 @@ export async function retrieveResourceTitle({ resource, resourceObject }) {
       if (!property.ref) {
 
         if (property.variants) {
-          return resourceObject[property.key][AppConfig.locale.default];
+          return resourceObject[property.key]?.[AppConfig.locale.default];
         }
 
         return resourceObject[property.key];
@@ -26,10 +33,7 @@ export async function retrieveResourceTitle({ resource, resourceObject }) {
 
       return retrieveResourceTitle({
         resource: property.ref,
-        resourceObject: await retrieveResourceObject({
-          resource: property.ref,
-          resourceId: resourceObject[property.key],
-        }),
+        resourceId: resourceObject[property.key],
       });
 
     })
@@ -38,14 +42,15 @@ export async function retrieveResourceTitle({ resource, resourceObject }) {
 }
 
 
-export function useResourceTitle({ resource, resourceObject }) {
+export function useResourceTitle({ resource, resourceId }) {
 
   const title = ref('');
+  const refreshHandle = ref(0);
 
 
-  watch([resource, resourceObject], async () => {
+  watch([resource, resourceId, refreshHandle], async () => {
 
-    if (!unref(resourceObject)) {
+    if (!unref(resourceId)) {
       return;
     }
 
@@ -54,7 +59,7 @@ export function useResourceTitle({ resource, resourceObject }) {
 
     title.value = await retrieveResourceTitle({
       resource: unref(resource),
-      resourceObject: unref(resourceObject),
+      resourceId: unref(resourceId),
     });
 
   }, { immediate: true });
@@ -62,6 +67,7 @@ export function useResourceTitle({ resource, resourceObject }) {
 
   return {
     title,
+    refresh: () => refreshHandle.value++,
   };
 
 }

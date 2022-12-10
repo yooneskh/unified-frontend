@@ -1,5 +1,4 @@
 import vuetify from 'vite-plugin-vuetify'
-import vue from '@vitejs/plugin-vue';
 import { routes } from './routes';
 
 

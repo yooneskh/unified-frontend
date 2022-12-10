@@ -152,7 +152,6 @@ async function handleItemUpdate(item) {
     props: {
       resource: props.resource,
       resourceId: item._id,
-      resourceObject: item,
     },
   });
 

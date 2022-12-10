@@ -17,7 +17,7 @@ function convertMetaPropertyToField(property) {
     identifier = 'checkbox';
   }
   // else if (property.ref === 'Media' && property.array) {
-  //   identifier = 'media';
+  //   identifier = 'media-list';
   // }
   else if (property.ref === 'Media') {
     identifier = 'media';
@@ -43,6 +43,7 @@ function convertMetaPropertyToField(property) {
 
   return {
     vIf: property.vIf,
+    variants: property.variants,
     key: property.key,
     identifier,
     label: property.title,

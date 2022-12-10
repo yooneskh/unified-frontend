@@ -27,7 +27,7 @@ async function handleCreateNew() {
   const result = await launchDialog({
     component: ResourceObjectDialog,
     props: {
-      resource: props.resource
+      resource: props.resource,
     },
   });
 

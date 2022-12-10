@@ -10,7 +10,6 @@ export async function retrieveResourceObject({ resource, resourceId }) {
   }
 
   if (cache.has(`resource.${resource}.${resourceId}.object`)) {
-    // todo: remember to clear it on object change
     return cache.get(`resource.${resource}.${resourceId}.object`);
   }
 
