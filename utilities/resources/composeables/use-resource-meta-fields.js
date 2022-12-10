@@ -5,8 +5,13 @@ import { registerFormElement } from 'unified-form';
 
 registerFormElement({
   identifier: 'media',
-  component: defineAsyncComponent(() => import('../components/form-element-media.vue'))
-})
+  component: defineAsyncComponent(() => import('../form-elements/media.vue')),
+});
+
+registerFormElement({
+  identifier: 'resource',
+  component: defineAsyncComponent(() => import('../form-elements/resource.vue')),
+});
 
 
 function convertMetaPropertyToField(property) {
@@ -22,9 +27,9 @@ function convertMetaPropertyToField(property) {
   else if (property.ref === 'Media') {
     identifier = 'media';
   }
-  // else if (property.ref) {
-  //   identifier = 'resource';
-  // }
+  else if (property.ref) {
+    identifier = 'resource';
+  }
   // else if (property.richText) {
   //   identifier = 'editor';
   // }
@@ -47,8 +52,8 @@ function convertMetaPropertyToField(property) {
     key: property.key,
     identifier,
     label: property.title,
-    resource: property.ref,
     width: property.width,
+    resource: property.ref,
     multiple: property.array,
     items: property.items ?? property.enum,
     // searchable: true,

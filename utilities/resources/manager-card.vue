@@ -1,5 +1,7 @@
 <script setup>
 
+import { generalHttpHandle, http } from '~~/services/http/mod';
+
 /* interface */
 
 const props = defineProps({
@@ -11,18 +13,27 @@ const props = defineProps({
 const emit = defineEmits([]);
 
 
+/* meta */
+
+import { useResourceUrl } from './composeables/use-resource-url';
+
+const { resourceUrlPart } = useResourceUrl({
+  resource: computed(() => props.resource),
+});
+
+
 /* general */
 
 const loading = ref(false);
 const elExplorer = ref();
 
 
-/* create new */
+/* create */
 
 import { launchDialog } from '~~/services/dialogs/mod';
 import ResourceObjectDialog from './object-dialog.vue';
 
-async function handleCreateNew() {
+async function handleCreate() {
 
   const result = await launchDialog({
     component: ResourceObjectDialog,
@@ -41,6 +52,88 @@ async function handleCreateNew() {
 }
 
 
+/* table actions */
+
+const tableActions = [
+  {
+    key: 'update',
+    icon: 'mdi-pen',
+    title: 'Update',
+    handler: handleItemUpdate,
+  },
+  {
+    key: 'delete',
+    color: 'error',
+    icon: 'mdi-delete',
+    title: 'Delete',
+    handler: handleItemDelete,
+  },
+];
+
+
+import { launchButtonPickerDialog } from '../unified-dialogs-vuetify/button-picker/mod';
+
+async function handleItemDelete(item) {
+
+  launchButtonPickerDialog({
+    icon: 'mdi-delete',
+    title: `Delete ${props.resource}`,
+    text: 'Are you sure you want to delete this?',
+    startButtons: [
+      {
+        value: false,
+        title: 'No, Cancel',
+      },
+    ],
+    endButtons: [
+      {
+        value: true,
+        title: 'Yes, Delete this',
+        color: 'error',
+        async handler() {
+
+          loading.value = true;
+          const { status, data } = await http.request({
+            method: 'delete',
+            url: `/${resourceUrlPart.value}/${item._id}`,
+          });
+          loading.value = false;
+
+          if (generalHttpHandle(status, data)) {
+            return;
+          }
+
+
+          elExplorer.value?.refreshItems();
+
+        }
+      },
+    ],
+  });
+
+}
+
+
+async function handleItemUpdate(item) {
+
+  const result = await launchDialog({
+    component: ResourceObjectDialog,
+    props: {
+      resource: props.resource,
+      resourceId: item._id,
+    },
+  });
+
+  if (!result) {
+    return;
+  }
+
+
+  elExplorer.value?.refreshItemsData();
+
+}
+
+
 /* template */
 
 import ExplorerTable from './explorer-table.vue';
@@ -52,7 +145,7 @@ import ExplorerTable from './explorer-table.vue';
   <v-card :prepend-icon="props.icon" :title="props.title" :loading="loading">
 
     <template #append>
-      <v-btn flat color="primary" prepend-icon="mdi-plus" @click="handleCreateNew()">
+      <v-btn flat color="primary" prepend-icon="mdi-plus" @click="handleCreate()">
         Create New
       </v-btn>
     </template>
@@ -60,6 +153,7 @@ import ExplorerTable from './explorer-table.vue';
     <explorer-table
       ref="elExplorer"
       :resource="props.resource"
+      :actions="tableActions"
       @update:loading="loading = $event"
     />
 

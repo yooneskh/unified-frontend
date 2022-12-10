@@ -5,6 +5,8 @@
 const props = defineProps({
   resource: String,
   loading: Boolean,
+  actions: Array,
+  selectedResources: Array,
 });
 
 const emit = defineEmits([
@@ -67,6 +69,21 @@ const { loading: countLoading, data: itemsCount, refresh: refreshItemsCount } = 
   // })),
 });
 
+const totalPages = computed(() =>
+  Math.ceil(itemsCount.value / itemsInPage.value) || 1
+);
+
+watch([totalPages], () => {
+
+  if (currentPage.value <= totalPages.value) {
+    return;
+  }
+
+
+  currentPage.value = totalPages.value;
+
+});
+
 
 function refreshItems() {
   refreshItemsData();
@@ -77,92 +94,6 @@ function refreshItems() {
 watch([loading, countLoading], () =>
   emit('update:loading', loading.value || countLoading.value)
 );
-
-
-/* actions */
-
-import { generalHttpHandle, http } from '~~/services/http/mod';
-
-import { launchButtonPickerDialog } from '../unified-dialogs-vuetify/button-picker/mod';
-
-const actions = [
-  {
-    key: 'update',
-    icon: 'mdi-pen',
-    title: 'Update',
-    handler: handleItemUpdate,
-  },
-  {
-    key: 'delete',
-    color: 'error',
-    icon: 'mdi-delete',
-    title: 'Delete',
-    handler: handleItemDelete,
-  },
-];
-
-
-async function handleItemDelete(item) {
-
-  const choice = await launchButtonPickerDialog({
-    icon: 'mdi-delete',
-    title: `Delete ${props.resource}`,
-    text: 'Are you sure you want to delete this?',
-    startButtons: [
-      {
-        value: false,
-        title: 'No, Cancel',
-      },
-    ],
-    endButtons: [
-      {
-        value: true,
-        title: 'Yes, Delete this',
-        color: 'error',
-      },
-    ],
-  });
-
-  if (!choice) {
-    return;
-  }
-
-  const { status, data } = await http.request({
-    method: 'delete',
-    url: `/${resourceUrlPart.value}/${item._id}`,
-  });
-
-  if (generalHttpHandle(status, data)) {
-    return;
-  }
-
-  alert(`${props.resource} deleted successfully.`);
-  refreshItems();
-
-}
-
-
-import { launchDialog } from '~~/services/dialogs/mod';
-import ResourceObjectDialog from './object-dialog.vue';
-
-async function handleItemUpdate(item) {
-
-  const result = await launchDialog({
-    component: ResourceObjectDialog,
-    props: {
-      resource: props.resource,
-      resourceId: item._id,
-    },
-  });
-
-  if (!result) {
-    return;
-  }
-
-
-  refreshItemsData();
-
-}
 
 
 /* template */
@@ -188,7 +119,8 @@ defineExpose({
     <simple-table
       :headers="headers"
       :items="items"
-      :actions="actions">
+      :selected-items="props.selectedResources"
+      :actions="props.actions">
 
       <template #item="{ header, data }">
         <explorer-table-cell
@@ -204,7 +136,7 @@ defineExpose({
       <v-pagination
         size="small"
         density="comfortable"
-        :length="Math.ceil(itemsCount / itemsInPage) || 1"
+        :length="totalPages"
         total-visible="9"
         v-model="currentPage"
       />

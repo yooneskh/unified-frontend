@@ -14,6 +14,7 @@ const props = defineProps({
     type: String,
     default: 'Actions',
   },
+  selectedItems: Array,
 });
 
 const emit = defineEmits([]);
@@ -46,7 +47,11 @@ const isMobile = inject('isMobile');
     </thead>
 
     <tbody>
-      <tr v-for="(item, index) of items" :key="item[props.itemKey]">
+      <tr
+        v-for="(item, index) of items" :key="item[props.itemKey]"
+        :style="{
+          'background': (props.selectedItems?.includes(item[props.itemKey])) ? 'rgba( var(--v-theme-primary), 0.069)' : undefined,
+        }">
 
         <td v-for="header of headers" :key="header.key">
           <slot name="item" :header="header" :item="item" :data="item[header.key]">

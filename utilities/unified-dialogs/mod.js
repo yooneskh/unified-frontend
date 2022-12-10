@@ -5,7 +5,7 @@ import { useDialogs } from './state';
 function uuid() {
   return (
     new Array(4)
-      .fill(undefined)
+      .fill()
       .map(() => Math.random().toString(16).slice(2))
       .join('-')
   );

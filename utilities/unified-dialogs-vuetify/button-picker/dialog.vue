@@ -14,6 +14,30 @@ const emit = defineEmits([
   'resolve',
 ]);
 
+
+/* button handling */
+
+const loadingButtons = reactive({});
+
+async function handleButtonClick(button) {
+
+  if (!button.handler) {
+    return
+  }
+
+  loadingButtons[button.value ?? button.title] = true;
+  try {
+
+    await button.handler();
+
+    emit('resolve', button.value ?? button.title);
+
+  }
+  catch {}
+  loadingButtons[button.value ?? button.title] = false;
+
+}
+
 </script>
 
 
@@ -33,7 +57,8 @@ const emit = defineEmits([
         v-for="(button, index) of props.startButtons" :key="index"
         :prepend-icon="button.icon"
         :color="button.color"
-        @click="emit('resolve', button.value ?? button.title)">
+        :loading="loadingButtons[button.value ?? button.title]"
+        @click="handleButtonClick(button)">
         {{ button.title }}
       </v-btn>
 
@@ -43,7 +68,8 @@ const emit = defineEmits([
         v-for="(button, index) of props.endButtons" :key="index"
         :prepend-icon="button.icon"
         :color="button.color"
-        @click="emit('resolve', button.value ?? button.title)">
+        :loading="loadingButtons[button.value ?? button.title]"
+        @click="handleButtonClick(button)">
         {{ button.title }}
       </v-btn>
 

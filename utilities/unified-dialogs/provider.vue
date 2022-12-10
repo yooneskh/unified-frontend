@@ -14,7 +14,7 @@ function removeDialog(dialog) {
 
   setTimeout(() => {
     dialogs.value.splice(
-      dialogs.value.findIndex(it => it.id === dialog.id),
+      dialogs.value.findIndex(it => it.key === dialog.key),
       1
     );
   }, 1000);
