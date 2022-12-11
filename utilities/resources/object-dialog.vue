@@ -163,7 +163,7 @@ async function submitObject() {
 
     <v-card-text class="pb-0">
       Please fill the form.
-    </v-card-text> {{ fields }}
+    </v-card-text>
 
     <v-card-text class="pt-0">
       <u-form

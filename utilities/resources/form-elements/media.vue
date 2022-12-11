@@ -26,14 +26,19 @@ const http = inject('http');
 const generalHttpHandle = inject('generalHttpHandle');
 
 const loading = ref(false);
+const uploading = ref(false);
 const media = ref(undefined);
 const error = ref(undefined);
 
 
 const title = computed(() => {
 
-  if (loading.value) {
+  if (uploading.value) {
     return 'Uploading ...';
+  }
+
+  if (loading.value) {
+    return 'Loading ...';
   }
 
   if (error.value) {
@@ -61,7 +66,7 @@ async function handleFileChange(event) {
   payload.append('file', file);
 
 
-  loading.value = true;
+  uploading.value = true;
   error.value = undefined;
 
   const { status, data } = await http.request({
@@ -70,7 +75,7 @@ async function handleFileChange(event) {
     body: payload,
   });
 
-  loading.value = false;
+  uploading.value = false;
 
   if (generalHttpHandle(status, data, true)) {
     error.value = data?.message || 'Could not upload file.';
@@ -79,6 +84,7 @@ async function handleFileChange(event) {
 
 
   media.value = data;
+  emit('input', data._id);
 
 }
 
@@ -147,7 +153,7 @@ function openMedia() {
     :placeholder="props.field.placeholder"
     :hint="props.field.hint"
     @click="elFile.click()"
-    :loading="loading"
+    :loading="loading || uploading"
     :model-value="title"
     :success="props.success"
     :error="props.error || !!error"
