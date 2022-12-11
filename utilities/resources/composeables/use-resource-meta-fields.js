@@ -14,6 +14,14 @@ registerFormElement({
 });
 
 
+function convertSeriesSchemaToFields(schema) {
+  return (
+    Object.keys(schema)
+      .map(key => ({ ...schema[key], key }))
+      .map(convertMetaPropertyToField)
+  );
+}
+
 function convertMetaPropertyToField(property) {
 
   let identifier = 'text';
@@ -33,9 +41,9 @@ function convertMetaPropertyToField(property) {
   // else if (property.richText) {
   //   identifier = 'editor';
   // }
-  // else if (property.type === 'series') {
-  //   identifier = 'series';
-  // }
+  else if (property.type === 'series') {
+    identifier = 'series';
+  }
   else if (property.enum || property.array) {
     identifier = 'select';
   }
@@ -59,6 +67,9 @@ function convertMetaPropertyToField(property) {
     // searchable: true,
     addable: property.array,
     chips: property.type === 'string' && property.array,
+    itemBase: property.seriesBase,
+    itemFields: property.seriesSchema ? convertSeriesSchemaToFields(property.seriesSchema) : undefined,
+    itemWidth: property.itemWidth,
   };
 
 }

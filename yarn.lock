@@ -4055,10 +4055,10 @@ unhead@^1.0.0:
     "@unhead/schema" "1.0.2"
     hookable "^5.4.1"
 
-unified-form-vuetify@0.4.0:
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/unified-form-vuetify/-/unified-form-vuetify-0.4.0.tgz#2bfc2122c44a9d2c892cb3d64d7206b56971d7ad"
-  integrity sha512-AB1FATxVBRvl/6NfovzHW8B7CLpI923jaaR+BXK3d8HQYQxQFct78llqjJY5l8jnCag2ZZSqdg7ZT0n8e4hiyA==
+unified-form-vuetify@0.4.2:
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/unified-form-vuetify/-/unified-form-vuetify-0.4.2.tgz#c4a1dd8a77655cf41c4687a323fd5808578a6074"
+  integrity sha512-y5kCIPBy3zKY6+E+4OEKo0nSpQFQX5Td2xCNbgMwSADeKdUrRhUmQte08Vf3MDHONjSHWM69HFq32urrjrbGjg==
 
 unified-form@0.3.1:
   version "0.3.1"
