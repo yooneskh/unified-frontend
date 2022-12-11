@@ -9,6 +9,11 @@ registerFormElement({
 });
 
 registerFormElement({
+  identifier: 'media-list',
+  component: defineAsyncComponent(() => import('../form-elements/media-list.vue')),
+});
+
+registerFormElement({
   identifier: 'resource',
   component: defineAsyncComponent(() => import('../form-elements/resource.vue')),
 });
@@ -29,9 +34,9 @@ function convertMetaPropertyToField(property) {
   if (property.type === 'boolean') {
     identifier = 'checkbox';
   }
-  // else if (property.ref === 'Media' && property.array) {
-  //   identifier = 'media-list';
-  // }
+  else if (property.ref === 'Media' && property.array) {
+    identifier = 'media-list';
+  }
   else if (property.ref === 'Media') {
     identifier = 'media';
   }
