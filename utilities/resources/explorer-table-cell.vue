@@ -56,6 +56,15 @@ import ExplorerTableCellResource from './explorer-table-cell-resource.vue';
     {{ dayjs(data).format(props.header.labelFormat) }}
   </template>
 
+  <template v-else-if="props.header.type === 'boolean'">
+    <template v-if="data">
+      <v-icon color="success" icon="mdi-check" />
+    </template>
+    <template v-else>
+      <v-icon color="error" icon="mdi-close" />
+    </template>
+  </template>
+
   <template v-else-if="props.header.type === 'number'">
     {{ (typeof props.data === 'number') ? (props.data.toLocaleString()) : (props.data) }}
   </template>

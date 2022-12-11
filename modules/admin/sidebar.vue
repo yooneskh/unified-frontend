@@ -26,6 +26,11 @@ const groups = [
         name: 'Posts',
         pathName: 'admin.posts.list',
       },
+      {
+        icon: 'mdi-calendar',
+        name: 'Events',
+        pathName: 'admin.events.list',
+      },
     ],
   },
   {
@@ -141,7 +146,7 @@ const visibleGroup = computed(() =>
             class="sidebar-nav-child"
             :to="{ name: child.pathName }"
             exact
-            @click="selectedGroupName = group.name; previewingGroupName = '';"
+            @click="selectedGroupName = visibleGroup.name; previewingGroupName = '';"
           />
         </v-list>
 

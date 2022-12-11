@@ -44,6 +44,14 @@ export const routes = [
         },
       },
       {
+        name: 'admin.events.list',
+        path: 'events',
+        file: resolve('/utilities/resources/manager-page.vue'),
+        meta: {
+          resource: 'Event',
+        },
+      },
+      {
         name: 'admin.accounts.list',
         path: 'accounts',
         file: resolve('/modules/accounts/page.vue'),
