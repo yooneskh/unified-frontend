@@ -18,6 +18,11 @@ registerFormElement({
   component: defineAsyncComponent(() => import('../form-elements/resource.vue')),
 });
 
+registerFormElement({
+  identifier: 'editor',
+  component: defineAsyncComponent(() => import('../form-elements/editor.vue')),
+});
+
 
 function convertSeriesSchemaToFields(schema) {
   return (
@@ -43,9 +48,9 @@ function convertMetaPropertyToField(property) {
   else if (property.ref) {
     identifier = 'resource';
   }
-  // else if (property.richText) {
-  //   identifier = 'editor';
-  // }
+  else if (property.richText) {
+    identifier = 'editor';
+  }
   else if (property.type === 'series') {
     identifier = 'series';
   }
