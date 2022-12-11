@@ -173,7 +173,14 @@ async function submitObject() {
       />
     </v-card-text>
 
-    <v-alert v-if="isValidationOk || validationMessages?.length > 0" class="mx-5 pa-3 mb-3" :class="{ 'bg-error': !isValidationOk, 'bg-success': isValidationOk }" style="overflow: unset;">
+    <v-alert
+      v-if="isValidationOk || validationMessages?.length > 0"
+      class="mx-5 pa-3 mb-3"
+      :class="{
+        'bg-error': !isValidationOk,
+        'bg-success': isValidationOk,
+      }"
+      style="overflow: unset;">
 
       <template v-if="isValidationOk">
         Everything is OK!
