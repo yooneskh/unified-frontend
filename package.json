@@ -20,7 +20,7 @@
     "dayjs": "1.11.7",
     "lodash": "4.17.21",
     "pluralize": "8.0.0",
-    "unified-form": "0.3.2",
+    "unified-form": "0.3.5",
     "unified-form-vuetify": "0.4.2",
     "unified-network": "0.6.2",
     "vuetify": "3.0.4"

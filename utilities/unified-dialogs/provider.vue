@@ -28,8 +28,8 @@ function removeDialog(dialog) {
   <v-dialog
     v-for="dialog of dialogs"
     :key="dialog.key"
-    v-bind="dialog.options"
     width="auto"
+    v-bind="dialog.options"
     :model-value="dialog.modelValue"
     @update:model-value="!$event && !dialog.options.prominent && removeDialog(dialog)">
 

@@ -1,5 +1,8 @@
 <script setup>
 
+const http = inject('http');
+const generalHttpHandle = inject('generalHttpHandle');
+
 /* interface */
 
 const props = defineProps({
@@ -62,6 +65,88 @@ function tryLoad() {
 watch([options], () => {
   emit('input', JSON.stringify(options), selectedVariant.value);
 });
+
+
+/* image */
+
+import { launchFormPickerDialog } from '~~/utilities/unified-dialogs-vuetify/form-picker/mod';
+
+async function handleAddImage() {
+
+  const form = await launchFormPickerDialog({
+    icon: 'mdi-image',
+    title: 'Choose Image',
+    subtitle: 'Add image to content',
+    text: 'Choose your image to be added.',
+    fields: [
+      {
+        key: 'file', identifier: 'media', label: 'File',
+        rules: [
+          v => !!v || 'File is required!',
+        ],
+      },
+      {
+        key: 'variant', identifier: 'radiobuttons', label: 'Variant',
+        items: [
+          { value: 'full', title: 'Full' },
+          { value: 'large', title: 'Large' },
+          { value: 'medium', title: 'Medium' },
+          { value: 'small', title: 'Small' },
+        ],
+        rules: [
+          v => !!v || 'Variant is required!',
+        ],
+      },
+      {
+        key: 'maxWidth', identifier: 'number', label: 'Max Width (px or %)',
+      },
+    ],
+    options: {
+      width: 512,
+    },
+    async submitHandler(form) {
+
+      const { status, data } = await http.request({
+        method: 'get',
+        url: `/media/${form.file}`,
+      });
+
+      if (generalHttpHandle(status, data)) {
+        return;
+      }
+
+
+      options.parts.push({
+        key: makeUuid(),
+        type: 'image',
+        variant: form.variant,
+        maxWidth: form.maxWidth,
+        images: {
+          full: data.path,
+          large: data.variants.large,
+          medium: data.variants.medium,
+          small: data.variants.small,
+        },
+      });
+
+    }
+  });
+
+}
+
+
+/* ordering */
+
+function handleMovePart(part, index, direction) {
+
+  const newParts = [...options.parts];
+
+  const movedPart = newParts.splice(index, 1)[0];
+  newParts.splice(index + direction, 0, movedPart);
+
+  options.parts = newParts;
+
+}
 
 
 /* ckeditor */
@@ -136,6 +221,9 @@ const makeUuid = inject('makeUuid');
 
         </template>
 
+        <v-divider class="mt-3" />
+
+
         <template v-if="options.parts.length === 0">
           <div class="text-caption text-center py-12">
             No parts added yet.
@@ -143,7 +231,7 @@ const makeUuid = inject('makeUuid');
         </template>
 
         <template v-else>
-          <template v-for="part of options.parts" :key="part.key">
+          <div v-for="(part, index) of options.parts" class="editor-element" :key="part.key">
 
             <div v-if="part.type === 'text'" class="py-4 px-10">
               <ckeditor-component
@@ -152,7 +240,46 @@ const makeUuid = inject('makeUuid');
               />
             </div>
 
-          </template>
+            <div v-if="part.type === 'image'" class="py-4 px-10">
+              <v-img
+                :src="part.images[part.variant]"
+                :max-width="part.maxWidth"
+                class="mx-auto"
+              />
+            </div>
+
+            <div class="actions d-flex" style="gap: 4px;">
+
+              <v-btn
+                variant="tonal"
+                color="primary"
+                size="small"
+                density="comfortable"
+                icon="mdi-chevron-down"
+                @click="handleMovePart(part, index, 1)"
+              />
+
+              <v-btn
+                variant="tonal"
+                color="primary"
+                size="small"
+                density="comfortable"
+                icon="mdi-chevron-up"
+                @click="handleMovePart(part, index, -1)"
+              />
+
+              <v-btn
+                variant="tonal"
+                color="error"
+                size="small"
+                density="comfortable"
+                icon="mdi-close"
+                @click="options.parts.splice(index, 1)"
+              />
+
+            </div>
+
+          </div>
         </template>
 
 
@@ -162,9 +289,9 @@ const makeUuid = inject('makeUuid');
           Add Part
         </div>
 
-        <div class="mx-auto d-inline-block d-flex" style="padding: 6px; gap: 6px;">
+        <div class="mx-auto d-inline-block d-flex mb-8" style="padding: 6px; gap: 6px;">
 
-          <v-btn variant="tonal" rounded="pill" color="primary" prepend-icon="mdi-text" @click="options.parts.push({ key: makeUuid(), type: 'text', text: '' })">
+          <v-btn variant="tonal" rounded="pill" color="primary" prepend-icon="mdi-text" @click="options.parts.push({ key: makeUuid(), type: 'text', text: '<p>Enter your text here</p>' })">
             Text
           </v-btn>
 
@@ -179,3 +306,30 @@ const makeUuid = inject('makeUuid');
 
   </div>
 </template>
+
+
+<style scoped>
+
+  .editor-element {
+    position: relative;
+  }
+
+  .editor-element .actions {
+
+    position: absolute;
+
+    top: 12px;
+    inset-inline-end: 12px;
+
+    opacity: 0;
+    pointer-events: none;
+    transition: all 300ms ease-in-out;
+
+  }
+
+  .editor-element:hover .actions {
+    opacity: 1;
+    pointer-events: unset;
+  }
+
+</style>
