@@ -23,6 +23,11 @@ registerFormElement({
   component: defineAsyncComponent(() => import('../form-elements/editor.vue')),
 });
 
+registerFormElement({
+  identifier: 'date',
+  component: defineAsyncComponent(() => import('../form-elements/date.vue')),
+});
+
 
 function convertSeriesSchemaToFields(schema) {
   return (
@@ -60,6 +65,9 @@ function convertMetaPropertyToField(property) {
   else if (property.longText) {
     identifier = 'textarea';
   }
+  else if (property.labelFormat || property.valueFormat || property.dateType) {
+    identifier = 'date';
+  }
   else if (property.type === 'number') {
     identifier = 'number';
   }
@@ -80,6 +88,9 @@ function convertMetaPropertyToField(property) {
     itemBase: property.seriesBase,
     itemFields: property.seriesSchema ? convertSeriesSchemaToFields(property.seriesSchema) : undefined,
     itemWidth: property.itemWidth,
+    labelFormat: property.labelFormat,
+    valueFormat: property.valueFormat,
+    dateType: property.dateType,
   };
 
 }
