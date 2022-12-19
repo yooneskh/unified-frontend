@@ -25,7 +25,7 @@ function handleLogout() {
 
 
 <template>
-  <v-app-bar title="HelloApp" color="primary">
+  <v-app-bar title="HelloApp">
 
     <template #prepend>
       <v-icon>
