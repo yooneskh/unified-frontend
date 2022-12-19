@@ -29,7 +29,7 @@ import AdminSidebar from './sidebar.vue';
 
       <admin-sidebar />
 
-      <v-main class="bg-grey-lighten-4" style="max-height: 100vh; overflow-y: auto;">
+      <v-main style="max-height: 100vh; overflow-y: auto;">
         <NuxtPage />
       </v-main>
 

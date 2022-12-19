@@ -15,7 +15,9 @@ import GeneralHeader from './header.vue';
 <template>
   <v-layout>
 
-    <general-header />
+    <general-header
+      v-if="!$route.meta.hideHeader"
+    />
 
     <v-main>
       <NuxtPage />
