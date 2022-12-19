@@ -1,0 +1,74 @@
+.v-locale--is-rtl {
+
+  div, input, span, .text-h1, .text-h2, .text-h3, .text-h4, .text-h5, .text-h6, .text-subtitle-1, .text-subtitle-2, .text-body-1, .text-body-2, .text-caption {
+    font-family: irsans;
+  }
+
+  .v-btn {
+    letter-spacing: 0;
+  }
+
+}
+
+@font-face {
+  font-family: 'irsans';
+  font-style: normal;
+  font-weight: 100;
+  src: url(@/assets/fonts/irsans/IRANSansX-Thin.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'irsans';
+  font-style: normal;
+  font-weight: 200;
+  src: url(@/assets/fonts/irsans/IRANSansX-UltraLight.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'irsans';
+  font-style: normal;
+  font-weight: 300;
+  src: url(@/assets/fonts/irsans/IRANSansX-Light.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'irsans';
+  font-style: normal;
+  font-weight: 400;
+  src: url(@/assets/fonts/irsans/IRANSansX-Regular.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'irsans';
+  font-style: normal;
+  font-weight: 500;
+  src: url(@/assets/fonts/irsans/IRANSansX-Medium.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'irsans';
+  font-style: normal;
+  font-weight: 600;
+  src: url(@/assets/fonts/irsans/IRANSansX-DemiBold.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'irsans';
+  font-style: normal;
+  font-weight: 700;
+  src: url(@/assets/fonts/irsans/IRANSansX-Bold.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'irsans';
+  font-style: normal;
+  font-weight: 800;
+  src: url(@/assets/fonts/irsans/IRANSansX-ExtraBold.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'irsans';
+  font-style: normal;
+  font-weight: 900;
+  src: url(@/assets/fonts/irsans/IRANSansX-Black.woff2) format('woff2');
+}

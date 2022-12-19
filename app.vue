@@ -78,7 +78,11 @@ provide('makeUuid', (sections = 4) => {
 
 
 <style lang="scss">
+
+  @import '@/assets/stylesheets/rtl.scss';
+
   .v-btn {
     text-transform: none !important;
   }
+
 </style>
