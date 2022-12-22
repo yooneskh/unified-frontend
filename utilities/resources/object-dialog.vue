@@ -211,7 +211,7 @@ import startCase from 'lodash/startCase';
         :loading="validationLoading || submitting"
         :disabled="!isValidationOk"
         @click="submitObject()">
-        {{ (isCreating) ? ('Create') : ('Update') }} {{ props.resource }}
+        {{ (isCreating) ? ('Create') : ('Update') }} {{ startCase(props.resource) }}
       </v-btn>
 
       <v-spacer />
