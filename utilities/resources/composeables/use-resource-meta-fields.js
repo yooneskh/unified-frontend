@@ -37,6 +37,9 @@ function convertSeriesSchemaToFields(schema) {
   );
 }
 
+
+import startCase from 'lodash/startCase';
+
 function convertMetaPropertyToField(property) {
 
   let identifier = 'text';
@@ -77,7 +80,7 @@ function convertMetaPropertyToField(property) {
     variants: property.variants,
     key: property.key,
     identifier,
-    label: property.title,
+    label: property.title ?? startCase(property.key),
     width: property.width,
     resource: property.ref,
     multiple: property.array,

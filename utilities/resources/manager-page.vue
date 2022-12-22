@@ -8,6 +8,8 @@ const route = useRoute();
 
 import ManagerCard from './manager-card.vue';
 
+import startCase from 'lodash/startCase';
+
 </script>
 
 
@@ -16,7 +18,7 @@ import ManagerCard from './manager-card.vue';
     <client-only>
       <manager-card
         :icon="route.meta.icon || 'mdi-table'"
-        :title="route.meta.title || `Manage ${route.meta.resource}s`"
+        :title="route.meta.title || `Manage ${startCase(route.meta.resource)}s`"
         :resource="route.meta.resource"
       />
     </client-only>

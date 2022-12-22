@@ -151,13 +151,15 @@ async function submitObject() {
 
 /* template */
 
+import startCase from 'lodash/startCase';
+
 </script>
 
 
 <template>
   <v-card
     prepend-icon="mdi-folder"
-    :title="`${(isCreating) ? ('Create') : ('Update')} ${props.resource}`"
+    :title="`${(isCreating) ? ('Create') : ('Update')} ${startCase(props.resource)}`"
     :loading="submitting"
     width="768">
 
