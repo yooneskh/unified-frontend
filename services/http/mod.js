@@ -15,9 +15,9 @@ export const http = makeUnifiedNetwork({
 
 
       return {
-        status: response.status,
-        headers: Object.fromEntries( response.headers.entries() ),
-        data: response._data,
+        status: response?.status,
+        headers: Object.fromEntries( response?.headers.entries() ),
+        data: response?._data,
       };
 
     }
@@ -25,7 +25,7 @@ export const http = makeUnifiedNetwork({
 
       return {
         status: error.statusCode,
-        headers: Object.fromEntries( error.response.headers.entries() ),
+        headers: Object.fromEntries( error.response?.headers.entries() ),
         data: error.data,
       };
 
