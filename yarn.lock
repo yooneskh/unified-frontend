@@ -2675,6 +2675,11 @@ jalaali-js@^1.1.0:
   resolved "https://registry.yarnpkg.com/jalaali-js/-/jalaali-js-1.2.6.tgz#f4ee4bf686ed32bb9656f101225be4b7a1c3fd21"
   integrity sha512-io974va+Qyu+UfuVX3UIAgJlxLhAMx9Y8VMfh+IG00Js7hXQo1qNQuwSiSa0xxco0SVgx5HWNkaiCcV+aZ8WPw==
 
+jalaliday@2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/jalaliday/-/jalaliday-2.3.0.tgz#f986b30e294ab34ac9c8dca22d94bdc37585cf7f"
+  integrity sha512-B/m3TqsRrTFED/HBDqON6rPKe0MpoLxNICZ5uZeZ/scHJUHKQNr1n+wdZSj8MxrY1Bmo05gllZeNEw4beXd2oQ==
+
 jest-worker@^26.2.1:
   version "26.6.2"
   resolved "https://registry.yarnpkg.com/jest-worker/-/jest-worker-26.6.2.tgz#7f72cbc4d643c365e27b9fd775f9d0eaa9c7a8ed"

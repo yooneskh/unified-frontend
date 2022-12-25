@@ -18,6 +18,7 @@
     "@mdi/font": "7.1.96",
     "@vueuse/core": "9.9.0",
     "dayjs": "1.11.7",
+    "jalaliday": "2.3.0",
     "lodash": "4.17.21",
     "pluralize": "8.0.0",
     "unified-form": "0.3.5",

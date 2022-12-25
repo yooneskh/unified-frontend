@@ -61,6 +61,18 @@ provide('makeUuid', (sections = 4) => {
   );
 });
 
+
+/* date format */
+
+import dayjs from 'dayjs';
+import jalaliDay from 'jalaliday';
+
+dayjs.extend(jalaliDay);
+
+provide('formatDate', (timestamp, format = 'YYYY/MM/DD HH:mm', calendar = 'gregory' /* jalali */, locale = 'en') => {
+  return dayjs(timestamp).calendar(calendar).locale(locale).format(format);
+});
+
 </script>
 
 
