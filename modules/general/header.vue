@@ -25,13 +25,25 @@ function handleLogout() {
 
 
 <template>
-  <v-app-bar title="HelloApp">
+  <v-app-bar>
 
-    <template #prepend>
-      <v-icon>
-        mdi-facebook
-      </v-icon>
-    </template>
+    <div
+      class="d-flex align-center ms-2 pe-4"
+      style="cursor: pointer;"
+      @click="router.push({ name: 'general.home' })">
+
+      <v-img
+        src="/logo.png"
+        class="flex-grow-0 me-3"
+        height="44px"
+        width="44px"
+      />
+
+      <div class="text-h5 font-weight-black text-primary">
+        HelloApp
+      </div>
+
+    </div>
 
     <v-spacer />
 
