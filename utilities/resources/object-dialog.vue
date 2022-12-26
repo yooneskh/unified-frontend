@@ -116,8 +116,8 @@ async function submitObject() {
   let url = `/${resourceUrlPart.value}/`;
 
   if (!isCreating.value) {
-    method = 'patch';
-    url += object.value._id;
+    method = 'post';
+    url += object.value._id + '/update';
   }
 
 
