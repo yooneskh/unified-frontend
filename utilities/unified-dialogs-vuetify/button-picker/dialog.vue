@@ -22,18 +22,19 @@ const loadingButtons = reactive({});
 async function handleButtonClick(button) {
 
   if (!button.handler) {
+    emit('resolve', button.value ?? button.title);
     return
   }
 
+
   loadingButtons[button.value ?? button.title] = true;
+
   try {
-
     await button.handler();
-
     emit('resolve', button.value ?? button.title);
-
   }
   catch {}
+
   loadingButtons[button.value ?? button.title] = false;
 
 }
