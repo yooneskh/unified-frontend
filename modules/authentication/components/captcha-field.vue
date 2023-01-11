@@ -1,19 +1,17 @@
 <script setup>
 
-import { onMounted, ref } from 'vue';
-import { http, generalHttpHandle } from '../../../services/http/mod';
-
+import { http, generalHttpHandle } from "~~/services/http/mod";
 
 /* interface */
 
-const $p = defineProps({
+const props = defineProps({
   modelValue: String,
-  id: String
+  id: String,
 });
 
 const emit = defineEmits([
   'update:modelValue',
-  'update:id'
+  'update:id',
 ]);
 
 
@@ -31,7 +29,11 @@ async function refreshCaptcha() {
   const { status, data } = await http.request({
     method: 'get',
     url: '/captcha-tokens/generate/new'
-  }); if (generalHttpHandle(status, data)) return;
+  });
+
+  if (generalHttpHandle(status, data)) {
+    return;
+  }
 
 
   captchaSrc.value = data.svg;
@@ -53,7 +55,7 @@ onMounted(refreshCaptcha);
       dir="ltr"
       inputmode="numeric"
       hide-details
-      :model-value="$p.modelValue"
+      :model-value="props.modelValue"
       @update:model-value="emit('update:modelValue', $event)"
     />
 

@@ -24,7 +24,7 @@ export function launchDialog({ component, props, options }) {
       props: props ?? {},
       options: options ?? {},
       resolve,
-      reject
+      reject,
     });
   });
 

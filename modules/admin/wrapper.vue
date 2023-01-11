@@ -1,9 +1,7 @@
 <script setup>
 
-import { ref } from 'vue';
 const router = useRouter();
 const route = useRoute();
-
 
 /* scroll fix */
 
@@ -24,15 +22,13 @@ import AdminSidebar from './sidebar.vue';
 
 
 <template>
-  <client-only>
-    <v-layout>
+  <v-layout>
 
-      <admin-sidebar />
+    <admin-sidebar />
 
-      <v-main style="max-height: 100vh; overflow-y: auto;">
-        <NuxtPage />
-      </v-main>
+    <v-main style="max-height: 100vh; overflow-y: auto;">
+      <NuxtPage />
+    </v-main>
 
-    </v-layout>
-  </client-only>
+  </v-layout>
 </template>

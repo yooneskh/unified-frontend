@@ -2,8 +2,8 @@
 
 /* dialogs */
 
-const dialogs = useDialogs();
 import { useDialogs } from './state';
+const dialogs = useDialogs();
 
 
 /* remove */

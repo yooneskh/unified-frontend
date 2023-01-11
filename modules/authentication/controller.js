@@ -1,17 +1,17 @@
 import { http, generalHttpHandle, syncedRequest } from '../../services/http/mod';
 
 
-export async function loadUserWithToken(loginToken, tokenRef, userRef) {
+export async function loadUserWithToken(loginToken, tokenRef, userRef, silent = false) {
 
   const { status, data } = await syncedRequest('--auth-profile--', {
     method: 'get',
     url: `/authentication/identity`,
     headers: {
-      Authorization: loginToken
-    }
+      Authorization: loginToken,
+    },
   });
 
-  if (generalHttpHandle(status, data)) {
+  if (generalHttpHandle(status, data, silent)) {
     throw new Error('could not login');
   }
 
@@ -26,7 +26,7 @@ export async function logoutUser(tokenRef, userRef) {
 
   const { status, data } = await http.request({
     method: 'post',
-    url: `/authentication/logout`
+    url: `/authentication/logout`,
   });
 
   if (generalHttpHandle(status, data)) {

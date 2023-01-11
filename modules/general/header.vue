@@ -1,9 +1,7 @@
 <script setup>
 
-import { ref } from 'vue';
 const router = useRouter();
 const route = useRoute();
-
 
 /* user */
 
@@ -18,6 +16,7 @@ import { logoutUser } from '../authentication/controller';
 function handleLogout() {
   logoutUser(token, user);
 }
+
 
 /* template */
 

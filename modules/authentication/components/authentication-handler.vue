@@ -1,8 +1,6 @@
 <script setup>
 
-import { ref } from 'vue';
-import { http, generalHttpHandle } from '../../../services/http/mod';
-
+import { http, generalHttpHandle } from '~~/services/http/mod';
 
 /* interface */
 
@@ -49,9 +47,6 @@ const captchaId = ref('');
 const captchaText = ref('');
 
 const verificationToken = ref('');
-
-
-import { loadUserWithToken } from '../controller';
 
 
 async function submitLogin() {
@@ -109,7 +104,10 @@ async function submitRegister() {
     }
   });
   loading.value = false;
-  if (generalHttpHandle(status, data)) return;
+
+  if (generalHttpHandle(status, data)) {
+    return;
+  }
 
 
   if (data.needsVerification) {
@@ -135,6 +133,7 @@ async function submitVerification() {
     }
   });
   loading.value = false;
+
   if (generalHttpHandle(status, data)) {
     mode.value = 'login';
     verificationCode.value = '';
@@ -145,6 +144,9 @@ async function submitVerification() {
   submitLoadUser(data);
 
 }
+
+
+import { loadUserWithToken } from '../controller';
 
 async function submitLoadUser(loginToken) {
 
@@ -271,7 +273,7 @@ import CaptchaField from './captcha-field.vue';
         :fields="[
           {
             key: 'verificationCode', identifier: 'text', label: 'Verification Code',
-          }
+          },
         ]"
       />
 

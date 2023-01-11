@@ -1,14 +1,11 @@
 <script setup>
 
-import { inject, onMounted, ref } from 'vue';
 const router = useRouter();
 const route = useRoute();
-
 
 /* authentication */
 
 const mode = ref('login');
-const loading = ref(false);
 
 
 onMounted(() => {
@@ -25,7 +22,6 @@ function handleAuthentication() {
 
 /* template specific */
 
-// import GradientText from '../../components/gradient-text.vue';
 import CoverImage from './images/cover.webp';
 import AuthenticationHandler from './components/authentication-handler.vue';
 

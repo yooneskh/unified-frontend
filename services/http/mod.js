@@ -16,19 +16,17 @@ export const http = makeUnifiedNetwork({
 
       return {
         status: response?.status,
-        headers: Object.fromEntries( response?.headers.entries() ),
+        headers: Object.fromEntries( response?.headers.entries() ?? [] ),
         data: response?._data,
       };
 
     }
     catch (error) {
-
       return {
         status: error.statusCode,
-        headers: Object.fromEntries( error.response?.headers.entries() ),
+        headers: Object.fromEntries( error.response?.headers.entries() ?? [] ),
         data: error.data,
       };
-
     }
 
   }

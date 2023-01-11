@@ -15,12 +15,10 @@ import startCase from 'lodash/startCase';
 
 <template>
   <v-container fluid>
-    <client-only>
-      <manager-card
-        :icon="route.meta.icon || 'mdi-table'"
-        :title="route.meta.title || `Manage ${startCase(route.meta.resource)}s`"
-        :resource="route.meta.resource"
-      />
-    </client-only>
+    <manager-card
+      :icon="route.meta.icon || 'mdi-table'"
+      :title="route.meta.title || `Manage ${startCase(route.meta.resource)}s`"
+      :resource="route.meta.resource"
+    />
   </v-container>
 </template>
