@@ -28,7 +28,7 @@ export const routes = [
         file: resolve('/modules/admin/dashboard.vue'),
       },
       {
-        name: 'admin.user.list',
+        name: 'admin.users.list',
         path: 'users',
         file: resolve('/utilities/resources/manager-page.vue'),
         meta: {
@@ -36,7 +36,7 @@ export const routes = [
         },
       },
       {
-        name: 'admin.post.list',
+        name: 'admin.posts.list',
         path: 'posts',
         file: resolve('/utilities/resources/manager-page.vue'),
         meta: {
@@ -44,7 +44,7 @@ export const routes = [
         },
       },
       {
-        name: 'admin.event.list',
+        name: 'admin.events.list',
         path: 'events',
         file: resolve('/utilities/resources/manager-page.vue'),
         meta: {
@@ -52,9 +52,12 @@ export const routes = [
         },
       },
       {
-        name: 'admin.account.list',
+        name: 'admin.accounts.list',
         path: 'accounts',
-        file: resolve('/modules/accounts/page.vue'),
+        file: resolve('./utilities/resources/manager-page.vue'),
+        meta: {
+          resource: 'Account',
+        },
       },
     ],
   },

@@ -19,17 +19,17 @@ const groups = [
       {
         icon: 'mdi-account-multiple',
         name: 'Users',
-        pathName: 'admin.user.list',
+        pathName: 'admin.users.list',
       },
       {
         icon: 'mdi-file-sign',
         name: 'Posts',
-        pathName: 'admin.post.list',
+        pathName: 'admin.posts.list',
       },
       {
         icon: 'mdi-calendar',
         name: 'Events',
-        pathName: 'admin.event.list',
+        pathName: 'admin.events.list',
       },
     ],
   },
@@ -40,7 +40,7 @@ const groups = [
       {
         icon: 'mdi-bank',
         name: 'Accounts',
-        pathName: 'admin.account.list',
+        pathName: 'admin.accounts.list',
       },
     ],
   },
