@@ -8,6 +8,7 @@ const props = defineProps({
   icon: String,
   title: String,
   resource: String,
+  extraObjectActions: Array,
 });
 
 const emit = defineEmits([]);
@@ -68,6 +69,7 @@ const tableActions = [
     title: 'Delete',
     handler: handleItemDelete,
   },
+  ...(props.extraObjectActions ?? []),
 ];
 
 

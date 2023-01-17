@@ -31,7 +31,7 @@ function removeDialog(dialog) {
     width="auto"
     v-bind="dialog.options"
     :model-value="dialog.modelValue"
-    @update:model-value="!$event && !dialog.options.prominent && removeDialog(dialog)">
+    @update:model-value="!$event && !dialog.options.prominent && (dialog.resolve(undefined) || removeDialog(dialog))">
 
     <component
       :is="dialog.component"

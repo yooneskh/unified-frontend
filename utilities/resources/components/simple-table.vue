@@ -20,6 +20,24 @@ const props = defineProps({
 const emit = defineEmits([]);
 
 
+/* actions */
+
+const actionsLoading = reactive({});
+
+async function handleActionClick(action, item, index) {
+
+  actionsLoading[`${item[props.itemKey]}-${action.key}`] = true;
+
+  try {
+    await action.handler?.(item, index);
+  }
+  catch {}
+
+  actionsLoading[`${item[props.itemKey]}-${action.key}`] = false;
+
+}
+
+
 /* template */
 
 import startCase from 'lodash/startCase';
@@ -70,7 +88,8 @@ const isMobile = inject('isMobile');
               size="small"
               flat
               class="me-2 my-1"
-              @click="action.handler?.(item, index)">
+              :loading="actionsLoading[`${item[props.itemKey]}-${action.key}`]"
+              @click="handleActionClick(action, item, index)">
               {{ action.title }}
             </v-btn>
           </template>
@@ -84,7 +103,8 @@ const isMobile = inject('isMobile');
               :color="action.color"
               :icon="action.icon"
               class="me-2 my-1"
-              @click="action.handler?.(item, index)">
+              :loading="actionsLoading[`${item[props.itemKey]}-${action.key}`]"
+              @click="handleActionClick(action, item, index)">
 
               <v-icon
                 size="small"
