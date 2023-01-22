@@ -67,4 +67,12 @@ import { UnifiedDialogProvider } from './utilities/unified-dialogs/mod';
     margin-top: 6px;
   }
 
+  .text-ltr {
+    direction: ltr;
+  }
+
+  .text-rtl {
+    direction: rtl;
+  }
+
 </style>
