@@ -189,7 +189,6 @@ import CaptchaField from './captcha-field.vue';
       </div>
 
       <u-form
-        class="mx-n3 mb-n3"
         :target="authStates"
         :fields="[
           {
@@ -227,7 +226,6 @@ import CaptchaField from './captcha-field.vue';
       </div>
 
       <u-form
-        class="mx-n3 mb-n3"
         :target="authStates"
         :fields="[
           {
@@ -268,7 +266,6 @@ import CaptchaField from './captcha-field.vue';
       </div>
 
       <u-form
-        class="mx-n3 mb-n3"
         :target="authStates"
         :fields="[
           {

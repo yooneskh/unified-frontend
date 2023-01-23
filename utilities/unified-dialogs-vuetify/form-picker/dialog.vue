@@ -57,7 +57,7 @@ async function handleSubmit() {
       {{ props.text }}
     </v-card-text>
 
-    <v-card-text class="pt-0 px-2">
+    <v-card-text class="pt-0">
       <u-form
         :target="form"
         :fields="props.fields"

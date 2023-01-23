@@ -57,7 +57,6 @@ const fields = computed(() => [
 
 <template>
   <u-form
-    class="pa-0"
     :target="valueProxy"
     :fields="fields"
   />

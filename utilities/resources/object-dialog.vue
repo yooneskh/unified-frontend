@@ -169,7 +169,6 @@ import startCase from 'lodash/startCase';
 
     <v-card-text class="pt-0">
       <u-form
-        class="px-0 pt-0"
         :target="object"
         :fields="fields"
       />
