@@ -30,12 +30,6 @@ export default defineNuxtConfig({
       ));
     },
   ],
-  imports: {
-    dirs: [
-      '../unified-network',
-      './plugins',
-    ],
-  },
   pages: true,
   hooks: {
     'pages:extend'(pages) {

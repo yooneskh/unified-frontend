@@ -1,5 +1,4 @@
 import { http, generalHttpHandle } from '~/services/http/mod';
-import UnifiedNetwork from '~/utilities/unified-network/unified-network.vue';
 
 import { useToken, useUser } from '~/modules/authentication/state';
 
@@ -15,8 +14,6 @@ export default defineNuxtPlugin(app => {
 
   app.vueApp.provide('http', http);
   app.vueApp.provide('generalHttpHandle', generalHttpHandle);
-
-  app.vueApp.component('u-network', UnifiedNetwork);
 
 
   /* authentication */
