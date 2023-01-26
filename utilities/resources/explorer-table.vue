@@ -42,8 +42,6 @@ const headers = computed(() =>
 
 /* items */
 
-import { useNetwork } from './composeables/use-network';
-
 const itemsInPage = ref(10);
 const currentPage = ref(1);
 

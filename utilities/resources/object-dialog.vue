@@ -66,7 +66,6 @@ onMounted(async () => {
 
 /* validation */
 
-import { useNetwork } from './composeables/use-network';
 import { useDebouncedClone } from './composeables/use-debounced-clone';
 
 

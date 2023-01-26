@@ -1,10 +1,11 @@
 import { http, generalHttpHandle } from '~~/services/http/mod';
 
 
-export function useNetwork({ gate, method, url, queries, body }) {
+export function useNetwork({ gate, method, baseUrl, url, queries, body }) {
 
   const gateRef = ref(gate);
   method = ref(method);
+  baseUrl = ref(baseUrl);
   url = ref(url);
   queries = ref(queries);
   body = ref(body);
@@ -20,7 +21,7 @@ export function useNetwork({ gate, method, url, queries, body }) {
   const refreshHandle = ref(0);
 
 
-  watch([gateRef, method, url, queries, body, refreshHandle], async () => {
+  watch([gateRef, method, baseUrl, url, queries, body, refreshHandle], async () => {
 
     if (typeof gate === 'function' && !gate()) {
       return;
@@ -39,6 +40,7 @@ export function useNetwork({ gate, method, url, queries, body }) {
 
     const response = await http.request({
       method: unref(method) || 'get',
+      baseUrl: unref(baseUrl),
       url: unref(url),
       queries: unref(queries),
       body: unref(body),
