@@ -23,7 +23,7 @@
     "pluralize": "8.0.0",
     "unified-form": "0.4.0",
     "unified-form-vuetify": "0.4.2",
-    "unified-network": "0.6.2",
+    "unified-network": "0.6.4",
     "vue3-persian-datetime-picker": "1.2.2",
     "vuetify": "3.1.2"
   }
