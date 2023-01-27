@@ -106,7 +106,7 @@ async function handleItemDelete(item) {
           }
 
 
-          elExplorer.value?.refreshItems();
+          refreshItems();
 
         }
       },
@@ -131,14 +131,33 @@ async function handleItemUpdate(item) {
   }
 
 
-  elExplorer.value?.refreshItemsData();
+  refreshItemsData();
 
+}
+
+
+/* actions */
+
+function refreshItems() {
+  elExplorer.value.refreshItems();
+}
+
+function refreshItemsData() {
+  elExplorer.value.refreshItemsData();
 }
 
 
 /* template */
 
 import ExplorerTable from './explorer-table.vue';
+
+
+/* expose */
+
+defineExpose({
+  refreshItems,
+  refreshItemsData,
+});
 
 </script>
 
