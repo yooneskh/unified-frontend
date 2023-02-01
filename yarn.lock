@@ -1372,10 +1372,10 @@
   resolved "https://registry.yarnpkg.com/@vue/shared/-/shared-3.2.45.tgz#a3fffa7489eafff38d984e23d0236e230c818bc2"
   integrity sha512-Ewzq5Yhimg7pSztDV+RH1UDKBzmtqieXQlpTVm2AwraoRL/Rks96mvd8Vgi7Lj+h+TH8dv7mXD3FRZR3TUvbSg==
 
-"@vuetify/loader-shared@^1.7.0":
-  version "1.7.0"
-  resolved "https://registry.yarnpkg.com/@vuetify/loader-shared/-/loader-shared-1.7.0.tgz#b3bea7f90795dd8efdb536b192335590d85bffdd"
-  integrity sha512-Db4K67wMhduDsbvdRBYkrYuomti+j0E/1vlz1lnDng5F9LYYBcXa60qypIazVGI6GX/CuY1vshN6XGtGQI4FKg==
+"@vuetify/loader-shared@^1.7.1":
+  version "1.7.1"
+  resolved "https://registry.yarnpkg.com/@vuetify/loader-shared/-/loader-shared-1.7.1.tgz#0f63a3d41b6df29a2db1ff438aa1819b237c37a3"
+  integrity sha512-kLUvuAed6RCvkeeTNJzuy14pqnkur8lTuner7v7pNE/kVhPR97TuyXwBSBMR1cJeiLiOfu6SF5XlCYbXByEx1g==
   dependencies:
     find-cache-dir "^3.3.2"
     upath "^2.0.1"
@@ -4811,12 +4811,12 @@ vite-plugin-checker@^0.5.4:
     vscode-languageserver-textdocument "^1.0.1"
     vscode-uri "^3.0.2"
 
-vite-plugin-vuetify@1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/vite-plugin-vuetify/-/vite-plugin-vuetify-1.0.1.tgz#dcdf78f804c0cc6c7ff90087fe2e8766598ce112"
-  integrity sha512-/xHsIDuHxq7f6fDqCBYxNascLhDi+X8dV3RzTwmo4mGPrSnGq9pHv8wJsXBIQIT3nY8s16V0lmd6sXMjm0F8wg==
+vite-plugin-vuetify@1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/vite-plugin-vuetify/-/vite-plugin-vuetify-1.0.2.tgz#d1777c63aa1b3a308756461b3d0299fd101ee8f4"
+  integrity sha512-MubIcKD33O8wtgQXlbEXE7ccTEpHZ8nPpe77y9Wy3my2MWw/PgehP9VqTp92BLqr0R1dSL970Lynvisx3UxBFw==
   dependencies:
-    "@vuetify/loader-shared" "^1.7.0"
+    "@vuetify/loader-shared" "^1.7.1"
     debug "^4.3.3"
     upath "^2.0.1"
 
