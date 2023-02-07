@@ -38,6 +38,7 @@ function removeDialog(dialog) {
       v-bind="dialog.props"
       @resolve="dialog.resolve($event); removeDialog(dialog);"
       @reject="dialog.reject($event ?? undefined); removeDialog(dialog);"
+      style="max-width: 100%"
     />
 
   </v-dialog>
