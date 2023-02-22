@@ -16,6 +16,11 @@ export const routes = [
         path: '',
         file: resolve('./modules/home/page.vue'),
       },
+      {
+        name: 'general.home.2',
+        path: '2',
+        file: resolve('./modules/home/page2.vue'),
+      },
     ],
   },
   {
