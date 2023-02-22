@@ -1,5 +1,5 @@
 
-console.log(11111111111111111111111);
+
 export default {
   scrollBehavior(to, _from, savedPosition) {
     if (savedPosition) {

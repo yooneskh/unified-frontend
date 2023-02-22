@@ -39,9 +39,9 @@ async function testDialogs() {
 
 
 <template>
-  <v-container fluid class="fill-height d-flx d-block flex-column align-center justify-center">
+  <v-container fluid class="fill-height d-flex flex-column align-center justify-center">
 
-    <div v-for="i of 100" class="text-h5">
+    <div class="text-h5">
       Hello From Unified Frontend
     </div>
 
