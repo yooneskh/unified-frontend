@@ -8,8 +8,8 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
-    "nuxt": "3.2.2",
-    "sass": "1.58.3",
+    "nuxt": "3.2.3",
+    "sass": "1.59.2",
     "vite-plugin-vuetify": "1.0.2"
   },
   "dependencies": {
@@ -21,10 +21,10 @@
     "jalaliday": "2.3.0",
     "lodash": "4.17.21",
     "pluralize": "8.0.0",
-    "unified-form": "0.4.0",
+    "unified-form": "0.5.0",
     "unified-form-vuetify": "0.4.2",
     "unified-network": "0.6.4",
     "vue3-persian-datetime-picker": "1.2.2",
-    "vuetify": "3.1.5"
+    "vuetify": "3.1.8"
   }
 }
