@@ -36,7 +36,11 @@ async function handleSubmit() {
       await props.submitHandler({ ...form });
       submitting.value = false;
     }
-    catch {}
+    catch (error) {
+      submitting.value = false;
+      console.error(error);
+      return;
+    }
   }
 
 
