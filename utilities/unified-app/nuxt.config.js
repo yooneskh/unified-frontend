@@ -13,6 +13,9 @@ export default defineNuxtConfig({
       'unified-form-vuetify'
     ]
   },
+  watch: [
+    'routes.js',
+  ],
   vite: {
     ssr: {
       noExternal: [
