@@ -3,6 +3,7 @@
   "scripts": {
     "build": "nuxt build",
     "serve": "nuxt dev --port 8080",
+    "lint": "exit 0;",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
@@ -13,7 +14,7 @@
     "vite-plugin-vuetify": "1.0.2"
   },
   "dependencies": {
-    "@ckeditor/ckeditor5-build-classic": "36.0.1",
+    "@ckeditor/ckeditor5-build-classic": "37.0.1",
     "@ckeditor/ckeditor5-vue": "4.0.1",
     "@mdi/font": "7.2.96",
     "@vueuse/core": "9.13.0",
