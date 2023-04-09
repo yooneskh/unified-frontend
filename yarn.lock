@@ -5124,10 +5124,10 @@ unified-form-vuetify@0.4.2:
   resolved "https://registry.yarnpkg.com/unified-form-vuetify/-/unified-form-vuetify-0.4.2.tgz#c4a1dd8a77655cf41c4687a323fd5808578a6074"
   integrity sha512-y5kCIPBy3zKY6+E+4OEKo0nSpQFQX5Td2xCNbgMwSADeKdUrRhUmQte08Vf3MDHONjSHWM69HFq32urrjrbGjg==
 
-unified-form@0.5.0:
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/unified-form/-/unified-form-0.5.0.tgz#f0180296625260dcc5cbf53bd3d8b9a750a4453f"
-  integrity sha512-Iyc2qoyo5tM72zDV1POoL6EFEdUnTWeDQ4IPO/jFMUMQWuZdVTjgDk1nPa7wflSai+CmoHMvgJoU0EPxqqon5Q==
+unified-form@0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/unified-form/-/unified-form-0.6.0.tgz#93a0bde592adc61c055d6ff28d8cf037a0c6d023"
+  integrity sha512-cDmETGr7sFZAgijMHfRcPJqRBmEv8IKgpOqf9RxNferFVeB50on4X9AHOqq8SwImdRJuNYJO+dxl7j8P9LUZXQ==
   dependencies:
     unified-mongo-filter "0.3.1"
 
