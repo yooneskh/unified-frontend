@@ -3,6 +3,7 @@
 const router = useRouter();
 const route = useRoute();
 
+
 /* scroll fix */
 
 onMounted(() => {
@@ -12,6 +13,18 @@ onMounted(() => {
 onUnmounted(() => {
   document.body.parentElement.style.overflowY = '';
 });
+
+
+/* authentication */
+
+const user = inject('user');
+
+watch(route, () => {
+  if (!user.value || !user.value._id) {
+    router.replace({ name: 'authentication.page' });
+    return;
+  }
+}, { immediate: true });
 
 
 /* template */

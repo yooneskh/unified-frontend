@@ -10,11 +10,16 @@ const loading = ref(false);
 
 import { loadUserWithToken } from './modules/authentication/controller';
 
+async function reloadUser(silent = false) {
+  await loadUserWithToken(token.value, token, user, silent);
+}
+
+provide('reloadUser', reloadUser);
+
+
 if (token.value) {
-
   loading.value = true;
-
-  (loadUserWithToken(token.value, token, user, true)
+  (reloadUser(true)
     .catch(() => {
       token.value = '';
     })
@@ -22,7 +27,6 @@ if (token.value) {
       loading.value = false;
     })
   );
-
 }
 
 
@@ -42,10 +46,19 @@ provide('isMobile', computed(() => display.smAndDown.value));
 provide('isTablet', computed(() => display.mdAndDown.value && !display.smAndDown.value));
 provide('isDesktop', computed(() => display.lgAndUp.value));
 
+provide('globalBreakpoints', computed(() => ({
+  xs: display.thresholds.value.sm,
+  sm: display.thresholds.value.md,
+  md: display.thresholds.value.lg,
+  lg: display.thresholds.value.xl,
+  xl: display.thresholds.value.xxl,
+})));
+
 
 /* unified dialogs */
 
 import { UnifiedDialogProvider } from './utilities/unified-dialogs/mod';
+import { UnifiedToastsProvider } from './utilities/unified-toasts/mod';
 
 </script>
 
@@ -79,6 +92,7 @@ import { UnifiedDialogProvider } from './utilities/unified-dialogs/mod';
     </template>
 
     <unified-dialog-provider />
+    <unified-toasts-provider />
 
   </v-app>
 </template>
@@ -110,6 +124,14 @@ import { UnifiedDialogProvider } from './utilities/unified-dialogs/mod';
 
   .gap-2 {
     gap: 8px;
+  }
+
+  .gap-3 {
+    gap: 12px;
+  }
+
+  .v-card-title {
+    white-space: normal;
   }
 
 </style>

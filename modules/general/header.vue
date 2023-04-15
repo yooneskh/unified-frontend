@@ -79,11 +79,11 @@ function handleLogout() {
 
       <template v-else>
 
-        <v-btn to="/authentication">
+        <v-btn :to="{ name: 'authentication.page' }">
           Login
         </v-btn>
 
-        <v-btn to="/authentication?mode=register">
+        <v-btn :to="{ name: 'authentication.page', query: { mode: 'register' } }">
           Register
         </v-btn>
 

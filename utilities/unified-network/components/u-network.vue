@@ -13,6 +13,7 @@ const props = defineProps({
   body: {},
   queries: Object,
   parameters: Object,
+  onLoad: Function,
 });
 
 const emit = defineEmits([]);
@@ -26,6 +27,7 @@ const { loading, error, status, data, headers, refresh } = useNetwork({
   url: computed(() => props.url),
   body: computed(() => props.body),
   queries: computed(() => props.queries),
+  onLoad: props.onLoad,
 });
 
 
@@ -60,8 +62,15 @@ defineExpose({
       :status="status"
       :data="data"
       :headers="headers"
-      :refresh="refresh"
-    />
+      :refresh="refresh">
+
+      <v-alert
+        type="error"
+        text="A problem has occured. Please try again."
+        density="comfortable"
+      />
+
+    </slot>
   </template>
 
   <template v-else>

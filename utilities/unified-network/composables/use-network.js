@@ -1,7 +1,7 @@
 import { http, generalHttpHandle } from '~~/services/http/mod';
 
 
-export function useNetwork({ gate, method, baseUrl, url, queries, body }) {
+export function useNetwork({ gate, method, baseUrl, url, queries, body, onLoad }) {
 
   const gateRef = ref(gate);
   method = ref(method);
@@ -56,6 +56,14 @@ export function useNetwork({ gate, method, baseUrl, url, queries, body }) {
     status.value = response.status;
     data.value = response.data;
     headers.value = response.headers;
+
+    if (onLoad) {
+      onLoad({
+        status: status.value,
+        data: data.value,
+        headers: headers.value,
+      });
+    }
 
   }, { immediate: true });
 

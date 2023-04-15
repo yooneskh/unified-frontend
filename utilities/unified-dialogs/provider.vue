@@ -37,8 +37,8 @@ function removeDialog(dialog) {
       :is="dialog.component"
       v-bind="dialog.props"
       @resolve="dialog.resolve($event); removeDialog(dialog);"
-      @reject="dialog.reject($event ?? undefined); removeDialog(dialog);"
-      style="max-width: 100%"
+      @reject="dialog.reject($event); removeDialog(dialog);"
+      style="max-width: 100%;"
     />
 
   </v-dialog>

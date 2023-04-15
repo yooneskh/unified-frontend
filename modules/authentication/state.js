@@ -2,7 +2,7 @@
 
 export const useToken = () => {
 
-  const cookie = useCookie('--auth-token--', {
+  const cookie = useCookie('--auth-token--', { // todo: handle spa mode separately
     maxAge: 3600 * 24 * 30,
   });
 

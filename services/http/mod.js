@@ -1,8 +1,9 @@
 import { makeUnifiedNetwork } from 'unified-network';
+import { AppConfig } from '~/app-config';
 
 
 export const http = makeUnifiedNetwork({
-  baseUrl: 'https://api.aboutshiraz.com/api',
+  baseUrl: `${AppConfig.http.baseUrl}/api`,
   processor: async ({ url, method, body, headers }) => {
 
     try {
@@ -22,11 +23,17 @@ export const http = makeUnifiedNetwork({
 
     }
     catch (error) {
+
+      if (!('statusCode' in error )) {
+        console.error(error);
+      }
+
       return {
         status: error.statusCode,
         headers: Object.fromEntries( error.response?.headers.entries() ?? [] ),
         data: error.data,
       };
+
     }
 
   }
