@@ -1,53 +1,20 @@
-import { http, generalHttpHandle } from '~/services/http/mod';
-
-import { useToken, useUser } from '~/modules/authentication/state';
-
-import { launchDialog } from '~/services/dialogs/mod';
-
-import dayjs from 'dayjs';
-import jalaliDay from 'jalaliday';
+import { useDisplay } from 'vuetify';
 
 
-export default defineNuxtPlugin(app => {
+export default defineNuxtPlugin(nuxtApp => {
 
-  /* http */
+  /* display breakpoints */
 
-  app.vueApp.provide('http', http);
-  app.vueApp.provide('generalHttpHandle', generalHttpHandle);
+  nuxtApp.vueApp.provide('isMobile', computed(() => useDisplay().xs.value));
+  nuxtApp.vueApp.provide('isTablet', computed(() => useDisplay().sm.value));
+  nuxtApp.vueApp.provide('isDesktop', computed(() => useDisplay().mdAndUp.value));
 
-
-  /* authentication */
-
-  const token = useToken();
-  const user = useUser();
-
-  app.vueApp.provide('token', token);
-  app.vueApp.provide('user', user);
-
-
-  /* unified dialogs */
-
-  app.vueApp.provide('launchDialog', launchDialog);
-
-
-  /* uuid */
-
-  app.vueApp.provide('makeUuid', (sections = 4) => {
-    return (
-      new Array(sections)
-        .fill()
-        .map(() => Math.random().toString(16).slice(2))
-        .join('-')
-    );
-  });
-
-
-  /* date format */
-
-  dayjs.extend(jalaliDay);
-
-  app.vueApp.provide('formatDate', (timestamp, format = 'YYYY/MM/DD HH:mm', calendar = 'gregori', locale = 'en') => {
-    return dayjs(timestamp).calendar(calendar).locale(locale).format(format);
-  });
+  nuxtApp.vueApp.provide('globalBreakpoints', computed(() => ({
+    xs: useDisplay().thresholds.value.sm,
+    sm: useDisplay().thresholds.value.md,
+    md: useDisplay().thresholds.value.lg,
+    lg: useDisplay().thresholds.value.xl,
+    xl: useDisplay().thresholds.value.xxl,
+  })));
 
 });

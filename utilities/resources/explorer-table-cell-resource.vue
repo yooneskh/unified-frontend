@@ -39,7 +39,7 @@ const { title, refresh: refreshitemTitle } = useResourceTitle({
 
 /* view */
 
-import { launchDialog } from '~~/services/dialogs/mod';
+const { launchDialog } = useDialog();
 
 async function showResource() {
 

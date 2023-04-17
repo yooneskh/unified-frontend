@@ -1,7 +1,7 @@
 <script setup>
 
-const http = inject('http');
-const generalHttpHandle = inject('generalHttpHandle');
+const { http, generalHttpHandle } = useHttp();
+
 
 /* interface */
 

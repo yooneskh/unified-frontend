@@ -1,6 +1,7 @@
 <script setup>
 
-import { http, generalHttpHandle } from '~~/services/http/mod';
+const { http, generalHttpHandle } = useHttp();
+
 
 /* interface */
 
@@ -28,8 +29,6 @@ const loading = useVModel(props, 'loading', emit);
 
 
 /* auth */
-
-import { useToken, useUser } from '../state';
 
 const token = useToken();
 const user = useUser();

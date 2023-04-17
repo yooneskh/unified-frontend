@@ -17,7 +17,7 @@ onUnmounted(() => {
 
 /* authentication */
 
-const user = inject('user');
+const user = useUser();
 
 watch(route, () => {
   if (!user.value || !user.value._id) {

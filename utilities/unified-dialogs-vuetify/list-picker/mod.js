@@ -1,6 +1,5 @@
-import { launchDialog } from '../../unified-dialogs/mod';
-
 import ListPickerDialog from './dialog.vue';
+const { launchDialog } = useDialog();
 
 
 export async function launchListPickerDialog({ icon, title, subtitle, text, items, isNavigation, options }) {

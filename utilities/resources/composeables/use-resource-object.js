@@ -1,6 +1,6 @@
 import { cache } from '~~/services/cache/mod';
-import { generalHttpHandle, http } from '~~/services/http/mod';
 import { retrieveResourceUrl } from './use-resource-url';
+const { generalHttpHandle, http } = useHttp();
 
 
 export async function retrieveResourceObject({ resource, resourceId }) {

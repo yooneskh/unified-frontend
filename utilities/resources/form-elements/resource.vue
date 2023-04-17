@@ -33,8 +33,8 @@ const fieldTitle = computed(() =>
 
 /* selection */
 
-import { launchDialog } from '~~/utilities/unified-dialogs/mod';
 import ResourceSelectionDialog from '../selection-dialog.vue';
+const { launchDialog } = useDialog();
 
 async function launchResourceSelector() {
 

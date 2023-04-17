@@ -1,4 +1,4 @@
-import { http, generalHttpHandle, syncedRequest } from '../../services/http/mod';
+const { http, generalHttpHandle, syncedRequest } = useHttp();
 
 
 export async function loadUserWithToken(loginToken, tokenRef, userRef, silent = false) {
@@ -38,5 +38,14 @@ export async function logoutUser(tokenRef, userRef) {
   tokenRef.value = '';
   userRef.value = undefined;
   http.removeHeader('Authorization');
+
+}
+
+export async function reloadUser(silent = false) {
+
+  const token = useToken();
+  const user = useUser();
+
+  await loadUserWithToken(token.value, token, user, silent);
 
 }

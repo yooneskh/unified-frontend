@@ -1,9 +1,10 @@
 <script setup>
 
-import { http, generalHttpHandle } from '~~/services/http/mod';
+const { http, generalHttpHandle } = useHttp();
 
 const router = useRouter();
 const route = useRoute();
+
 
 /* interface */
 

@@ -1,6 +1,7 @@
 <script setup>
 
-import { http, generalHttpHandle } from "~~/services/http/mod";
+const { http, generalHttpHandle } = useHttp();
+
 
 /* interface */
 
@@ -36,7 +37,7 @@ async function refreshCaptcha() {
   }
 
 
-  captchaSrc.value = data.svg;
+  captchaSrc.value = data.data;
   emit('update:id', data.captchaId);
 
 }
@@ -59,9 +60,9 @@ onMounted(refreshCaptcha);
       @update:model-value="emit('update:modelValue', $event)"
     />
 
-    <div
-      v-html="captchaSrc"
-      class="ms-2 me-1 d-block rounded"
+    <v-img
+      :src="captchaSrc"
+      class="flex-grow-0 ms-4 rounded"
       style="width: 120px; height: 40px; padding: 8px; background: white;"
     />
 

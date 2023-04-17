@@ -3,10 +3,11 @@
 const router = useRouter();
 const route = useRoute();
 
+
 /* user */
 
-const token = inject('token');
-const user = inject('user');
+const token = useToken();
+const user = useUser();
 
 
 /* logout */

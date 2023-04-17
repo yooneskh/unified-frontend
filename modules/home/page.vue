@@ -1,7 +1,8 @@
 <script setup>
 
-const token = inject('token');
-const user = inject('user');
+const token = useToken();
+const user = useUser();
+
 
 import { launchListPickerDialog } from '../../utilities/unified-dialogs-vuetify/list-picker/mod';
 

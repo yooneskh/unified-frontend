@@ -2,19 +2,10 @@
 
 /* authentication */
 
-const token = inject('token');
-const user = inject('user');
+import { reloadUser } from './modules/authentication/controller';
 
+const token = useToken();
 const loading = ref(false);
-
-
-import { loadUserWithToken } from './modules/authentication/controller';
-
-async function reloadUser(silent = false) {
-  await loadUserWithToken(token.value, token, user, silent);
-}
-
-provide('reloadUser', reloadUser);
 
 
 if (token.value) {
@@ -30,29 +21,11 @@ if (token.value) {
 }
 
 
-const http = inject('http');
+const { http } = useHttp();
 
 watch(token, () => {
   http.applyHeader('Authorization', token.value);
 }, { immediate: true })
-
-
-/* display breakpoints */
-
-import { useDisplay } from 'vuetify/lib/framework.mjs';
-const display = useDisplay();
-
-provide('isMobile', computed(() => display.smAndDown.value));
-provide('isTablet', computed(() => display.mdAndDown.value && !display.smAndDown.value));
-provide('isDesktop', computed(() => display.lgAndUp.value));
-
-provide('globalBreakpoints', computed(() => ({
-  xs: display.thresholds.value.sm,
-  sm: display.thresholds.value.md,
-  md: display.thresholds.value.lg,
-  lg: display.thresholds.value.xl,
-  xl: display.thresholds.value.xxl,
-})));
 
 
 /* unified dialogs */

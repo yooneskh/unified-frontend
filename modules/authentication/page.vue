@@ -25,7 +25,7 @@ function handleAuthentication() {
 import CoverImage from './images/cover.webp';
 import AuthenticationHandler from './components/authentication-handler.vue';
 
-const isMobile = inject('isMobile');
+const isDesktop = inject('isDesktop');
 
 </script>
 
@@ -34,7 +34,7 @@ const isMobile = inject('isMobile');
   <v-container fluid class="pa-0">
 
     <v-row no-gutters style="min-height: 100vh;">
-      <v-col v-if="!isMobile" cols="5" class="pa-3 d-flex flex-column" style="height: 100vh;">
+      <v-col v-if="isDesktop" cols="5" class="pa-3 d-flex flex-column" style="height: 100vh;">
         <v-card
           :image="CoverImage"
           class="flex-grow-1 cover"

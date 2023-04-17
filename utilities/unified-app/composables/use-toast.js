@@ -1,7 +1,7 @@
 import { launchToast } from "~~/utilities/unified-toasts/mod";
 
 
-export function toast({ color, icon, title, duration, clickHandler, closeHandler, action, actionIcon, actionHandler }) {
+function toast({ color, icon, title, duration, clickHandler, closeHandler, action, actionIcon, actionHandler }) {
   launchToast({
     color,
     icon,
@@ -15,7 +15,7 @@ export function toast({ color, icon, title, duration, clickHandler, closeHandler
   });
 }
 
-export function toastSuccess({ color, icon, title, duration, clickHandler, closeHandler, action, actionIcon, actionHandler }) {
+function toastSuccess({ color, icon, title, duration, clickHandler, closeHandler, action, actionIcon, actionHandler }) {
   launchToast({
     type: 'success',
     color,
@@ -30,7 +30,7 @@ export function toastSuccess({ color, icon, title, duration, clickHandler, close
   });
 }
 
-export function toastError({ color, icon, title, duration, clickHandler, closeHandler, action, actionIcon, actionHandler }) {
+function toastError({ color, icon, title, duration, clickHandler, closeHandler, action, actionIcon, actionHandler }) {
   launchToast({
     type: 'error',
     color,
@@ -45,7 +45,7 @@ export function toastError({ color, icon, title, duration, clickHandler, closeHa
   });
 }
 
-export function toastWarning({ color, icon, title, duration, clickHandler, closeHandler, action, actionIcon, actionHandler }) {
+function toastWarning({ color, icon, title, duration, clickHandler, closeHandler, action, actionIcon, actionHandler }) {
   launchToast({
     type: 'warning',
     color,
@@ -60,7 +60,7 @@ export function toastWarning({ color, icon, title, duration, clickHandler, close
   });
 }
 
-export function toastInfo({ color, icon, title, duration, clickHandler, closeHandler, action, actionIcon, actionHandler }) {
+function toastInfo({ color, icon, title, duration, clickHandler, closeHandler, action, actionIcon, actionHandler }) {
   launchToast({
     type: 'info',
     color,
@@ -73,4 +73,15 @@ export function toastInfo({ color, icon, title, duration, clickHandler, closeHan
     actionIcon,
     actionHandler,
   });
+}
+
+
+export function useToast() {
+  return {
+    toast,
+    toastSuccess,
+    toastError,
+    toastWarning,
+    toastInfo,
+  };
 }

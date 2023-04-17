@@ -1,6 +1,7 @@
 <script setup>
 
-import { generalHttpHandle, http } from '~~/services/http/mod';
+const { http, generalHttpHandle } = useHttp();
+
 
 /* interface */
 
@@ -31,8 +32,8 @@ const elExplorer = ref();
 
 /* create */
 
-import { launchDialog } from '~~/services/dialogs/mod';
 import ResourceObjectDialog from './object-dialog.vue';
+const { launchDialog } = useDialog();
 
 async function handleCreate() {
 

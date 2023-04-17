@@ -1,6 +1,5 @@
-import { launchDialog } from '../../unified-dialogs/mod';
-
 import ButtonPickerDialog from './dialog.vue';
+const { launchDialog } = useDialog();
 
 
 export async function launchButtonPickerDialog({ icon, title, subtitle, text, startButtons, endButtons, isReversed, options }) {

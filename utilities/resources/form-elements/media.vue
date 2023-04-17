@@ -1,5 +1,8 @@
 <script setup>
 
+const { http, generalHttpHandle } = useHttp();
+
+
 /* interface */
 
 const props = defineProps({
@@ -21,9 +24,6 @@ const elFile = ref();
 
 
 /* upload */
-
-const http = inject('http');
-const generalHttpHandle = inject('generalHttpHandle');
 
 const loading = ref(false);
 const uploading = ref(false);

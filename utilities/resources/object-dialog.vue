@@ -1,7 +1,6 @@
 <script setup>
 
-import { http, generalHttpHandle } from "~~/services/http/mod";
-import { retrieveResourceObject } from "./composeables/use-resource-object";
+const { http, generalHttpHandle } = useHttp();
 
 const router = useRouter()
 const route = useRoute()
@@ -35,6 +34,8 @@ const { resourceUrlPart } = useResourceUrl({
 
 
 /* object */
+
+import { retrieveResourceObject } from './composeables/use-resource-object';
 
 const object = ref({});
 const objectClone = ref({});

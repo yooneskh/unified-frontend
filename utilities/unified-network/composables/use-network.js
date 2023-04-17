@@ -1,4 +1,4 @@
-import { http, generalHttpHandle } from '~~/services/http/mod';
+const { http, generalHttpHandle } = useHttp();
 
 
 export function useNetwork({ gate, method, baseUrl, url, queries, body, onLoad }) {

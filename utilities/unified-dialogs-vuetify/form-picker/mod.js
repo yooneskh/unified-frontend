@@ -1,6 +1,5 @@
-import { launchDialog } from '../../unified-dialogs/mod';
-
 import FormPickerDialog from './dialog.vue';
+const { launchDialog } = useDialog();
 
 
 export async function launchFormPickerDialog({ icon, title, subtitle, text, initialForm, fields, submitLabel, cancelLabel, submitHandler, options }) {
