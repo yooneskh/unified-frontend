@@ -728,10 +728,10 @@
   dependencies:
     lodash-es "^4.17.15"
 
-"@ckeditor/ckeditor5-vue@5.0.0":
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/@ckeditor/ckeditor5-vue/-/ckeditor5-vue-5.0.0.tgz#942b498ae07c6cf4b97dcbaa572a23435bd95238"
-  integrity sha512-YMFT4foRC4iln9+0IdTMbzuZ0Fq5LAplcJkoSDaRels7WWAqFlqx8ts7rwezv1jS9M+xFTDCg8HG4F9amtHN8Q==
+"@ckeditor/ckeditor5-vue@5.1.0":
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/@ckeditor/ckeditor5-vue/-/ckeditor5-vue-5.1.0.tgz#1fb371f8d1e66746c63714c779644686e138ccf7"
+  integrity sha512-KEx4Tj2Irr4ZbLG8LnaKpb0Dgd8qmLmKFWeiKkQwM3RAAeYRYOCcBVB2Y168I9KA8wRosPxgOO9jbQ92yopYHA==
 
 "@ckeditor/ckeditor5-watchdog@^37.0.1":
   version "37.0.1"
