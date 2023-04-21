@@ -16,7 +16,20 @@ onMounted(() => {
 
 
 function handleAuthentication() {
-  router.push(route.query['next'] || '/');
+  if (!route.query['next']) {
+    router.push({ name: 'general.home' })
+  }
+  else {
+    if (route.query['next'].startsWith('::')) {
+      router.push({ name: route.query['next'].slice(2) })
+    }
+    else if(route.query['next'].startsWith('http')) {
+      window.open(route.query['next']);
+    }
+    else {
+      router.push(route.query['next']);
+    }
+  }
 }
 
 
