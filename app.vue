@@ -1,8 +1,7 @@
 <script setup>
 
-/* authentication */
 
-import { reloadUser } from './modules/authentication/controller';
+/* authentication */
 
 const token = useToken();
 const loading = ref(false);
@@ -21,17 +20,9 @@ if (token.value) {
 }
 
 
-const { http } = useHttp();
-
 watch(token, () => {
-  http.applyHeader('Authorization', token.value);
+  useHttp().applyHeader('Authorization', token.value);
 }, { immediate: true })
-
-
-/* unified dialogs */
-
-import { UnifiedDialogProvider } from './utilities/unified-dialogs/mod';
-import { UnifiedToastsProvider } from './utilities/unified-toasts/mod';
 
 </script>
 
@@ -64,7 +55,7 @@ import { UnifiedToastsProvider } from './utilities/unified-toasts/mod';
       </NuxtLayout>
     </template>
 
-    <unified-dialog-provider />
+    <unified-dialogs-provider />
     <unified-toasts-provider />
 
   </v-app>
@@ -74,10 +65,6 @@ import { UnifiedToastsProvider } from './utilities/unified-toasts/mod';
 <style lang="scss">
 
   @import '@/assets/stylesheets/rtl.scss';
-
-  .v-btn {
-    text-transform: none !important;
-  }
 
   .v-messages__message + .v-messages__message {
     margin-top: 6px;
@@ -101,10 +88,6 @@ import { UnifiedToastsProvider } from './utilities/unified-toasts/mod';
 
   .gap-3 {
     gap: 12px;
-  }
-
-  .v-card-title {
-    white-space: normal;
   }
 
 </style>
