@@ -21,27 +21,6 @@ const groups = [
         name: 'Users',
         pathName: 'admin.users.list',
       },
-      {
-        icon: 'mdi-file-sign',
-        name: 'Posts',
-        // pathName: 'admin.posts.list',
-      },
-      {
-        icon: 'mdi-calendar',
-        name: 'Events',
-        // pathName: 'admin.events.list',
-      },
-    ],
-  },
-  {
-    icon: 'mdi-cash',
-    name: 'Financial',
-    children: [
-      {
-        icon: 'mdi-bank',
-        name: 'Accounts',
-        // pathName: 'admin.accounts.list',
-      },
     ],
   },
 ];

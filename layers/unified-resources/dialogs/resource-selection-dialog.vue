@@ -53,8 +53,6 @@ const { titles } = useResourceArrayTitles({
 
 /* template */
 
-import ResourceExplorerTable from './explorer-table.vue';
-
 </script>
 
 

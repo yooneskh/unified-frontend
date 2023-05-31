@@ -32,17 +32,12 @@ const fieldTitle = computed(() =>
 
 /* selection */
 
-import ResourceSelectionDialog from '../selection-dialog.vue';
-
 async function launchResourceSelector() {
 
-  const result = await launchDialog({
-    component: ResourceSelectionDialog,
-    props: {
-      resource: props.field.resource,
-      multiple: props.field.multiple,
-      resourceIds: props.field.multiple ? props.value : (props.value ? [props.value] : []),
-    },
+  const result = await launchResourceSelectionDialog({
+    resource: props.field.resource,
+    multiple: props.field.multiple,
+    resourceIds: props.field.multiple ? props.value : (props.value ? [props.value] : []),
   });
 
   if (!result) {

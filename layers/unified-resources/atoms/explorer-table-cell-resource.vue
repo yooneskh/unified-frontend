@@ -35,14 +35,9 @@ const { title, refresh: refreshitemTitle } = useResourceTitle({
 
 async function showResource() {
 
-  const result = await launchDialog({
-    component: defineAsyncComponent(() =>
-      import('../dialogs/object-dialog.vue')
-    ),
-    props: {
-      resource: props.resource,
-      resourceId: props.resourceId,
-    },
+  const result = await launchResourceObjectDialog({
+    resource: props.resource,
+    resourceId: props.resourceId,
   });
 
   if (!result) {

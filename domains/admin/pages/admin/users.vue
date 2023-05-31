@@ -19,11 +19,9 @@ definePageMeta({
 
 <template>
   <v-container fluid>
-
-    <v-card
-      prepend-icon="mdi-account"
-      title="Managing Users"
+    <resource-manager-card
+      icon="mdi-account"
+      resource="User"
     />
-
   </v-container>
 </template>

@@ -30,15 +30,10 @@ const elExplorer = ref();
 
 /* create */
 
-import ResourceObjectDialog from '../dialogs/object-dialog.vue';
-
 async function handleCreate() {
 
-  const result = await launchDialog({
-    component: ResourceObjectDialog,
-    props: {
-      resource: props.resource,
-    },
+  const result = await launchResourceObjectDialog({
+    resource: props.resource,
   });
 
   if (!result) {
@@ -114,12 +109,9 @@ async function handleItemDelete(item) {
 
 async function handleItemUpdate(item) {
 
-  const result = await launchDialog({
-    component: ResourceObjectDialog,
-    props: {
-      resource: props.resource,
-      resourceId: item._id,
-    },
+  const result = await launchResourceObjectDialog({
+    resource: props.resource,
+    resourceId: item._id,
   });
 
   if (!result) {
@@ -153,11 +145,14 @@ defineExpose({
 
 /* template */
 
+import startCase from 'lodash/startCase';
+import pluralize from 'pluralize';
+
 </script>
 
 
 <template>
-  <v-card :prepend-icon="props.icon" :title="props.title" :loading="loading">
+  <v-card :prepend-icon="props.icon" :title="props.title ?? `Manage ${startCase(pluralize(props.resource))}`" :loading="loading">
 
     <template #append>
       <v-btn flat color="primary" prepend-icon="mdi-plus" @click="handleCreate()">

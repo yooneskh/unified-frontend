@@ -59,7 +59,7 @@ async function submitLogin() {
   });
   loading.value = false;
 
-  if (status !== 200) {
+  if (status === 404) {
 
     if (confirm('User account does not exist. Do you want to create it?')) {
       mode.value = 'register';
@@ -67,6 +67,9 @@ async function submitLogin() {
 
     return;
 
+  }
+  else if (generalHttpHandle(status, data)) {
+    return;
   }
 
 
