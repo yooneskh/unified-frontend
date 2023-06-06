@@ -6,6 +6,8 @@ const route = useRoute();
 
 /* template */
 
+import GeneralHeader from '../atoms/general-header.vue';
+
 </script>
 
 

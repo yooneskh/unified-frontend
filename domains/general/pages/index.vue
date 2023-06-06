@@ -13,6 +13,10 @@ definePageMeta({
   name: 'general.home.page',
 });
 
+useHead({
+  title: 'Home',
+});
+
 
 /* template */
 

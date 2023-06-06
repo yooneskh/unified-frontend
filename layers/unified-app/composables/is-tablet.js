@@ -1,8 +1,6 @@
 import { useDisplay } from 'vuetify';
 
 
-export function isTablet() {
-  return computed(() =>
-    useDisplay().sm.value
-  );
-}
+export const isTablet = computed(() =>
+  useDisplay().sm.value
+);

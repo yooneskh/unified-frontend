@@ -22,7 +22,14 @@ if (token.value) {
 
 watch(token, () => {
   useHttp().applyHeader('Authorization', token.value);
-}, { immediate: true })
+}, { immediate: true });
+
+
+/* app */
+
+useHead({
+  titleTemplate: t => `${t} - Application`,
+});
 
 </script>
 

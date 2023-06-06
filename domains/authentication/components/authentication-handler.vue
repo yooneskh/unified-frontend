@@ -207,7 +207,7 @@ async function submitLoadUser(loginToken) {
         Register new account
       </v-btn>
 
-      <v-btn variant="text" class="mt-3" block to="/">
+      <v-btn variant="text" class="mt-3" block :to="{ name: 'general.home.page' }">
         Return to home page
       </v-btn>
 
@@ -247,7 +247,7 @@ async function submitLoadUser(loginToken) {
         Have account before?
       </v-btn>
 
-      <v-btn variant="text" class="mt-3" block to="/">
+      <v-btn variant="text" class="mt-3" block :to="{ name: 'general.home.page' }">
         Return to home page
       </v-btn>
 
@@ -272,7 +272,7 @@ async function submitLoadUser(loginToken) {
         Check Code
       </v-btn>
 
-      <v-btn variant="text" class="mt-2" block to="/">
+      <v-btn variant="text" class="mt-2" block :to="{ name: 'general.home.page' }">
         Resend Code
       </v-btn>
 

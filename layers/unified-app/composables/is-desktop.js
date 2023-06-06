@@ -1,8 +1,6 @@
 import { useDisplay } from 'vuetify';
 
 
-export function isDesktop() {
-  return computed(() =>
-    useDisplay().mdAndUp.value
-  );
-}
+export const isDesktop = computed(() =>
+  useDisplay().mdAndUp.value
+);
