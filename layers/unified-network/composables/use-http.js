@@ -12,6 +12,7 @@ const http = makeUnifiedNetwork({
         method: method.toUpperCase(),
         body,
         headers,
+        retry: 0,
       });
 
 
