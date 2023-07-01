@@ -20,7 +20,7 @@
     "@ckeditor/ckeditor5-vue": "5.1.0",
     "@mdi/font": "7.2.96",
     "@vueuse/core": "10.2.1",
-    "dayjs": "1.11.8",
+    "dayjs": "1.11.9",
     "jalaliday": "2.3.0",
     "lodash": "4.17.21",
     "pluralize": "8.0.0",
