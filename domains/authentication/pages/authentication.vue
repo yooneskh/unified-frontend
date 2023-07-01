@@ -7,7 +7,7 @@ const route = useRoute();
 /* page */
 
 definePageMeta({
-  name: 'authentication',
+  name: 'authentication.page',
 });
 
 useHead({

@@ -1,6 +1,9 @@
 
 
 export default defineNuxtConfig({
+  experimental: {
+    typedPages: true,
+  },
   extends: [
     './domains/authentication',
     './domains/general',
