@@ -11,8 +11,8 @@
     "start": "node .output/server/index.mjs"
   },
   "devDependencies": {
-    "nuxt": "3.6.3",
-    "sass": "1.63.6",
+    "nuxt": "3.6.5",
+    "sass": "1.64.0",
     "vite-plugin-vuetify": "1.0.2"
   },
   "dependencies": {
@@ -28,6 +28,6 @@
     "unified-form-vuetify": "0.6.5",
     "unified-network": "0.6.4",
     "vue3-persian-datetime-picker": "1.2.2",
-    "vuetify": "3.3.8"
+    "vuetify": "3.3.9"
   }
 }
