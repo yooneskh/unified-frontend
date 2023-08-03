@@ -12,7 +12,7 @@
   },
   "devDependencies": {
     "nuxt": "3.6.5",
-    "sass": "1.64.0",
+    "sass": "1.64.2",
     "vite-plugin-vuetify": "1.0.2"
   },
   "dependencies": {
