@@ -12,7 +12,9 @@ const props = defineProps({
   extraObjectActions: Array,
 });
 
-const emit = defineEmits([]);
+const emit = defineEmits([
+
+]);
 
 
 /* meta */
@@ -51,14 +53,14 @@ async function handleCreate() {
 const tableActions = [
   {
     key: 'update',
-    icon: 'mdi-pen',
+    icon: 'i-bx-pencil',
     title: 'Update',
     handler: handleItemUpdate,
   },
   {
     key: 'delete',
-    color: 'error',
-    icon: 'mdi-delete',
+    color: 'danger',
+    icon: 'i-bx-bxs-trash',
     title: 'Delete',
     handler: handleItemDelete,
   },
@@ -67,22 +69,19 @@ const tableActions = [
 
 
 async function handleItemDelete(item) {
-
-  launchButtonPickerDialog({
+  await launchButtonPickerDialog({
     icon: 'mdi-delete',
     title: `Delete ${props.resource}`,
     text: 'Are you sure you want to delete this?',
     startButtons: [
       {
-        value: false,
         title: 'No, Cancel',
       },
     ],
     endButtons: [
       {
-        value: true,
         title: 'Yes, Delete this',
-        color: 'error',
+        color: 'danger',
         async handler() {
 
           loading.value = true;
@@ -103,7 +102,6 @@ async function handleItemDelete(item) {
       },
     ],
   });
-
 }
 
 
@@ -152,20 +150,31 @@ import pluralize from 'pluralize';
 
 
 <template>
-  <v-card :prepend-icon="props.icon" :title="props.title ?? `Manage ${startCase(pluralize(props.resource))}`" :loading="loading">
+  <section>
 
-    <template #append>
-      <v-btn flat color="primary" prepend-icon="mdi-plus" @click="handleCreate()">
+    <div class="flex justify-between items-start">
+
+      <div class="text-xl font-bold">
+        {{ props.title ?? `Manage ${startCase(pluralize(props.resource))}` }}
+      </div>
+
+      <a-btn
+        color="primary"
+        icon="i-bx-plus"
+        class="text-sm"
+        @click="handleCreate()">
         Create New
-      </v-btn>
-    </template>
+      </a-btn>
+
+    </div>
 
     <resource-explorer-table
       ref="elExplorer"
       :resource="props.resource"
       :actions="tableActions"
+      class="mt-4"
       @update:loading="loading = $event"
     />
 
-  </v-card>
+  </section>
 </template>

@@ -1,1 +1,1 @@
-git push user@host:/path
+git push user@path master --force

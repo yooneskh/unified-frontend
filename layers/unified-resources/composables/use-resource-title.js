@@ -1,74 +1,115 @@
+import { retrieveResourceArrayTitles } from '../utils/retrieve-resource-title';
 
 
 export function useResourceTitle({ resource, resourceId }) {
 
   const title = ref('');
+  const loading = ref(false);
   const refreshHandle = ref(0);
 
 
-  watch([resource, resourceId, refreshHandle], async () => {
+  watchImmediate([resource, resourceId, refreshHandle], async () => {
 
     if (!unref(resourceId)) {
       return;
     }
 
 
-    title.value = '';
+    loading.value = true;
 
-    title.value = await retrieveResourceTitle({
-      resource: unref(resource),
-      resourceId: unref(resourceId),
-    });
+    try {
+      title.value = await retrieveResourceTitle({
+        resource: unref(resource),
+        resourceId: unref(resourceId),
+      });
+    }
+    catch {
+      title.value = '';
+    }
+    finally {
+      loading.value = false;
+    }
 
-  }, { immediate: true });
+  });
 
 
   return {
     title,
+    loading,
     refresh: () => refreshHandle.value++,
   };
 
 }
 
 
-export function useResourceArrayTitles({ resource, resourceIds }) {
-
-  const refreshHandle = ref(0);
+export function useResourceArrayTitlesMap({ resource, resourceIds }) {
 
   const titles = ref({});
   const loading = ref(false);
+  const refreshHandle = ref(0);
 
 
-  watch([resource, resourceIds, refreshHandle], async () => {
-
-    for (const key of Object.keys(titles.value)) {
-      if (!( unref(resourceIds).includes(key) )) {
-        delete titles.value[key];
-      }
-    }
-
+  watchImmediate([resource, resourceIds, refreshHandle], async () => {
 
     loading.value = true;
 
-    await Promise.all(
-      unref(resourceIds).map(resourceId =>
-        retrieveResourceTitle({
-          resource: unref(resource),
-          resourceId: unref(resourceId),
-        })
-        .then(title =>
-          titles.value[unref(resourceId)] = title
-        )
-      )
-    );
+    try {
+      titles.value = await retrieveResourceArrayTitlesMap({
+        resource: unref(resource),
+        resourceIds: unref(resourceIds),
+      });
+    }
+    catch {
+      titles.value = {};
+    }
+    finally {
+      loading.value = false;
+    }
 
-    loading.value = false;
-
-  }, { immediate: true });
+  });
 
 
   return {
     titles,
+    loading,
+    refresh: () => refreshHandle.value++,
+  };
+
+}
+
+
+export function useResourceArrayTitles({ resource, resourceIds, seperator }) {
+
+  const title = ref('');
+  const loading = ref(false);
+  const refreshHandle = ref(0);
+
+  const _seperator = ref(seperator);
+
+
+  watchImmediate([resource, resourceIds, _seperator, refreshHandle], async () => {
+
+    loading.value = true;
+
+    try {
+      title.value = await retrieveResourceArrayTitles({
+        resource: unref(resource),
+        resourceIds: unref(resourceIds),
+        seperator: unref(_seperator),
+      });
+    }
+    catch {
+      title.value = '';
+    }
+    finally {
+      loading.value = false;
+    }
+
+  });
+
+
+  return {
+    title,
     loading,
     refresh: () => refreshHandle.value++,
   };

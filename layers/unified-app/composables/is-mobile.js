@@ -1,6 +1,8 @@
-import { useDisplay } from 'vuetify';
+import { useWindowSize } from "@vueuse/core";
 
+
+const size = useWindowSize();
 
 export const isMobile = computed(() =>
-  useDisplay().xs.value
+  size.width.value < 640
 );

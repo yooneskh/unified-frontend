@@ -2,8 +2,19 @@
 
 const http = useHttp();
 
+const router = useRouter();
+const route = useRoute();
+
+const token = useToken();
+const user = useUser();
+
 
 /* interface */
+
+const props = defineProps({
+
+});
+
 
 const mode = defineModel('mode', {
   type: String,
@@ -24,22 +35,17 @@ const emit = defineEmits([
 
 /* authentication */
 
-const token = useToken();
-const user = useUser();
-
-
-/* actions */
-
-const authStates = reactive({
-  phoneNumber: '',
-  name: '',
-  verificationCode: '',
-});
-
 const captchaId = ref('');
 const captchaText = ref('');
 
-const verificationToken = ref('');
+
+/* login */
+
+const phoneNumber = ref('');
+
+const codedPhoneNumber = computed(() =>
+  '+98' + phoneNumber.value.slice(1)
+);
 
 
 async function submitLogin() {
@@ -50,7 +56,7 @@ async function submitLogin() {
     url: `/authentication/login`,
     body: {
       provider: 'phoneNumber',
-      phoneNumber: '+98' + authStates.phoneNumber.slice(1),
+      phoneNumber: codedPhoneNumber.value,
     },
     headers: {
       'captcha-id': captchaId.value,
@@ -61,7 +67,7 @@ async function submitLogin() {
 
   if (status === 404) {
 
-    if (confirm('User account does not exist. Do you want to create it?')) {
+    if (confirm('This account does not exist. Do you want to create an account with this number?')) {
       mode.value = 'register';
     }
 
@@ -83,6 +89,12 @@ async function submitLogin() {
 
 }
 
+
+/* register */
+
+const userName = ref('');
+
+
 async function submitRegister() {
 
   loading.value = true;
@@ -91,8 +103,8 @@ async function submitRegister() {
     url: `/authentication/register`,
     body: {
       provider: 'phoneNumber',
-      phoneNumber: '+98' + authStates.phoneNumber.slice(1),
-      name: authStates.name,
+      phoneNumber: codedPhoneNumber.value,
+      name: userName.value,
     },
     headers: {
       'captcha-id': captchaId.value,
@@ -116,6 +128,12 @@ async function submitRegister() {
 
 }
 
+
+/* verification */
+
+const verificationToken = ref('');
+const verificationCode = ref('');
+
 async function submitVerification() {
 
   loading.value = true;
@@ -125,7 +143,7 @@ async function submitVerification() {
     body: {
       provider: 'phoneNumber',
       verificationToken: verificationToken.value,
-      verificationCode: authStates.verificationCode,
+      verificationCode: verificationCode.value,
     }
   });
   loading.value = false;
@@ -141,6 +159,8 @@ async function submitVerification() {
 
 }
 
+
+/* profile */
 
 async function submitLoadUser(loginToken) {
 
@@ -161,122 +181,106 @@ async function submitLoadUser(loginToken) {
     loading.value = false;
 
     mode.value = 'login';
-    authStates.verificationCode = '';
+    verificationCode.value = '';
 
   }
 
 }
 
 
-/* template specific */
+/* template */
+
+import { AppConfig } from '~/app-config';
 
 </script>
 
 
 <template>
-  <div class="authentication-handler">
+  <a-card class="pa-4 max-w-512">
 
-    <template v-if="mode === 'login'">
-
-      <div class="text-body-1">
-        Please enter your phone number.
+    <div class="flex items-center justify-center mt-3 mb-7">
+      <img
+        src="/logo-small.webp"
+        class="w-40px h-40px"
+      />
+      <div class="text-2xl font-black ms-3">
+        Login to {{ AppConfig.brand.title }}
       </div>
+    </div>
 
-      <u-form
-        :target="authStates"
-        :fields="[
-          {
-            key: 'phoneNumber', identifier: 'text', label: 'Phone Number',
-            placeholder: '09---------',
-          }
-        ]"
+    <div v-if="mode === 'login'" class="flex flex-col gap-3">
+    
+      <p>
+        Please enter your phone number to login.
+      </p>
+  
+      <a-input
+        label="Phone number"
+        input-classes="ltr"
+        v-model="phoneNumber"
+      />
+  
+      <a-btn
+        color="primary"
+        class="mt-2 w-full text-lg"
+        :disabled="!phoneNumber"
+        :loading="loading"
+        @click="submitLogin()">
+        Login to account
+      </a-btn>
+
+    </div>
+
+    <div v-else-if="mode === 'register'" class="flex flex-col gap-3">
+    
+      <p>
+        Please enter your information to create your account.
+      </p>
+  
+      <a-input
+        label="Phone number"
+        input-classes="ltr"
+        v-model="phoneNumber"
       />
 
-      <client-only>
-        <captcha-field
-          v-model="captchaText"
-          v-model:id="captchaId"
-        />
-      </client-only>
+      <a-input
+        label="Name"
+        v-model="userName"
+      />
+  
+      <a-btn
+        color="primary"
+        class="mt-2 w-full text-lg"
+        :disabled="!phoneNumber || !userName"
+        :loading="loading"
+        @click="submitRegister()">
+        Create your account
+      </a-btn>
 
-      <v-btn color="primary" class="mt-8" block size="large" :loading="loading" @click="submitLogin()">
-        Login
-      </v-btn>
+    </div>
 
-      <v-btn variant="tonal" class="mt-2" block @click="mode = 'register'">
-        Register new account
-      </v-btn>
-
-      <v-btn variant="text" class="mt-3" block :to="{ name: 'general.home.page' }">
-        Return to home page
-      </v-btn>
-
-    </template>
-
-    <template v-if="mode === 'register'">
-
-      <div class="text-body-1">
-        Please fill these information to create your account.
-      </div>
-
-      <u-form
-        :target="authStates"
-        :fields="[
-          {
-            key: 'phoneNumber', identifier: 'text', label: 'Phone Number',
-            placeholder: '09---------',
-          },
-          {
-            key: 'name', identifier: 'text', label: 'Your Name',
-          },
-        ]"
+    <div v-else-if="mode === 'verify'" class="flex flex-col gap-3">
+    
+      <p>
+        Please enter the code sent to {{ phoneNumber }} below.
+      </p>
+  
+      <a-input
+        label="Verification code"
+        input-classes="ltr"
+        v-model="verificationCode"
       />
 
-      <client-only>
-        <captcha-field
-          v-model="captchaText"
-          v-model:id="captchaId"
-        />
-      </client-only>
+      <a-btn
+        color="primary"
+        class="mt-2 w-full text-lg"
+        :disabled="!verificationCode"
+        :loading="loading"
+        @click="submitVerification()">
+        Check code
+      </a-btn>
 
-      <v-btn color="primary" class="mt-8" block size="large" :loading="loading" @click="submitRegister()">
-        Register
-      </v-btn>
+    </div>
 
-      <v-btn variant="tonal" class="mt-1" block @click="mode = 'login'">
-        Have account before?
-      </v-btn>
-
-      <v-btn variant="text" class="mt-3" block :to="{ name: 'general.home.page' }">
-        Return to home page
-      </v-btn>
-
-    </template>
-
-    <template v-if="mode === 'verify'">
-
-      <div class="text-body-1">
-        Enter the code below
-      </div>
-
-      <u-form
-        :target="authStates"
-        :fields="[
-          {
-            key: 'verificationCode', identifier: 'text', label: 'Verification Code',
-          },
-        ]"
-      />
-
-      <v-btn color="primary" class="mt-8" block size="large" :loading="loading" @click="submitVerification()">
-        Check Code
-      </v-btn>
-
-      <v-btn variant="text" class="mt-2" block :to="{ name: 'general.home.page' }">
-        Resend Code
-      </v-btn>
-
-    </template>
-
-  </div>
+  </a-card>
 </template>

@@ -43,9 +43,27 @@ function handleItemSelection(item) {
 }
 
 
+/* select new */
+
+async function selectNewResource() {
+
+  const result = await launchResourceObjectDialog({
+    resource: props.resource,
+  });
+
+  if (!result) {
+    return;
+  }
+
+
+  handleItemSelection(result);
+
+}
+
+
 /* titles */
 
-const { titles } = useResourceArrayTitles({
+const { titles } = useResourceArrayTitlesMap({
   resource: computed(() => props.resource),
   resourceIds: selectedResources,
 });
@@ -57,22 +75,42 @@ const { titles } = useResourceArrayTitles({
 
 
 <template>
-  <v-card
-    flat
-    prepend-icon="mdi-file-document"
-    :title="`Select ${props.resource}`"
-    width="1024">
+  <a-card prepend-icon="mdi-file-document" class="w-768px">
 
-    <template v-if="props.multiple" #append>
-      <v-btn flat color="primary" prepend-icon="mdi-check" @click="emit('resolve', [...selectedResources])">
-        Confirm Selection
-      </v-btn>
+    <template #title>
+      <div class="flex items-start gap-2">
+
+        <span>
+          Select {{ props.resource }}
+        </span>
+  
+        <div class="grow" />
+  
+        <a-btn
+          variant="light"
+          color="primary"
+          icon="i-bx-plus"
+          class="text-sm"
+          @click="selectNewResource()">
+          Select New
+        </a-btn>
+
+        <a-btn
+          v-if="props.multiple"
+          color="primary"
+          icon="i-bx-check"
+          class="text-sm"
+          @click="emit('resolve', [...selectedResources])">
+          Confirm Selection
+        </a-btn>
+
+      </div>
     </template>
 
-    <v-card-text v-if="props.multiple && selectedResources.length > 0">
-      <v-chip
+    <div class="a-card-body" v-if="props.multiple && selectedResources.length > 0">
+      <a-chip
         v-for="(resourceId, index) of selectedResources" :key="resourceId"
-        variant="tonal"
+        variant="light"
         color="primary"
         class="me-2"
         closable
@@ -80,8 +118,8 @@ const { titles } = useResourceArrayTitles({
 
         {{ titles[resourceId] ?? '---' }}
 
-      </v-chip>
-    </v-card-text>
+      </a-chip>
+    </div>
 
     <resource-explorer-table
       :resource="props.resource"
@@ -89,7 +127,7 @@ const { titles } = useResourceArrayTitles({
       :actions="[
         {
           value: 'select',
-          icon: 'mdi-open-in-new',
+          icon: 'i-bx-check-square',
           title: 'Select',
           color: 'primary',
           handler: handleItemSelection
@@ -97,5 +135,5 @@ const { titles } = useResourceArrayTitles({
       ]"
     />
 
-  </v-card>
+  </a-card>
 </template>

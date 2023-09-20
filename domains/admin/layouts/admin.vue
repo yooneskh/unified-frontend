@@ -1,29 +1,30 @@
 <script setup>
 
 const router = useRouter();
-const route = useRoute();
-
-
-/* scroll fix */
-
-onMounted(() => {
-  document.body.parentElement.style.overflowY = 'unset';
-});
-
-onUnmounted(() => {
-  document.body.parentElement.style.overflowY = '';
-});
 
 
 /* authentication */
 
 const user = useUser();
 
-watch(route, () => {
+watch(user, () => {
   if (!user.value || !user.value._id) {
-    router.replace({ name: 'authentication' });
+    router.replace({
+      name: 'authentication',
+      query: {
+        next: '::admin.dashboard',
+      },
+    });
   }
 }, { immediate: true });
+
+
+/* locale */
+
+useElementClass({
+  el: () => document.body,
+  classes: 'ltr',
+});
 
 
 /* template */
@@ -32,13 +33,11 @@ watch(route, () => {
 
 
 <template>
-  <v-layout>
-
-    <admin-sidebar />
-
-    <v-main class="h-100 overflow-y-auto">
-      <slot />
-    </v-main>
-
-  </v-layout>
+  <div v-if="user && user._id">
+    <general-header />
+    <admin-toolbar />
+    <content-container>
+      <slot />  
+    </content-container>
+  </div>
 </template>

@@ -1,4 +1,4 @@
-import { AppConfig } from '~~/app-config';
+import { AppConfig } from '~/app-config';
 
 
 export async function retrieveResourceTitle({ resource, resourceId }) {
@@ -36,5 +36,44 @@ export async function retrieveResourceTitle({ resource, resourceId }) {
 
     })
   )).join(' ');
+
+}
+
+
+export async function retrieveResourceArrayTitles({ resource, resourceIds, seperator = ' - ' }) {
+
+  const titles = await Promise.all(
+    resourceIds.map?.(resourceId =>
+      retrieveResourceTitle({
+        resource,
+        resourceId,
+      })
+    )
+  );
+
+  return titles.join(seperator);
+  
+}
+
+
+export async function retrieveResourceArrayTitlesMap({ resource, resourceIds }) {
+
+  const titles = {};
+
+
+  await Promise.all(
+    resourceIds.map?.(resourceId =>
+      retrieveResourceTitle({
+        resource,
+        resourceId,
+      })
+      .then(title => {
+        titles[resourceId] = title
+      })
+    )
+  );
+
+
+  return titles;
 
 }

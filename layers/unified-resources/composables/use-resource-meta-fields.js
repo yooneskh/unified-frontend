@@ -62,7 +62,7 @@ function convertMetaPropertyToField(property) {
     chips: property.type === 'string' && property.array,
     itemBase: property.seriesBase,
     itemFields: property.seriesSchema ? convertSeriesSchemaToFields(property.seriesSchema) : undefined,
-    itemWidth: property.itemWidth,
+    seriesColumns: property.seriesColumns,
     labelFormat: property.labelFormat,
     valueFormat: property.valueFormat,
     dateType: property.dateType,

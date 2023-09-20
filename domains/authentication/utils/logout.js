@@ -1,3 +1,4 @@
+const http = useHttp();
 
 
 export async function logoutUser(tokenRef, userRef) {

@@ -1,5 +1,5 @@
 
 
 export const useDialogs = () => (
-  useState('--unified-dialogs-dialogs--', () => [])
+  useSimpleState('--unified-dialogs-dialogs--', () => [])
 );

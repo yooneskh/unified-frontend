@@ -5,14 +5,18 @@
 
 const props = defineProps({
   resource: String,
-  loading: Boolean,
   actions: Array,
   selectedResources: Array,
 });
 
 const emit = defineEmits([
-  'update:loading',
+
 ]);
+
+const loading = defineModel('loading', {
+  type: Boolean,
+  local: true,
+});
 
 
 /* shared */
@@ -43,7 +47,7 @@ const itemsInPage = ref(10);
 const currentPage = ref(1);
 
 
-const { loading, data: items, refresh: refreshItemsData } = useNetwork({
+const { loading: itemsLoading, data: items, refresh: refreshItemsData } = useNetwork({
   method: 'get',
   url: computed(() =>
     `${resourceUrlPart.value}/`
@@ -86,14 +90,9 @@ function refreshItems() {
 }
 
 
-watch([loading, countLoading], () =>
-  emit('update:loading', loading.value || countLoading.value)
-);
-
-
-/* template */
-
-import ExplorerTableCell from '../atoms/explorer-table-cell.vue';
+watch([itemsLoading, countLoading], () => {
+  loading.value = itemsLoading.value || countLoading.value;
+});
 
 
 /* expose */
@@ -104,13 +103,18 @@ defineExpose({
   refreshItemsCount,
 });
 
+
+/* template */
+
+import ExplorerTableCell from '../atoms/explorer-table-cell.vue';
+
 </script>
 
 
 <template>
   <div class="explorer-table">
 
-    <simple-table
+    <u-table
       :headers="headers"
       :items="items"
       :selected-items="props.selectedResources"
@@ -123,34 +127,34 @@ defineExpose({
         />
       </template>
 
-    </simple-table>
+    </u-table>
 
-    <div class="pa-3 d-flex align-start">
+    <div class="pa-3 flex items-center">
 
-      <v-pagination
-        size="small"
-        density="comfortable"
-        :length="totalPages"
-        total-visible="9"
-        v-model="currentPage"
-      />
+      <div class="flex gap-1">
+        <a-btn
+          v-for="index of totalPages"
+          variant="light"
+          :color="currentPage === index ? 'primary' : ''"
+          class="rounded-full text-sm"
+          @click="currentPage = index">
+          {{ index }}
+        </a-btn>
+      </div>
 
-      <v-spacer />
+      <div class="grow" />
 
-      <v-select
-        variant="outlined"
-        density="compact"
-        class="flex-grow-0"
-        :items="[5, 10, 15, 30]"
+      <div class="text-sm">
+        Items to show
+      </div>
+
+      <a-select
+        variant="outline"
+        class="grow-0 text-sm ms-3 w-100px"
+        :options="[5, 10, 15, 30]"
         v-model="itemsInPage"
         @update:model-value="currentPage = 1"
-        hide-details>
-        <template #prepend>
-          <div class="text-caption">
-            Items to show
-          </div>
-        </template>
-      </v-select>
+      />
 
     </div>
 

@@ -1,39 +1,42 @@
-import vuetify from 'vite-plugin-vuetify'
 
 
 export default defineNuxtConfig({
   extends: [
-    '../unified-form',
     '../unified-network',
     '../unified-dialogs',
-    '../unified-dialogs-vuetify',
-    '../unified-toasts-vuetify',
+    '../unified-dialogs-common',
+    '../unified-toasts',
+    '../unified-form',
+    '../unified-form-anu',
+    '../unified-resources',
   ],
-  css: [
-    'vuetify/dist/vuetify.min.css',
-    '@mdi/font/css/materialdesignicons.min.css',
-  ],
-  build: {
-    transpile: [
-      'unified-form',
-      'unified-form-vuetify',
-    ],
+  vue: {
+    defineModel: true,
   },
-  vite: {
-    ssr: {
-      noExternal: [
-        'vuetify',
-      ],
-    },
-    define: {
-      'process.env.DEBUG': false,
-    },
+  experimental: {
+    headNext: true
   },
   modules: [
-    async (_, nuxt) => {
-      nuxt.hooks.hook('vite:extendConfig', config => config.plugins.push(
-        vuetify(),
-      ));
-    },
+    '@anu-vue/nuxt',
+    '@unocss/nuxt',
   ],
+  anu: {
+    propsDefaults: {
+      ABtn: {
+        color: '',
+      }
+    },
+    themes: {
+      light: {
+        colors: {
+          primary: '198, 72%, 53%',
+        },
+      },
+      dark: {
+        colors: {
+          primary: '198, 72%, 53%',
+        },
+      },
+    },
+  },
 });

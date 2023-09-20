@@ -17,7 +17,7 @@ function removeDialog(dialog) {
       dialogs.value.findIndex(it => it.key === dialog.key),
       1
     );
-  }, 1000);
+  }, 500);
 
 }
 
@@ -25,21 +25,20 @@ function removeDialog(dialog) {
 
 
 <template>
-  <v-dialog
+  <a-dialog
     v-for="dialog of dialogs"
     :key="dialog.key"
-    width="auto"
+    class="w-unset"
     v-bind="dialog.options"
     :model-value="dialog.modelValue"
-    @update:model-value="!$event && !dialog.options.prominent && (dialog.resolve(undefined) || removeDialog(dialog))">
+    @update:model-value="!$event && !dialog.options.persistent && (dialog.resolve(undefined) || removeDialog(dialog))">
 
     <component
       :is="dialog.component"
       v-bind="dialog.props"
       @resolve="dialog.resolve($event); removeDialog(dialog);"
       @reject="dialog.reject($event); removeDialog(dialog);"
-      style="max-width: 100%;"
     />
 
-  </v-dialog>
+  </a-dialog>
 </template>

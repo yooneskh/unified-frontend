@@ -8,12 +8,12 @@ const props = defineProps({
   data: {},
 });
 
-const emit = defineEmits([]);
+const emit = defineEmits([
+
+]);
 
 
 /* template */
-
-import dayjs from 'dayjs';
 
 import ExplorerTableCellResource from './explorer-table-cell-resource.vue';
 
@@ -54,15 +54,15 @@ import ExplorerTableCellResource from './explorer-table-cell-resource.vue';
   </template>
 
   <template v-else-if="props.header.labelFormat">
-    {{ dayjs(data).format(props.header.labelFormat) }}
+    {{ !data ? '' : formatDate(data, props.header.labelFormat) }}
   </template>
 
   <template v-else-if="props.header.type === 'boolean'">
     <template v-if="data">
-      <v-icon color="success" icon="mdi-check" />
+      <a-icon color="success" icon="i-bx-check" />
     </template>
     <template v-else>
-      <v-icon color="error" icon="mdi-close" />
+      <a-icon color="danger" icon="i-bx-x" />
     </template>
   </template>
 

@@ -1,15 +1,23 @@
-# Unified Frontend
+## Setup
 
-## Development
+Make sure to install the dependencies:
 
 ```bash
-yarn serve # runs the dev server on the 8080 port
+bun i
 ```
 
+## Development Server
 
-## Build
+Start the development server on `http://localhost:8080`:
 
 ```bash
-yarn build # builds the project in the .output directory
-node .output/server/index.mjs # runs the project
+bun serve
+```
+
+## Production
+
+Build the application for production:
+
+```bash
+bun run build
 ```

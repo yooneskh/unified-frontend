@@ -1,5 +1,17 @@
 <script setup>
 
+const http = useHttp();
+
+import { AppConfig } from '~/app-config';
+
+
+/* seo */
+
+
+useHead({
+  titleTemplate: t => `${t ? `${t} - ` : ''}${AppConfig.brand.title}`,
+});
+
 
 /* authentication */
 
@@ -10,7 +22,8 @@ const loading = ref(false);
 if (token.value) {
   loading.value = true;
   (reloadUser(true)
-    .catch(() => {
+    .catch((error) => {
+      console.error(error);
       token.value = '';
     })
     .finally(() => {
@@ -21,80 +34,63 @@ if (token.value) {
 
 
 watch(token, () => {
-  useHttp().applyHeader('Authorization', token.value);
+  http.applyHeader('Authorization', token.value);
 }, { immediate: true });
 
 
-/* app */
+/* dark mode */
 
-useHead({
-  titleTemplate: t => `${t} - Application`,
+const { activeThemeName } = useAnu();
+const isDarkMode = useDarkMode();
+
+watchEffect(() => {
+  activeThemeName.value = isDarkMode.value ? 'dark' : 'light';
 });
 
 </script>
 
 
 <template>
-  <v-app>
 
-    <template v-if="loading">
-      <div class="h-100 d-flex flex-column align-center justify-center">
+  <template v-if="loading">
+    <div class="h-screen flex flex-col items-center justify-center">
+      <img
+        src="/logo-small.webp"
+        class="w-40px h-40px"
+      />
+      <a-spinner
+        class="mt-3 text-primary"
+      />
+    </div>
+  </template>
 
-        <v-img
-          src="/logo.png"
-          width="56"
-          height="56"
-          class="flex-grow-0"
-        />
+  <template v-else>
+    <nuxt-layout>
+      <nuxt-page />
+    </nuxt-layout>
+  </template>
 
-        <v-progress-circular
-          indeterminate
-          color="primary"
-          size="24"
-          class="mt-3"
-        />
+  <unified-toasts-provider />
+  <unified-dialogs-provider />
 
-      </div>
-    </template>
-    <template v-else>
-      <NuxtLayout>
-        <NuxtPage />
-      </NuxtLayout>
-    </template>
-
-    <unified-dialogs-provider />
-    <unified-toasts-provider />
-
-  </v-app>
 </template>
 
 
-<style lang="scss">
+<style>
 
-  @import '@/assets/stylesheets/rtl.scss';
+  /* @import '@/assets/stylesheets/rtl.css'; */
 
-  .v-messages__message + .v-messages__message {
-    margin-top: 6px;
-  }
-
-  .text-ltr {
-    direction: ltr;
-  }
-
-  .text-rtl {
+  .rtl {
     direction: rtl;
   }
 
-  .gap-1 {
-    gap: 4px;
+  .ltr {
+    direction: ltr;
   }
 
-  .gap-2 {
-    gap: 8px;
-  }
 
-  .gap-3 {
-    gap: 12px;
+  .a-table-table-th {
+    text-align: unset;
   }
 
 </style>

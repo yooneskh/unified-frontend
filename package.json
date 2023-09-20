@@ -1,33 +1,24 @@
 {
-  "private": true,
-  "version": "0.0.1",
+  "name": "unified-frontend",
   "scripts": {
-    "build": "nuxt build",
-    "serve": "nuxt dev --port 8080",
-    "lint": "exit 0;",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare",
-    "start": "node .output/server/index.mjs"
+    "build": "VITE_BUILT_STATIC=false nuxt build",
+    "serve": "VITE_BUILT_STATIC=false nuxt dev --port 8080",
+    "generate": "VITE_BUILT_STATIC=true nuxt generate",
+    "postinstall": "nuxt prepare"
   },
   "devDependencies": {
-    "nuxt": "3.6.5",
-    "sass": "1.64.2",
-    "vite-plugin-vuetify": "1.0.2"
+    "@unocss/nuxt": "0.56.0",
+    "nuxt": "3.6.5"
   },
   "dependencies": {
-    "@ckeditor/ckeditor5-build-classic": "39.0.0",
-    "@ckeditor/ckeditor5-vue": "5.1.0",
-    "@mdi/font": "7.2.96",
-    "@vueuse/core": "10.3.0",
-    "dayjs": "1.11.9",
+    "@anu-vue/nuxt": "0.15.2",
+    "@vueuse/core": "10.4.1",
+    "dayjs": "1.11.10",
     "jalaliday": "2.3.0",
     "lodash": "4.17.21",
     "pluralize": "8.0.0",
-    "unified-form": "0.7.2",
-    "unified-form-vuetify": "0.6.5",
+    "unified-mongo-filter": "0.3.1",
     "unified-network": "0.6.4",
-    "vue3-persian-datetime-picker": "1.2.2",
-    "vuetify": "3.3.11"
+    "vue3-persian-datetime-picker": "1.2.2"
   }
 }

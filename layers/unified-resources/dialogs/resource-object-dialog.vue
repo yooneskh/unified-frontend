@@ -148,69 +148,71 @@ import startCase from 'lodash/startCase';
 
 
 <template>
-  <v-card
-    prepend-icon="mdi-folder"
+  <a-card
+    icon="mdi-folder"
     :title="`${(isCreating) ? ('Create') : ('Update')} ${startCase(props.resource)}`"
     :loading="submitting"
-    width="768">
+    class="w-512px">
 
-    <v-card-text class="pb-0">
-      Please fill the form.
-    </v-card-text>
+    <div class="a-card-body max-h-70vh overflow-y-auto">
 
-    <v-card-text class="pt-0">
+      <p class="text-body-1">
+        Please fill the form.
+      </p>
+
       <u-form
         :target="object"
         :fields="fields"
+        class="mt-4"
       />
-    </v-card-text>
 
-    <v-alert
-      v-if="isValidationOk || validationMessages?.length > 0"
-      class="mx-5 pa-3 mb-3"
-      :class="{
-        'bg-error': !isValidationOk,
-        'bg-success': isValidationOk,
-      }"
-      style="overflow: unset;">
+    </div>
 
-      <template v-if="isValidationOk">
-        Everything is OK!
-      </template>
-
-      <template v-else>
-        <v-list class="bg-transparent py-0" density="compact">
-          <v-list-item
-            v-for="message of validationMessages" :key="message.error"
-            class="px-2"
-            :title="message.error"
+    <div v-if="isValidationOk || validationMessages?.length > 0">
+      <div
+        class="text-white py-1 px-2"
+        :class="[isValidationOk ? 'bg-success' : 'bg-danger']">
+  
+        <template v-if="isValidationOk">
+          <div class="py-2 px-4">
+            Everything is OK!
+          </div>
+        </template>
+  
+        <template v-else>
+          <a-list
+            class="ma-0"
+            :items="validationMessages.map(it => it.error)"
           />
-        </v-list>
-      </template>
+        </template>
+  
+      </div>
+    </div>
 
-    </v-alert>
+    <div class="flex pa-2">
 
-    <v-card-actions>
-
-      <v-btn
+      <a-btn
+        variant="light"
         color="primary"
-        variant="tonal"
         class="px-6"
-        size="large"
-        :prepend-icon="(isCreating) ? ('mdi-plus') : ('mdi-pen')"
+        :icon="(isCreating) ? ('i-bx-plus') : ('i-bx-pencil')"
         :loading="validationLoading || submitting"
         :disabled="!isValidationOk"
         @click="submitObject()">
         {{ (isCreating) ? ('Create') : ('Update') }} {{ startCase(props.resource) }}
-      </v-btn>
+      </a-btn>
 
-      <v-spacer />
+      <div class="grow" />
 
-      <v-btn variant="tonal" size="large" class="px-6" :disabled="submitting" @click="emit('resolve')">
+      <a-btn
+        variant="light"
+        class="px-6"
+        :disabled="submitting"
+        @click="emit('resolve')">
         Cancel
-      </v-btn>
+      </a-btn>
 
-    </v-card-actions>
+    </div>
 
-  </v-card>
+  </a-card>
 </template>

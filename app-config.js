@@ -1,8 +1,10 @@
+
+
 export const AppConfig = {
-  http: {
-    baseUrl: 'https://api.tasliatbegu.ir',
+  brand: {
+    title: 'Application',
   },
-  locale: {
-    default: 'en',
+  http: {
+    baseUrl: '/',
   },
 };

@@ -9,8 +9,7 @@ const route = useRoute();
 /* page */
 
 definePageMeta({
-  layout: 'general',
-  name: 'general.home.page',
+  name: 'general.home',
 });
 
 useHead({
@@ -24,21 +23,20 @@ useHead({
 
 
 <template>
-  <v-container fluid class="h-100 d-flex flex-column align-center justify-center">
+  <content-container class="h-[calc(100vh-64px)] flex flex-col gap-3 items-center justify-center">
 
-    <div class="text-h5">
-      Hello From Unified Frontend
+    <div class="text-2xl">
+      Welcome to the Unified Frontend!
     </div>
 
-    <v-btn
-      variant="outlined"
-      color="primary"
-      prepend-icon="mdi-link"
-      class="mt-4 text-none"
-      href="https://github.com/yooneskh"
-      target="_blank">
-      Made By YoonesKh
-    </v-btn>
+    <a href="https://github.com/yooneskh" target="_blank">
+      <a-btn
+        variant="light"
+        color="primary"
+        icon="i-bx-link">
+        Made By Yooneskh
+      </a-btn>
+    </a>
 
-  </v-container>
+  </content-container>
 </template>

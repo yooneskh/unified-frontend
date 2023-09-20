@@ -1,5 +1,7 @@
 <script setup>
 
+const http = useHttp();
+
 const router = useRouter();
 const route = useRoute();
 
@@ -7,7 +9,8 @@ const route = useRoute();
 /* page */
 
 definePageMeta({
-  name: 'authentication.page',
+  name: 'authentication',
+  layout: 'bare',
 });
 
 useHead({
@@ -17,90 +20,55 @@ useHead({
 
 /* authentication */
 
-const mode = ref('login');
+function onAuthenticated() {
 
+  const next = route.query['next'];
 
-onMounted(() => {
-  if (route.query['mode'] === 'register') {
-    mode.value = 'register';
+  if (!next) {
+    return router.push({
+      name: 'general.home',
+    });
   }
-});
 
+  if (next.startsWith('::')) {
+    return router.push({
+      name: next.slice(2),
+    });
+  }
+  
+  if(next.startsWith('http')) {
+    return window.open(next);
+  }
 
-function handleAuthentication() {
-  if (!route.query['next']) {
-    router.push({ name: 'general.home.page' })
-  }
-  else {
-    if (route.query['next'].startsWith('::')) {
-      router.push({ name: route.query['next'].slice(2) })
-    }
-    else if(route.query['next'].startsWith('http')) {
-      window.open(route.query['next']);
-    }
-    else {
-      router.push(route.query['next']);
-    }
-  }
+  router.push(next);
+
 }
 
 
-/* template specific */
+/* template */
 
-import CoverImage from '../assets/images/cover.webp';
+import BackgroundImage from '../assets/images/background.webp';
 
 </script>
 
 
 <template>
-  <v-container fluid class="pa-0">
+  <div class="h-screen grid grid-cols-1 md:grid-cols-[1fr_1fr]">
 
-    <v-row no-gutters style="min-height: 100vh;">
-      <v-col v-if="isDesktop" cols="5" class="pa-3 d-flex flex-column" style="height: 100vh;">
-        <v-card
-          :image="CoverImage"
-          class="flex-grow-1 cover"
-          style="height: 0; width: 100%;"
-        />
-      </v-col>
-      <v-col class="d-flex flex-column align-center justify-center">
+    <div class="grid items-center justify-center">
 
-        <v-card flat width="420" max-width="90%" color="transparent">
+      <authentication-handler
+        @authenticated="onAuthenticated()"
+      />
 
-          <div class="d-flex align-center justify-center mb-8">
+    </div>
 
-            <v-img
-              src="/logo.png"
-              width="64"
-              class="flex-grow-0"
-            />
+    <div class="hidden md:block">
+      <img
+        :src="BackgroundImage"
+        class="h-screen w-full shadow-md border-r-1px border-r-black/30 object-cover"
+      />
+    </div>
 
-            <div class="text-h4 ms-3 font-weight-bold">
-              Login
-            </div>
-
-          </div>
-
-          <authentication-handler
-            v-model:mode="mode"
-            @authenticated="handleAuthentication()"
-          />
-
-        </v-card>
-
-      </v-col>
-    </v-row>
-
-  </v-container>
+  </div>
 </template>
-
-
-<style lang="scss" scoped>
-  .v-card.cover {
-    box-shadow: 0 1px  1px  rgba(0,0,0,0.12),
-                0 2px  2px  rgba(0,0,0,0.12),
-                0 4px  4px  rgba(0,0,0,0.12),
-                0 8px  8px  rgba(0,0,0,0.12),
-                0 16px 16px rgba(0,0,0,0.12);
-  }
-</style>

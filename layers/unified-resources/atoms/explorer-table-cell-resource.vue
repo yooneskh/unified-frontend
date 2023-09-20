@@ -8,7 +8,9 @@ const props = defineProps({
   resourceId: String,
 });
 
-const emit = defineEmits([]);
+const emit = defineEmits([
+
+]);
 
 
 /* resource */
@@ -57,19 +59,24 @@ async function showResource() {
 
 <template>
   <template v-if="props.resource === 'Media'">
-    <a target="_blank" :href="item?.path">
+    <a target="_blank" :href="item?.path" class="text-primary underline">
+
       Media
-      <v-menu v-if="item?.type.startsWith('image')" open-on-hover activator="parent">
-        <v-sheet min-height="40">
-          <v-img :src="item.path" width="150" />
-        </v-sheet>
-      </v-menu>
+
+      <a-menu
+        v-if="item?.type.startsWith('image')"
+        trigger="hover">
+        <img
+          :src="item.variants?.small ?? item.path"
+          class="w-150px"
+        />
+      </a-menu>
+
     </a>
   </template>
   <template v-else>
     <span
-      class="text-primary me-2 text-decoration-underline"
-      style="cursor: pointer;"
+      class="text-primary underline cursor-pointer me-2"
       @click="showResource()">
       {{ title }}
     </span>

@@ -1,24 +1,10 @@
 
 
 export default defineNuxtConfig({
-  experimental: {
-    typedPages: true,
-  },
   extends: [
-    './domains/authentication',
+    // './domains/authentication',
     './domains/general',
-    './domains/admin',
+    // './domains/admin',
     './layers/unified-app',
-    './layers/unified-resources',
   ],
-  vite: {
-    vue: {
-      script: {
-        defineModel: true,
-      },
-    },
-  },
-  routeRules: {
-    '/admin/**': { ssr: false },
-  },
 });
