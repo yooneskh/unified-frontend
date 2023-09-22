@@ -7,7 +7,7 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
-    "@unocss/nuxt": "0.56.0",
+    "@unocss/nuxt": "0.56.1",
     "nuxt": "3.6.5"
   },
   "dependencies": {
