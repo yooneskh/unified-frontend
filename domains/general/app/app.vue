@@ -1,3 +1,17 @@
+<script setup>
+
+const config = useAppConfig();
+
+
+/* seo */
+
+useHead({
+  titleTemplate: t => `${t ? `${t} - ` : ''}${config.brand.title}`,
+});
+
+</script>
+
+
 <template>
 
   <nuxt-route-announcer />
@@ -5,6 +19,8 @@
   <nuxt-layout>
     <nuxt-page />
   </nuxt-layout>
+
+  <unified-toasts-provider />
 
 </template>
 
