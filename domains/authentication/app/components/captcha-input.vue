@@ -1,0 +1,52 @@
+<script setup>
+
+/* interface */
+
+const props = defineProps({
+
+});
+
+const emit = defineEmits([
+
+]);
+
+
+const captchaId = defineModel('captchaId');
+const captchaText = defineModel('captchaText');
+
+
+/* captcha */
+
+const { data: captchaData, refresh } = useUFetch(`/captcha-tokens/generate/new`);
+
+watch(() => captchaData.value?.captchaId, () => {
+  captchaId.value = captchaData.value?.captchaId;
+}, { immediate: true });
+
+</script>
+
+
+<template>
+  <div>
+
+    <u-input
+      label="Enter the text below"
+      v-model="captchaText"
+    />
+
+    <div class="flex items-center justify-center gap-1 mt-1">
+
+      <img
+        :src="captchaData?.data"
+      />
+
+      <u-btn
+        icon="i-mdi-refresh"
+        class="ghost neutral"
+        @click="refresh();"
+      />
+
+    </div>
+
+  </div>
+</template>

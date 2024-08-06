@@ -51,7 +51,7 @@ export function toastDanger({ color, icon, title, duration, clickHandler, closeH
     color: color ?? 'danger',
     icon: icon || 'i-mdi-alert',
     title,
-    duration: duration || 100000,
+    duration: duration || 10000,
     clickHandler,
     closeHandler,
     action,

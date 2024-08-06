@@ -4,6 +4,7 @@ export default defineNuxtConfig({
   future: { compatibilityVersion: 4 },
   extends: [
     './domains/general',
+    './domains/authentication',
     './plugins/unified-app',
   ],
   unifiedComponents: {

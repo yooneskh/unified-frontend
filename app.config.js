@@ -6,8 +6,8 @@ export default {
     title: 'Unified Frontend',
   },
   http: {
-    baseUrl: 'https://api.khoshghadam.com',
-    apiUrl: 'https://api.khoshghadam.com/api',
+    baseUrl: 'https://api.oncup.khoshghadam.com',
+    apiUrl: 'https://api.oncup.khoshghadam.com/api',
   },
   locale: {
     default: 'en',
