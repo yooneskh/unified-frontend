@@ -19,7 +19,6 @@ useHead({
 const mode = ref('login');
 const captchaId = ref('');
 const captchaText = ref('');
-const loading = ref(false);
 
 
 /* login */
@@ -29,10 +28,9 @@ const email = ref('');
 async function doLogin() {
 
   const data = await ufetch(`/authentication/login`, {
-    loading,
     method: 'post',
     body: {
-      provider: 'email',
+      method: 'email',
       email: email.value,
     },
     headers: {
@@ -52,7 +50,7 @@ async function doLogin() {
     mode.value = 'verify';
   }
   else {
-    submitLoadUser(data);
+    await submitLoadUser(data.token);
   }
 
 }
@@ -76,7 +74,6 @@ async function initiateRegister() {
         handler: async () => {
 
           const data = await ufetch(`/authentication/register`, {
-            loading,
             method: 'post',
             body: {
               provider: 'phoneNumber',
@@ -95,7 +92,7 @@ async function initiateRegister() {
             mode.value = 'verify';
           }
           else {
-            submitLoadUser(data);
+            await submitLoadUser(data.token);
           }
 
         },
@@ -114,7 +111,6 @@ const verificationCode = ref('');
 async function submitVerification() {
 
   const data = await ufetch(`/authentication/verify`, {
-    loading,
     method: 'post',
     body: {
       verificationToken: verificationToken.value,
@@ -127,7 +123,7 @@ async function submitVerification() {
   });
 
 
-  submitLoadUser(data);
+  await submitLoadUser(data.token);
 
 }
 
@@ -135,13 +131,9 @@ async function submitVerification() {
 /* profile */
 
 async function submitLoadUser(loginToken) {
-
-  loading.value = true;
-
   try {
 
     await authenticationLoadUserWithToken(loginToken, useToken(), useUser());
-    loading.value = false;
 
     router.push({ name: 'general.home' })
 
@@ -150,13 +142,13 @@ async function submitLoadUser(loginToken) {
 
     console.error(error);
 
-    loading.value = false;
-
     mode.value = 'login';
+    email.value = '';
+    captchaId.value = '';
+    captchaText.value = '';
     verificationCode.value = '';
 
   }
-
 }
 
 </script>
