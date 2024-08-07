@@ -5,6 +5,7 @@ export default defineNuxtConfig({
   extends: [
     './domains/general',
     './domains/authentication',
+    './domains/admin',
     './plugins/unified-app',
   ],
   unifiedComponents: {

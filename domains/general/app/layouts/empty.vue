@@ -4,6 +4,5 @@
 
 
 <template>
-  <general-header />
   <slot />
 </template>

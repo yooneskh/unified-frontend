@@ -12,4 +12,7 @@ export default defineNuxtConfig({
     '../unified-network',
     'unified-components',
   ],
+  modules: [
+    'nuxt-typed-router',
+  ],
 });

@@ -7,6 +7,7 @@ const router = useRouter();
 
 definePageMeta({
   name: 'authentication',
+  layout: 'empty',
 });
 
 useHead({
@@ -135,7 +136,12 @@ async function submitLoadUser(loginToken) {
 
     await authenticationLoadUserWithToken(loginToken, useToken(), useUser());
 
-    router.push({ name: 'general.home' })
+    if (useUser().value?.permissions?.some(it => it.startsWith('admin'))) {
+      router.push({ name: 'admin.dashboard' })
+    }
+    else {
+      router.push({ name: 'general.home' })
+    }
 
   }
   catch (error) {

@@ -12,7 +12,8 @@
   },
   "dependencies": {
     "nuxt": "3.12.4",
+    "nuxt-typed-router": "3.6.5",
     "unified-components": "0.6.5",
-    "vue": "3.4.35"
+    "vue": "3.4.36"
   }
 }
