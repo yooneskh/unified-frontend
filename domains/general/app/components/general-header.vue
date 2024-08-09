@@ -9,6 +9,7 @@ const user = useUser();
 
 <template>
   <header class="border-b-1">
+
     <content-container class="flex items-center py-2">
 
       <nuxt-link class="text-lg" :to="{ name: 'general.home' }">
@@ -35,5 +36,8 @@ const user = useUser();
       </template>
 
     </content-container>
+
+    <slot name="inside-bottom" />
+
   </header>
 </template>
