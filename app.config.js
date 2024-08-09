@@ -1,7 +1,7 @@
 
 
 export default {
-  id: 'unified-frontend',
+  id: 'langovid',
   brand: {
     title: 'Unified Frontend',
   },

@@ -4,5 +4,6 @@
 
 
 <template>
+  <admin-header />
   <slot />
 </template>
