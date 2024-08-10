@@ -1,13 +1,33 @@
 <script setup>
 
-const config = useAppConfig();
-const token = useToken();
-const user = useUser();
+const route = useRoute();
 
 
 /* admin header links */
 
 const { data: links } = await useUFetch('/admin/header/links');
+
+const activeItem = computed(() => {
+  for (const link of links.value ?? []) {
+
+    if (link.to && route.name === link.to.name && (!route.params?.resourceIdentifier || route.params.resourceIdentifier === link.to.params?.resourceIdentifier)) {
+      return link;
+    }
+
+    if (link.children?.length > 0) {
+      for (const child of link.children) {
+        if (child.to && route.name === child.to.name && (!route.params?.resourceIdentifier || route.params.resourceIdentifier === child.to.params?.resourceIdentifier)) {
+          return child;
+        }
+      }
+    }
+
+  }
+});
+
+const activeGroup = computed(() =>
+  links.value?.find(it => it === activeItem.value || it.children?.includes(activeItem.value))
+);
 
 </script>
 
@@ -21,18 +41,30 @@ const { data: links } = await useUFetch('/admin/header/links');
             <nuxt-link :to="link.to">
               <u-btn
                 :label="link.label"
-                class="outline neutral"
+                class="outline"
+                :class="{
+                  'bg-neutral/15': link === activeGroup
+                }"
               />
             </nuxt-link>
           </template>
           <template v-else>
-            <u-btn :label="link.label" class="outline neutral" append-icon="i-mdi-chevron-down">
+            <u-btn
+              :label="link.label"
+              append-icon="i-mdi-chevron-down"
+              class="outline"
+              :class="{
+                'bg-neutral/15': link === activeGroup
+              }">
               <u-dropdown>
                 <u-card class="fill surface flex flex-col gap-1 p-1">
                   <nuxt-link v-for="child of link.children" :to="child.to">
                     <u-btn
                       :label="child.label"
-                      class="ghost neutral w-[192px] text-sm"
+                      class="ghost w-[192px] text-sm"
+                      :class="{
+                        'bg-neutral/15': child === activeItem
+                      }"
                     />
                   </nuxt-link>
                 </u-card>

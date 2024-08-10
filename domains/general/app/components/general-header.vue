@@ -22,7 +22,7 @@ const user = useUser();
         <nuxt-link :to="{ name: user?.permissions?.some(it => it.startsWith('admin')) ? 'admin.dashboard' : 'general.home' }">
           <u-btn
             icon="i-mdi-account-outline"
-            class="ghost neutral"
+            class="ghost"
           />
         </nuxt-link>
       </template>
@@ -30,7 +30,7 @@ const user = useUser();
         <nuxt-link :to="{ name: 'authentication' }">
           <u-btn
             label="Login"
-            class="soft neutral text-sm"
+            class="soft text-sm"
           />
         </nuxt-link>
       </template>
