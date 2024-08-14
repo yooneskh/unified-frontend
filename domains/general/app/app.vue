@@ -20,6 +20,7 @@ useHead({
     <nuxt-page />
   </nuxt-layout>
 
+  <unified-dialogs-provider />
   <unified-toasts-provider />
 
 </template>

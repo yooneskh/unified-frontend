@@ -21,7 +21,7 @@ useHead({
         Hello to Unified Components!
       </p>
   
-      <nuxt-link to="https://github.com/yooneskh/unified-components" target="_blank">
+      <nuxt-link to="https://github.com/yooneskh" target="_blank">
         <u-btn
           icon="i-mdi-github"
           label="Go To Github"
