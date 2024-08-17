@@ -8,7 +8,7 @@ function generalHandler(options, request, response) {
 
   if (response && response?.status !== 200 && !options.silent) {
     toastDanger({
-      title: 'There was a problem. Please try again later.',
+      title: response?._data?.error ?? 'There was a problem. Please try again later.',
     });
   }
 

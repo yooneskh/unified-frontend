@@ -38,9 +38,9 @@ async function doLogin() {
       'captcha-id': captchaId.value,
       'captcha-text': captchaText.value,
     },
-    onResponseError: ({ response }) => {
+    onResponseError: async ({ response }) => {
       if (response?.status === 404) {
-        initiateRegister();
+        await initiateRegister();
       }
     },
   });
@@ -60,10 +60,10 @@ async function doLogin() {
 /* register */
 
 async function initiateRegister() {
-  launchButtonPickerDialog({
+  await launchButtonPickerDialog({
     icon: 'i-mdi-account',
     title: 'Register a new account',
-    text: 'There is no account with this email "", do you want to create a new account?',
+    text: `There is no account with this email "${email.value}", do you want to create a new account?`,
     endButtons: [
       {
         label: 'No, cancel'
@@ -72,34 +72,38 @@ async function initiateRegister() {
     startButtons: [
       {
         label: 'Create new account',
+        classes: 'primary',
         handler: async () => {
-
-          const data = await ufetch(`/authentication/register`, {
-            method: 'post',
-            body: {
-              provider: 'phoneNumber',
-              name: userName.value,
-              phoneNumber: codedPhoneNumber.value,
-            },
-            headers: {
-              'captcha-id': captchaId.value,
-              'captcha-text': captchaText.value,
-            },
-          });
-        
-        
-          if (data.needsVerification) {
-            verificationToken.value = data.verificationToken;
-            mode.value = 'verify';
-          }
-          else {
-            await submitLoadUser(data.token);
-          }
-
+          captchaText.value = '';
+          mode.value = 'register';
         },
       },
     ],
   });
+}
+
+async function doRegister() {
+
+  const data = await ufetch(`/authentication/register`, {
+    method: 'post',
+    body: {
+      method: 'email',
+      email: email.value,
+    },
+    headers: {
+      'captcha-id': captchaId.value,
+      'captcha-text': captchaText.value,
+    },
+  });
+
+
+  if (data.needsVerification) {
+    verificationToken.value = data.verificationToken;
+    mode.value = 'verify';
+  }
+  else {
+    await submitLoadUser(data.token);
+  }
 
 }
 
@@ -185,6 +189,23 @@ async function submitLoadUser(loginToken) {
         label="Login"
         class="fill primary rounded-full mt-6 px-20"
         :click-handler="doLogin"
+      />
+
+    </template>
+
+    <template v-if="mode === 'register'">
+
+      <captcha-input
+        :key="mode"
+        class="mt-2"
+        v-model:captcha-id="captchaId"
+        v-model:captcha-text="captchaText"
+      />
+
+      <u-btn
+        label="Register"
+        class="fill primary rounded-full mt-6 px-20"
+        :click-handler="doRegister"
       />
 
     </template>

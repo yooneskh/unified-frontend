@@ -8,7 +8,6 @@ export default defineNuxtPlugin(async () => {
 
 
   const { data } = await useUFetch('/authentication/identity', {
-    method: 'get',
     headers: {
       Authorization: useToken().value,
     },

@@ -23,6 +23,7 @@ const { data: captchaData, refresh } = useUFetch(`/captcha-tokens/`, {
 
 watch(() => captchaData.value?.captchaId, () => {
   captchaId.value = captchaData.value?.captchaId;
+  captchaText.value = '';
 }, { immediate: true });
 
 </script>
@@ -44,10 +45,10 @@ watch(() => captchaData.value?.captchaId, () => {
 
       <div v-html="captchaData?.captchaData" class="w-[150px] h-[50px]" />
 
-
       <u-btn
         icon="i-mdi-refresh"
-        class="ghost neutral"
+        class="ghost"
+        tabindex="-1"
         @click="refresh();"
       />
 
