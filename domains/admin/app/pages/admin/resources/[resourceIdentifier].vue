@@ -28,7 +28,7 @@ const resourceModel = computed(() =>
 /* seo */
 
 useHead({
-  title: resourceIdentifier,
+  title: resourceModel,
 });
 
 </script>
@@ -36,6 +36,9 @@ useHead({
 
 <template>
   <content-container>
-    <pre class="my-12">{{ { resourceIdentifier, resourceModel } }}</pre>
+    <resource-manager-card
+      :resource="resourceModel"
+      class="my-6"
+    />
   </content-container>
 </template>

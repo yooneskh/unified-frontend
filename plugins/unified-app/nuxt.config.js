@@ -8,6 +8,7 @@ export default defineNuxtConfig({
     headNext: true,
   },
   extends: [
+    '../unified-resources',
     '../unified-dialogs-common',
     '../unified-dialogs',
     '../unified-toasts',
