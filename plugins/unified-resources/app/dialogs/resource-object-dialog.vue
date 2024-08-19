@@ -82,14 +82,7 @@ async function submitObject() {
   });
 
 
-  if (isCreating.value) {
-    cacher.set(`resource.${props.resource}.${object.value._id}.object`, data);
-  }
-  else {
-    cacher.delete(`resource.${props.resource}.${object.value._id}.object`);
-  }
-
-
+  cacher.set(`resource.${props.resource}.${object.value._id}.object`, data);
   emit('resolve', data);
 
 }

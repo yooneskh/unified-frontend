@@ -77,7 +77,10 @@ async function handleActionClick(action, item, index) {
         </tr>
         <tr
           v-for="row of props.items" :key="row[props.itemKey]"
-          class="transition hover:bg-black/10">
+          class="transition hover:bg-black/10"
+          :class="{
+            'bg-primary/15': props.selectedItems?.includes(row[props.itemKey]),
+          }">
   
           <td
             v-for="header of props.headers" :key="header.key"
@@ -96,21 +99,21 @@ async function handleActionClick(action, item, index) {
                 <u-btn
                   :icon="action.icon"
                   class="ghost hidden md:inline-flex"
-                  :class="action.color"
+                  :class="action.classes"
                   :loading="actionsLoading[`${row[props.itemKey]}-${action.key}`]"
                   @click="handleActionClick(action, row, index)"
                 />
                 <u-btn
-                  :label="action.title"
+                  :label="action.label"
                   :icon="action.icon"
                   class="ghost md:hidden"
-                  :class="action.color"
+                  :class="action.classes"
                   :loading="actionsLoading[`${row[props.itemKey]}-${action.key}`]"
                   @click="handleActionClick(action, row, index)"
                 />
     
                 <u-tooltip
-                  :text="action.title"
+                  :text="action.label"
                   class="md:block"
                 />
   

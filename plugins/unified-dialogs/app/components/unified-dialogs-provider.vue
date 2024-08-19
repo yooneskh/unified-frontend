@@ -44,6 +44,7 @@ function removeDialog(dialog) {
 
     <component
       :is="dialog.component"
+      class="max-w-full"
       v-bind="dialog.props"
       @resolve="dialog.resolve($event); removeDialog(dialog);"
       @reject="dialog.reject($event); removeDialog(dialog);"

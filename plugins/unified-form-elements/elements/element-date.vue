@@ -30,7 +30,7 @@ const fieldTitle = computed(() => {
 
 
   if (props.field.valueFormat) {
-    return formatDate(modelValue.value, props.field.labelFormat ?? props.field.valueFormat, undefined, undefined, props.field.valueFormat);
+    return formatDate(modelValue.value, props.field.labelFormat ?? props.field.valueFormat, undefined, props.field.valueFormat);
   }
 
   if (props.field.labelFormat) {
@@ -55,12 +55,7 @@ const fieldValue = computed(() => {
   }
 
 
-  if (props.field.valueFormat || props.field.labelFormat) {
-    return formatDate(modelValue.value, 'YYYY-MM-DD HH:mm', undefined, undefined, props.field.valueFormat);
-  }
-
-
-  return modelValue.value;
+  return formatDate(modelValue.value, 'YYYY/MM/DD HH:mm', undefined, props.field.valueFormat);
 
 });
 
@@ -73,7 +68,7 @@ function handleDateChange(newDate) {
   }
 
 
-  const epoch = dateToTimestamp(newDate, 'YYYY-MM-DD HH:mm');
+  const epoch = parseDate(newDate, 'YYYY/MM/DD HH:mm');
 
   if (props.field.valueFormat) {
     modelValue.value = formatDate(epoch, props.field.valueFormat);
@@ -87,7 +82,9 @@ function handleDateChange(newDate) {
 
 /* template */
 
-import DatePicker from 'vue3-persian-datetime-picker';
+const DatePicker = defineAsyncComponent(() =>
+  import('vue3-persian-datetime-picker')
+);
 
 </script>
 
@@ -115,24 +112,15 @@ import DatePicker from 'vue3-persian-datetime-picker';
     />
 
     <u-dropdown persist="content" class="w-[512px]" v-model="isOpened">
-      <!-- <date-picker
-        class="vpd-datepicker-form-element block w-[300px] border shadow-md rounded-lg"
-        locale="en"
-        format="YYYY-MM-DD HH:mm"
-        :type="props.field.dateType"
-        simple
-        auto-submit
-        inline
-        :model-value="fieldValue"
-        @update:model-value="handleDateChange($event)"
-      /> -->
       <div class="shadow-lg border rounded-lg overflow-hidden">
         <date-picker
-          format="jYYYY/jMM/jDD"
+          format="YYYY/MM/DD HH:mm"
+          :type="props.field.dateType"
+          locale="en"
           inline
           class="[&>.vpd-input-group]:hidden vpd-datepicker-form-element"
-          v-model="modelValue"
-          @update:model-value="isOpened = false;"
+          :modelValue="fieldValue"
+          @update:model-value="handleDateChange($event); isOpened = false;"
         />
       </div>
     </u-dropdown>
@@ -147,6 +135,10 @@ import DatePicker from 'vue3-persian-datetime-picker';
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  .vpd-datepicker-form-element :deep(.vpd-time-column svg) {
+    margin: auto;
   }
 
 </style>

@@ -54,12 +54,13 @@ async function showResource() {
   <template v-if="props.resource === 'Media'">
     <a target="_blank" :href="item?.path" class="text-primary underline flex items-center gap-2">
       <img
+        v-if="item?.type?.startsWith('image')"
         :src="item?.variants?.small ?? item?.path"
         class="w-[32px] h-[32px] inline-block rounded-md object-contain"
       />
       Media
       <u-dropdown
-        v-if="item?.type.startsWith('image')"
+        v-if="item?.type?.startsWith('image')"
         trigger="hover">
         <img
           :src="item.variants?.small ?? item.path"

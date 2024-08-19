@@ -33,12 +33,12 @@ export function useEnrichedMeta({ resource }) {
       ...meta.value,
       createdAt: {
         type: 'number',
-        labelFormat: 'YYYY/MM/DD HH:mm:ss',
+        labelFormat: 'YY/MM/DD HH:mm',
         dir: 'ltr'
       },
       updatedAt: {
         type: 'number',
-        labelFormat: 'YYYY/MM/DD HH:mm:ss',
+        labelFormat: 'YY/MM/DD HH:mm',
         dir: 'ltr'
       },
     }))

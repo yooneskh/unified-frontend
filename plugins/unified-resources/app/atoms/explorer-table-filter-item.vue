@@ -3,9 +3,7 @@
 /* interface */
 
 const props = defineProps({
-  header: {
-    type: Object,
-  },
+  header: Object,
 });
 
 const emit = defineEmits([
@@ -17,8 +15,8 @@ const modelValue = defineModel();
 
 /* elements */
 
-import ElementMedia from '../../unified-form-elements/elements/element-media.vue';
-import ElementResource from '../../unified-form-elements/elements/element-resource.vue';
+import ElementMedia from '../../../unified-form-elements/elements/element-media.vue';
+import ElementResource from '../../../unified-form-elements/elements/element-resource.vue';
 
 </script>
 
@@ -33,9 +31,8 @@ import ElementResource from '../../unified-form-elements/elements/element-resour
         <template #append-inner>
           <u-btn
             v-if="modelValue"
-            variant="ghost"
             icon="i-mdi-close"
-            class="text-xs me-1"
+            class="ghost text-xs me-1"
             @click.stop="modelValue = undefined;"
           />
         </template>
@@ -47,9 +44,8 @@ import ElementResource from '../../unified-form-elements/elements/element-resour
         <template #append-inner>
           <u-btn
             v-if="modelValue"
-            variant="ghost"
             icon="i-mdi-close"
-            class="text-xs me-1"
+            class="ghost text-xs me-1"
             @click.stop="modelValue = undefined;"
           />
         </template>
@@ -61,9 +57,8 @@ import ElementResource from '../../unified-form-elements/elements/element-resour
         <template #append-inner>
           <u-btn
             v-if="modelValue"
-            variant="ghost"
             icon="i-mdi-close"
-            class="text-xs me-1"
+            class="ghost text-xs me-1"
             @click="modelValue = undefined;"
           />
         </template>
@@ -75,9 +70,8 @@ import ElementResource from '../../unified-form-elements/elements/element-resour
         <template #append-inner>
           <u-btn
             v-if="modelValue"
-            variant="ghost"
             icon="i-mdi-close"
-            class="text-xs me-1"
+            class="ghost text-xs me-1"
             @click="modelValue = undefined;"
           />
         </template>

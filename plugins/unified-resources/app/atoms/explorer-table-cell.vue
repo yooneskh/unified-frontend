@@ -27,7 +27,7 @@ function viewSeriesData() {
       items: props.data,
     },
     options: {
-      containerClasses: 'w-[768px]'
+      containerClasses: 'w-2xl'
     },
   });
 }
@@ -44,7 +44,7 @@ import ExplorerTableCellResource from './explorer-table-cell-resource.vue';
 
   <template v-if="props.header.variants">
     <template v-for="(headerExtra, variant) of props.header.variants" :key="variant">
-      <span class="underline me-2">
+      <span class="underline m-1">
         {{ variant }}:
         <explorer-table-cell
           v-if="props.data[variant]"
@@ -67,6 +67,7 @@ import ExplorerTableCellResource from './explorer-table-cell-resource.vue';
         v-if="item"
         :header="{ ...props.header, array: false }"
         :data="item"
+        class="m-1"
       />
     </template>
   </template>
@@ -80,21 +81,20 @@ import ExplorerTableCellResource from './explorer-table-cell-resource.vue';
   </template>
 
   <template v-else-if="props.header.labelFormat">
-    <!-- {{ !data ? '' : formatDate(data, props.header.labelFormat, 'jalali') }} -->
-      {{ data }}
+    {{ !data ? '' : formatDate(data, props.header.labelFormat) }}
   </template>
 
   <template v-else-if="props.header.type === 'boolean'">
     <template v-if="data">
-      <i class="text-success i-mdi-check" />
+      <u-icon name="i-mdi-check" class="text-success" />
     </template>
     <template v-else>
-      <i class="text-error i-mdi-close" />
+      <u-icon name="i-mdi-close" class="text-danger" />
     </template>
   </template>
 
   <template v-else-if="props.header.type === 'number'">
-    {{ (typeof props.data === 'number') ? (props.data.toLocaleString()) : (props.data) }}
+    {{ props.data?.toLocaleString?.() ?? props.data }}
   </template>
 
   <template v-else-if="props.header.items">

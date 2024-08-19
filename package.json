@@ -11,6 +11,7 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@formkit/tempo": "0.1.2",
     "nuxt": "3.12.4",
     "nuxt-typed-router": "3.6.5",
     "pluralize": "8.0.0",

@@ -1,6 +1,5 @@
 <script setup>
 
-import { singular } from 'pluralize';
 import pluralize from 'pluralize';
 import startCase from 'lodash/startCase';
 
@@ -58,15 +57,15 @@ const tableActions = computed(() => {
   result.push({
     key: 'update',
     icon: 'i-mdi-pencil',
-    title: 'Update',
+    label: 'Update',
     handler: handleItemUpdate,
   });
 
   result.push({
     key: 'delete',
-    color: 'danger',
     icon: 'i-mdi-delete',
-    title: 'Delete',
+    label: 'Delete',
+    classes: 'danger',
     handler: handleItemDelete,
   });
 
