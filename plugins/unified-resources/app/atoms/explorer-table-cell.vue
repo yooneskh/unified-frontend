@@ -94,7 +94,9 @@ import ExplorerTableCellResource from './explorer-table-cell-resource.vue';
   </template>
 
   <template v-else-if="props.header.type === 'number'">
-    {{ props.data?.toLocaleString?.() ?? props.data }}
+    <div class="text-right">
+      {{ props.data?.toLocaleString?.() ?? props.data }}
+    </div>
   </template>
 
   <template v-else-if="props.header.items">
