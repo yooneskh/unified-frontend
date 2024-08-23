@@ -7,6 +7,10 @@ export default defineNuxtConfig({
   experimental: {
     headNext: true,
   },
+  sourcemap: {
+    server: false,
+    client: process.env.NODE_ENV === 'development',
+  },
   extends: [
     '../unified-resources',
     '../unified-dialogs-common',
