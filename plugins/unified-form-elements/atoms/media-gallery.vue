@@ -140,6 +140,9 @@ async function deleteFile(media) {
         class="w-[24px]"
       />
     </div>
+    <div v-else-if="!pending && mediaList.length === 0" class="text-sm text-center p-3">
+      You have not uploaded any media yet.
+    </div>
 
     <div class="grid grid-cols-5 gap-3 mt-3 max-h-[512px] overflow-y-auto -mx-3 px-3">
       <u-card v-for="media of queriedMediaList" :key="media._id" class="p-1 interactive border-none shadow-none group relative" @click="emit('resolve', media._id);">

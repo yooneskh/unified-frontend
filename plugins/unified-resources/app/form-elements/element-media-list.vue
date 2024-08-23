@@ -18,11 +18,11 @@ const valueProxy = reactive({
   files: [],
 });
 
-watchImmediate([props], () => {
+watch([props], () => {
   if (modelValue.value && Array.isArray(modelValue.value) && JSON.stringify(modelValue.value) !== JSON.stringify(valueProxy.files.map(it => it.file))) {
     valueProxy.files = modelValue.value.map(it => ({ file: it }));
   }
-});
+}, { immediate: true });
 
 watch(valueProxy, () => {
   modelValue.value = valueProxy.files.map(it => it.file);

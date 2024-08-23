@@ -41,7 +41,7 @@ async function openMediaSelector() {
 }
 
 
-watchImmediate(modelValue, async () => {
+watch(modelValue, async () => {
 
   mediaObject.value = undefined;
 
@@ -57,7 +57,7 @@ watchImmediate(modelValue, async () => {
 
   mediaObject.value = data;
 
-});
+}, { immediate: true });
 
 
 /* template */
@@ -79,7 +79,7 @@ watchImmediate(modelValue, async () => {
     :loading="props.field.loading || loading"
     :readonly="props.field.readonly"
     :disabled="props.field.disabled"
-    @click="openMediaSelector()"
+    @click.self="openMediaSelector()"
     :model-value="fieldText"
     :error="props.error ? props.messages?.join(' - ') : undefined"
     :success="props.success ? props.messages?.join(' - ') : undefined">

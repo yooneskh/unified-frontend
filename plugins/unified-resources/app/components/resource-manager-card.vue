@@ -83,6 +83,9 @@ async function handleItemDelete(item) {
     icon: 'i-mdi-delete',
     title: `Delete ${props.resource}`,
     text: 'Are you sure you want to delete this?',
+    options: {
+      containerClasses: 'w-md',
+    },
     startButtons: [
       {
         label: 'No, Cancel',
