@@ -63,7 +63,7 @@ async function selectResource() {
     :loading="props.field.loading || loading"
     :readonly="props.field.readonly"
     :disabled="props.field.disabled"
-    @click="selectResource()"
+    @click.self="selectResource()"
     :model-value="title"
     :error="props.error ? props.messages?.join(' - ') : undefined"
     :success="props.success ? props.messages?.join(' - ') : undefined">

@@ -4,7 +4,7 @@ const cacher = useCacher();
 export async function retrieveMeta({ resource }) {
 
   if (!resource) {
-    return [];
+    return {};
   }
 
   if (cacher.has(`resource.${resource}`)) {

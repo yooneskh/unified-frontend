@@ -11,7 +11,7 @@ export async function retrieveResourceTitle({ resource, resourceId }) {
     resourceId,
   });
 
-  const titleableMetas = meta.filter(it => it.titleable);
+  const titleableMetas = Object.entries(meta).map(it => ({ ...it[1], key: it[0] })).filter(it => it.titleable);
 
 
   return (await Promise.all(

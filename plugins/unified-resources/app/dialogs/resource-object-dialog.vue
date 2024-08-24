@@ -95,7 +95,7 @@ async function submitObject() {
     icon="i-mdi-folder"
     :title="`${isCreating ? 'Create a' : 'Update the'} ${props.resource}`"
     text="Enter the information in the form below."
-    class="w-2xl max-w-full">
+    class="w-5xl max-w-full">
 
     <u-form
       :target="object"

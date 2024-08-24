@@ -69,7 +69,7 @@ const { titles } = useResourceArrayTitlesMap({
   <u-card
     icon="i-mdi-file-document"
     :title="`Select ${props.resource}`"
-    class="w-2xl">
+    class="w-5xl max-w-full">
 
     <template #append>
       <u-btn
