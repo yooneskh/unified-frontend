@@ -42,7 +42,7 @@ onUnmounted(() => {
 
 <template>
   <div
-    class="h-[2px] bg-current rounded-full"
+    class="h-[2px] bg-current"
     :style="{
       width: `${currentValue / props.duration * 100}%`
     }"

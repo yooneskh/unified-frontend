@@ -150,9 +150,9 @@ async function deleteFile(media) {
         <img
           v-if="media.type?.startsWith('image')"
           :src="media.path"
-          class="h-[128px] w-full object-contain bg-gray/10 p-2 rounded-lg"
+          class="h-[128px] w-full object-contain bg-gray/10 p-2"
         />
-        <div v-else class="h-[128px] w-full bg-gray/10 rounded-lg flex items-center justify-center">
+        <div v-else class="h-[128px] w-full bg-gray/10 flex items-center justify-center">
           <u-icon
             name="i-mdi-file"
             class="text-6xl opacity-50"
@@ -168,7 +168,7 @@ async function deleteFile(media) {
 
         <div class="absolute top-[4px] right-[4px] opacity-0 group-hover:opacity-100 z-[1]">
           <u-btn
-            class="soft danger text-xs rounded-full"
+            class="soft danger text-xs"
             icon="i-mdi-close"
             @click.stop="deleteFile(media)"
           />

@@ -129,8 +129,7 @@ import ExplorerTableFilterItem from '../atoms/explorer-table-filter-item.vue';
       :headers="headers"
       :items="items"
       :selected-items="props.selectedResources"
-      :actions="props.actions"
-      class="rounded-lg">
+      :actions="props.actions">
 
       <template #header-name="{ header, label }">
 
@@ -169,7 +168,7 @@ import ExplorerTableFilterItem from '../atoms/explorer-table-filter-item.vue';
         <u-btn
           v-for="index of totalPages"
           :label="String(index)"
-          class="soft rounded-full aspect-1 text-sm"
+          class="soft aspect-1 text-sm"
           :class="{
             'primary': currentPage === index,
           }"

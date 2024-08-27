@@ -112,7 +112,7 @@ const DatePicker = defineAsyncComponent(() =>
     />
 
     <u-dropdown persist="content" class="w-[512px]" v-model="isOpened">
-      <div class="shadow-lg border rounded-lg overflow-hidden">
+      <div class="shadow-lg border overflow-hidden">
         <date-picker
           format="YYYY/MM/DD HH:mm"
           :type="props.field.dateType"

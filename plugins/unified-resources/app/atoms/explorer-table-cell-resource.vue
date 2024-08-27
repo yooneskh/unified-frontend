@@ -56,7 +56,7 @@ async function showResource() {
       <img
         v-if="item?.type?.startsWith('image')"
         :src="item?.variants?.small ?? item?.path"
-        class="w-[32px] h-[32px] inline-block rounded-md object-contain"
+        class="w-[32px] h-[32px] inline-block object-contain"
       />
       Media
       <u-dropdown
@@ -64,7 +64,7 @@ async function showResource() {
         trigger="hover">
         <img
           :src="item.variants?.small ?? item.path"
-          class="w-[150px] rounded-lg border shadow-md"
+          class="w-[150px] border shadow-md"
         />
       </u-dropdown>
     </a>

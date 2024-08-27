@@ -187,7 +187,7 @@ async function submitLoadUser(loginToken) {
 
       <u-btn
         label="Login"
-        class="fill primary rounded-full mt-6 px-20"
+        class="fill primary mt-6 px-20"
         :click-handler="doLogin"
       />
 
@@ -204,7 +204,7 @@ async function submitLoadUser(loginToken) {
 
       <u-btn
         label="Register"
-        class="fill primary rounded-full mt-6 px-20"
+        class="fill primary mt-6 px-20"
         :click-handler="doRegister"
       />
 
@@ -219,7 +219,7 @@ async function submitLoadUser(loginToken) {
 
       <u-btn
         label="Verify"
-        class="fill primary rounded-full mt-6 px-20"
+        class="fill primary mt-6 px-20"
         :click-handler="submitVerification"
       />
 

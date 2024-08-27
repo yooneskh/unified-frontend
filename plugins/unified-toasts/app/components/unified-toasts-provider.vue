@@ -39,7 +39,7 @@ function handleToastFinish(toast, isClick = false) {
   
           <fading-linear-progress
             :duration="toast.duration || 5000"
-            class="absolute top-[1px] inset-x-[6px] rounded-full"
+            class="absolute top-[1px] inset-x-[6px]"
             @finished="handleToastFinish(toast)"
           />
   

@@ -54,7 +54,7 @@ function handleMoveItem(item, index, direction) {
 
 
 <template>
-  <div class="form-element-series border rounded">
+  <div class="form-element-series border">
 
     <p class="text-sm flex items-center gap-3 py-2 px-3 border-b">
 
@@ -69,7 +69,7 @@ function handleMoveItem(item, index, direction) {
       <u-btn
         icon="i-mdi-plus"
         label="Item"
-        class="soft primary text-xs rounded-full py-1"
+        class="soft primary text-xs py-1"
         @click="handleAddItem()"
       />
 
@@ -98,34 +98,34 @@ function handleMoveItem(item, index, direction) {
         <u-form
           :target="item"
           :fields="props.field.itemFields"
-          class="border rounded p-2"
+          class="border p-2"
         />
 
         <div class="series-item-actions flex gap-1">
 
           <u-btn
             icon="i-mdi-content-copy"
-            class="soft text-xs rounded-full aspect-1 p-1"
+            class="soft text-xs aspect-1 p-1"
             @click="handleDuplicateItem(item, index)"
           />
 
           <u-btn
             v-if="index > 0"
             icon="i-mdi-chevron-left"
-            class="soft text-xs rounded-full aspect-1 p-1"
+            class="soft text-xs aspect-1 p-1"
             @click="handleMoveItem(item, index, -1)"
           />
 
           <u-btn
             v-if="index < modelValue.length - 1"
             icon="i-mdi-chevron-right"
-            class="soft text-xs rounded-full aspect-1 p-1"
+            class="soft text-xs aspect-1 p-1"
             @click="handleMoveItem(item, index, 1)"
           />
 
           <u-btn
             icon="i-mdi-close"
-            class="soft danger text-xs rounded-full aspect-1 p-1"
+            class="soft danger text-xs aspect-1 p-1"
             @click="handleDeleteItem(item, index)"
           />
 

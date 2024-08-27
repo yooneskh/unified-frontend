@@ -94,7 +94,7 @@ watch(modelValue, async () => {
 
         <img
           :src="mediaObject.variants?.small ?? mediaObject.path"
-          class="h-[32px] w-[32px] inline-block rounded-md object-contain"
+          class="h-[32px] w-[32px] inline-block object-contain"
         />
   
         <u-btn
@@ -105,7 +105,7 @@ watch(modelValue, async () => {
         <u-dropdown trigger="hover">
           <img
             :src="mediaObject.variants?.small ?? mediaObject.path"
-            class="w-[256px] rounded-md"
+            class="w-[256px]"
           />
         </u-dropdown>
   
