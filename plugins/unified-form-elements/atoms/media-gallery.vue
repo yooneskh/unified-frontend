@@ -39,6 +39,7 @@ const queriedMediaList = computed(() =>
 
 const elFile = ref();
 const loading = ref(false);
+const progress = ref(0);
 
 
 async function handleFileSelected(file) {
@@ -46,15 +47,40 @@ async function handleFileSelected(file) {
   const payload = new FormData();
   payload.append('file', file);
 
+  const xhr = new XMLHttpRequest();
+  xhr.open('POST', useAppConfig().http.apiUrl + '/media/upload', true);
+  xhr.setRequestHeader('Authorization', useToken().value);
 
-  await ufetch(`/media/upload`, {
-    loading,
-    method: 'post',
-    body: payload,
-  });
+  xhr.upload.onprogress = (event) => {
+    if (event.lengthComputable) {
+      progress.value = (event.loaded / event.total) * 100;
+    }
+  };
 
+  xhr.onload = () => {
 
-  refresh();
+    loading.value = false;
+
+    toastSuccess({
+      title: 'Media was uploaded successfully',
+    });
+
+    refresh();
+
+  };
+
+  xhr.onerror = () => {
+  
+    loading.value = false;
+
+    toastDanger({
+      title: 'Upload failed. Please try again.',
+    });
+
+  };
+
+  loading.value = true;
+  xhr.send(payload);
 
 }
 
@@ -95,8 +121,14 @@ async function deleteFile(media) {
     title="Media Gallery"
     subtitle="Select media from gallery"
     class="w-5xl max-w-full">
-    
+
     <template #append>
+
+      <template v-if="loading">
+        <span class="text-xs opacity-50 mt-2.5">
+          %{{ progress?.toFixed(0) }}
+        </span>
+      </template>
 
       <u-btn
         icon="i-mdi-upload"
