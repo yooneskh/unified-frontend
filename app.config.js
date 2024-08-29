@@ -1,13 +1,13 @@
 
 
 export default {
-  id: 'langovid',
+  id: 'uapp',
   brand: {
-    title: 'Unified Frontend',
+    title: 'Unified Application',
   },
   http: {
-    baseUrl: 'https://api.langovid.khoshghadam.com',
-    apiUrl: 'https://api.langovid.khoshghadam.com/api',
+    baseUrl: 'https://uapp.khoshghadam.com',
+    apiUrl: 'https://uapp.khoshghadam.com/api',
   },
   locale: {
     default: 'en',
