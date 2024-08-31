@@ -17,27 +17,20 @@ const emit = defineEmits([
 
 /* button handling */
 
-const loadingButtons = reactive({});
-
 async function handleButtonClick(button) {
 
   if (!button.handler) {
-    emit('resolve', button.value);
+    emit('resolve', button.value || button.label);
     return
   }
 
 
-  loadingButtons[button.value] = true;
-
   try {
     await button.handler();
-    emit('resolve', button.value);
+    emit('resolve', button.value || button.label);
   }
   catch {
 
-  }
-  finally {
-    loadingButtons[button.value] = false;
   }
 
 }
@@ -61,8 +54,7 @@ async function handleButtonClick(button) {
         :label="button.label"
         :append-icon="button.appendIcon"
         :class="button.classes"
-        :loading="loadingButtons[button.value]"
-        @click="handleButtonClick(button)"
+        :click-handler="() => handleButtonClick(button)"
       />
       
       <div class="grow" />
@@ -73,8 +65,7 @@ async function handleButtonClick(button) {
         :label="button.label"
         :append-icon="button.appendIcon"
         :class="button.classes"
-        :loading="loadingButtons[button.value]"
-        @click="handleButtonClick(button)"
+        :click-handler="() => handleButtonClick(button)"
       />
 
     </div>

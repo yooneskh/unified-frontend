@@ -6,10 +6,14 @@ function generalHandler(options, request, response) {
     options.loading.value = false;
   }
 
-  if (response && response?.status !== 200 && !options.silent) {
+  if (!options.handled && response && response?.status !== 200 && !options.silent) {
+
     toastDanger({
       title: response?._data?.error ?? 'There was a problem. Please try again later.',
     });
+
+    options.handled = true;
+
   }
 
 }
