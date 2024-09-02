@@ -30,5 +30,6 @@ useHead({
   :root {
     color: theme('colors.on-surface');
     background-color: theme('colors.surface');
+    font-family: "Space Grotesk";
   }
 </style>
