@@ -19,6 +19,7 @@ const captchaText = defineModel('captchaText');
 
 const { data: captchaData, refresh } = useUFetch(`/captcha-tokens/`, {
   method: 'post',
+  server: false,
 });
 
 watch(() => captchaData.value?.captchaId, () => {
