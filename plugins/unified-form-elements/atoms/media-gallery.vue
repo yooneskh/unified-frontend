@@ -1,5 +1,8 @@
 <script setup>
 
+const user = useUser();
+
+
 /* interface */
 
 const props = defineProps({
@@ -13,7 +16,11 @@ const emit = defineEmits([
 
 /* media */
 
-const { pending, data: mediaList, refresh } = useUFetch(`/media/`);
+const { pending, data: mediaList, refresh } = useUFetch(`/media/`, {
+  query: {
+    owner: computed(() => user.value._id),
+  },
+});
 
 const reversedMediaList = computed(() =>
   mediaList.value?.toReversed() ?? []

@@ -18,7 +18,7 @@
     "pluralize": "8.0.0",
     "unified-components": "0.6.13",
     "unified-mongo-filter": "0.3.1",
-    "vue": "3.5.1",
+    "vue": "3.5.3",
     "vue3-persian-datetime-picker": "1.2.2"
   }
 }
