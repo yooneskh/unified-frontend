@@ -45,7 +45,7 @@ const itemsInPage = ref(10);
 const currentPage = ref(1);
 
 const filters = ref({});
-const sorts = ref({});
+const sorts = ref({ 'createdAt': -1 });
 
 
 const filtersQuery = computed(() =>
@@ -66,8 +66,8 @@ const { data: items, refresh: refreshItemsData } = useUFetch(
   computed(() => `${resourceUrlPart.value}/`),
   {
     query: {
-      'filters': filtersQuery,
-      'sorts': sortsQuery,
+      'filter': filtersQuery,
+      'sort': sortsQuery,
       'skip': computed(() => (currentPage.value - 1) * itemsInPage.value),
       'limit': computed(() => itemsInPage.value),
     },
@@ -140,7 +140,7 @@ import ExplorerTableFilterItem from '../atoms/explorer-table-filter-item.vue';
           <u-btn
             :icon="sorts[header.key] === undefined ? 'i-mdi-arrow-up-down' : (sorts[header.key] === -1 ? 'i-mdi-arrow-down' : 'i-mdi-arrow-up')"
             class="ghost text-xs p-[2px] -mt-1"
-            @click="sorts[header.key] = sorts[header.key] === undefined ? -1 : (sorts[header.key] === -1 ? 1 : undefined)"
+            @click="sorts = { [header.key]: sorts[header.key] === undefined ? -1 : (sorts[header.key] === -1 ? 1 : undefined) }"
           />
 
         </div>
