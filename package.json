@@ -13,7 +13,7 @@
   "dependencies": {
     "@formkit/tempo": "0.1.2",
     "@nuxt/fonts": "0.7.2",
-    "nuxt": "3.13.1",
+    "nuxt": "3.13.0",
     "nuxt-typed-router": "3.6.5",
     "pluralize": "8.0.0",
     "unified-components": "0.6.13",

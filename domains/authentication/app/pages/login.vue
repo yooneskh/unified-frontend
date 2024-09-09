@@ -39,9 +39,14 @@ async function doLogin() {
       'captcha-text': captchaText.value,
     },
     onResponseError: async ({ response }) => {
+
+      captchaText.value = '';
+
       if (response?.status === 404) {
-        await initiateRegister();
+        directRegister.value = false;
+        mode.value = 'register';
       }
+
     },
   });
 
@@ -59,28 +64,7 @@ async function doLogin() {
 
 /* register */
 
-async function initiateRegister() {
-  await launchButtonPickerDialog({
-    icon: 'i-mdi-account',
-    title: 'Register a new account',
-    text: `There is no account with this email "${email.value}", do you want to create a new account?`,
-    endButtons: [
-      {
-        label: 'No, cancel'
-      },
-    ],
-    startButtons: [
-      {
-        label: 'Create new account',
-        classes: 'primary',
-        handler: async () => {
-          captchaText.value = '';
-          mode.value = 'register';
-        },
-      },
-    ],
-  });
-}
+const directRegister = ref(false);
 
 async function doRegister() {
 
@@ -165,65 +149,102 @@ async function submitLoadUser(loginToken) {
 
 
 <template>
-  <div class="min-h-screen flex flex-col items-center justify-center">
+  <div class="min-h-screen flex items-center justify-center p-3">
 
-    <div class="text-xl font-bold mb-8">
-      Login | Register
-    </div>
+    <u-card class="text md:outline neutral w-full max-w-md shadow-none">
 
-    <template v-if="mode === 'login'">
+      <div class="text-xl font-bold text-center mb-8">
+        Login | Register
+      </div>
+  
+      <template v-if="mode === 'login'">
+  
+        <p class="mb-4">
+          If you already have an account, please enter your email below and click on "Login". <br />
+          If you don't have an account, please click on "Register".
+        </p>
+  
+        <u-input
+          label="Email"
+          v-model="email"
+        />
+  
+        <captcha-input
+          :key="mode"
+          class="mt-2"
+          v-model:captcha-id="captchaId"
+          v-model:captcha-text="captchaText"
+        />
+  
+        <div class="flex flex-col gap-2 mt-6">
+          <u-btn
+            label="Login"
+            class="fill justify-center"
+            :click-handler="doLogin"
+          />
+          <u-btn
+            label="Register"
+            class="soft justify-center"
+            @click="directRegister = true; mode = 'register';"
+          />
+        </div>
+  
+      </template>
+  
+      <template v-if="mode === 'register'">
+  
+        <p v-if="!directRegister" class="mb-4">
+          There is no account with this email <strong>"{{ email }}"</strong>, if you want to create a new account, please enter the captcha below and click on "Create new account".
+        </p>
+        <p v-else class="mb-4">
+          Please enter your email below, enter the captcha and click on "Create new account".
+        </p>
+  
+        <u-input
+          v-if="directRegister"
+          label="Email"
+          v-model="email"
+        />
+  
+        <captcha-input
+          :key="mode"
+          class="mt-2"
+          v-model:captcha-id="captchaId"
+          v-model:captcha-text="captchaText"
+        />
+  
+        <div class="flex flex-col gap-2 mt-6">
+          <u-btn
+            label="Create new account"
+            class="fill justify-center"
+            :click-handler="doRegister"
+          />
+        </div>
+  
+      </template>
+  
+      <template v-if="mode === 'verify'">
+  
+        <p class="mb-4">
+          Please enter the code sent to you at <strong>"{{ email }}"</strong> below and click on "Verify".
+        </p>
 
-      <u-input
-        label="Email"
-        v-model="email"
-      />
+        <u-input
+          label="Verification code"
+          v-model="verificationCode"
+        />
+  
+        <div class="flex flex-col gap-2 mt-6">
+          <u-btn
+            label="Verify"
+            class="fill justify-center"
+            :click-handler="submitVerification"
+          />
+        </div>
+  
+      </template>
 
-      <captcha-input
-        :key="mode"
-        class="mt-2"
-        v-model:captcha-id="captchaId"
-        v-model:captcha-text="captchaText"
-      />
-
-      <u-btn
-        label="Login"
-        class="fill primary mt-6 px-20"
-        :click-handler="doLogin"
-      />
-
-    </template>
-
-    <template v-if="mode === 'register'">
-
-      <captcha-input
-        :key="mode"
-        class="mt-2"
-        v-model:captcha-id="captchaId"
-        v-model:captcha-text="captchaText"
-      />
-
-      <u-btn
-        label="Register"
-        class="fill primary mt-6 px-20"
-        :click-handler="doRegister"
-      />
-
-    </template>
-
-    <template v-if="mode === 'verify'">
-
-      <u-input
-        label="Enter the code sent to you"
-        v-model="verificationCode"
-      />
-
-      <u-btn
-        label="Verify"
-        class="fill primary mt-6 px-20"
-        :click-handler="submitVerification"
-      />
-
-    </template>
+    </u-card>
 
   </div>
 </template>
