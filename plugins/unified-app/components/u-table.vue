@@ -98,7 +98,7 @@ async function handleActionClick(action, item, index) {
               
                 <u-btn
                   :icon="action.icon"
-                  class="ghost hidden md:inline-flex"
+                  class="ghost hidden md:inline-flex whitespace-nowrap"
                   :class="action.classes"
                   :loading="actionsLoading[`${row[props.itemKey]}-${action.key}`]"
                   @click="handleActionClick(action, row, index)"
@@ -106,7 +106,7 @@ async function handleActionClick(action, item, index) {
                 <u-btn
                   :label="action.label"
                   :icon="action.icon"
-                  class="ghost md:hidden"
+                  class="ghost md:hidden whitespace-nowrap"
                   :class="action.classes"
                   :loading="actionsLoading[`${row[props.itemKey]}-${action.key}`]"
                   @click="handleActionClick(action, row, index)"

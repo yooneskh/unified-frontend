@@ -35,6 +35,7 @@ watch(() => captchaData.value?.captchaId, () => {
 
     <u-input
       label="Enter the number below"
+      inputmode="numeric"
       v-model="captchaText"
     />
 

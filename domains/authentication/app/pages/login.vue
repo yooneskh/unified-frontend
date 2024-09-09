@@ -166,6 +166,7 @@ async function submitLoadUser(loginToken) {
   
         <u-input
           label="Email"
+          inputmode="email"
           v-model="email"
         />
   
@@ -203,6 +204,7 @@ async function submitLoadUser(loginToken) {
         <u-input
           v-if="directRegister"
           label="Email"
+          inputmode="email"
           v-model="email"
         />
   
@@ -231,6 +233,7 @@ async function submitLoadUser(loginToken) {
 
         <u-input
           label="Verification code"
+          inputmode="numeric"
           v-model="verificationCode"
         />
   
