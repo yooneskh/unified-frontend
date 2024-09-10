@@ -56,7 +56,9 @@ async function handleActionClick(action, item, index) {
             <slot name="header" :header="header">
               <div class="text-start px-3 py-2 whitespace-nowrap">
                 <slot name="header-name" :header="header" :label="startCase(header.key)">
-                  {{ header.label || startCase(header.key) }}
+                  <span :class="header.headerClasses">
+                    {{ header.label || startCase(header.key) }}
+                  </span>
                 </slot>
               </div>
             </slot>
@@ -87,7 +89,9 @@ async function handleActionClick(action, item, index) {
             class="text-start px-3 py-4">
   
             <slot name="item" :header="header" :item="row" :data="row[header.key]">
-              {{ row[header.key] }}
+              <span :class="header.bodyClasses">
+                {{ row[header.key] }}
+              </span>
             </slot>
   
           </td>
