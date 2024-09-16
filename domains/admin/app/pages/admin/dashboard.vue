@@ -5,6 +5,7 @@
 definePageMeta({
   name: 'admin.dashboard',
   layout: 'admin',
+  middleware: 'is-authenticated-admin',
 });
 
 useHead({

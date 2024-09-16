@@ -8,6 +8,7 @@ const route = useRoute();
 definePageMeta({
   name: 'admin.resources',
   layout: 'admin',
+  middleware: 'is-authenticated-admin',
 });
 
 

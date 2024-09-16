@@ -1,8 +1,5 @@
 <script setup>
 
-const router = useRouter();
-
-
 /* page */
 
 definePageMeta({
@@ -121,16 +118,8 @@ async function submitVerification() {
 
 async function submitLoadUser(loginToken) {
   try {
-
     await authenticationLoadUserWithToken(loginToken, useToken(), useUser());
-
-    if (useUser().value?.permissions?.some(it => it.startsWith('admin'))) {
-      router.push({ name: 'admin.dashboard' })
-    }
-    else {
-      router.push({ name: 'general.home' })
-    }
-
+    navigateTo({ name: 'general.home' })
   }
   catch (error) {
 

@@ -2,17 +2,25 @@
 
 export default defineNuxtPlugin(async () => {
 
-  if (!useToken().value) {
+  if (!useToken().value || useUser().value) {
     return;
   }
 
+  try {
 
-  const { data } = await useUFetch('/authentication/identity', {
-    headers: {
-      Authorization: useToken().value,
-    },
-  });
+    const data = await ufetch('/authentication/identity', {
+      headers: {
+        Authorization: useToken().value,
+      },
+      silent: true,
+    });
+  
+    useUser().value = data;
 
-  useUser().value = data.value;
+  }
+  catch {
+    useToken().value = '';
+    useUser().value = undefined;
+  }
 
 });
