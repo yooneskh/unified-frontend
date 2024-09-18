@@ -9,6 +9,10 @@ useHead({
   titleTemplate: t => `${t ? `${t} - ` : ''}${config.brand.title}`,
 });
 
+useSeoMeta({
+  description: 'Applications description.',
+});
+
 </script>
 
 
