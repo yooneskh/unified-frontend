@@ -10,7 +10,9 @@ useHead({
 });
 
 useSeoMeta({
-  description: 'Applications description.',
+  'description': 'Applications description.',
+  'og:image': '/favicon.ico',
+  'twitter:card': 'summary',
 });
 
 </script>
